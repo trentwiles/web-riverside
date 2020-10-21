@@ -1,0 +1,61 @@
+ErrorDocument 404 /404.php
+ErrorDocument 403 /403.php
+ErrorDocument 400 /request-error?code=400
+ErrorDocument 500 /404.php
+ 
+DirectoryIndex index.php
+  
+# ScriptAlias "/cgi-bin/" "/var/www/html/cgi-bin/"
+# Line above should go in apache2.conf 
+ 
+php_value session.gc_maxlifetime 600000
+
+<Files "general.html">
+Order Allow,Deny
+Deny from all
+</Files>
+ 
+<Files "client.json">
+Order Allow,Deny
+Deny from all
+</Files>
+
+<Files "composer.lock">
+Order Allow,Deny
+Deny from all
+</Files>
+
+<Files "php.ini">
+Order Allow,Deny
+Deny from all
+</Files>
+
+<Files ".gitignore">
+Order Allow,Deny
+Deny from all
+</Files>
+ 
+# Remove the hashtags incase anything goes wrong
+ 
+# <Files "contact.php">
+# Order Allow,Deny
+# Deny from all
+# </Files>
+ 
+# <IfModule mod_log_config.c>
+#    %{CF-Connecting-IP}i
+# </IfModule>
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+
+
+RewriteRule /\.git / [F,L]
+RewriteRule ^auth\.json$ / [F,L]
+RewriteRule ^composer\.(lock|json)$ / [F,L]
+RewriteRule ^config.php$ / [F,L]
+RewriteRule ^flarum$ / [F,L]
+RewriteRule ^storage/(.*)?$ / [F,L]
+RewriteRule ^vendor/(.*)?$ / [F,L]
