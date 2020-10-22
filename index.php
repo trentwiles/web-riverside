@@ -7,7 +7,7 @@ $pug = new Pug();
 
 
 $router->get('/', function() {
-    $pug->render('views/index.pug', array(
+    Pug::render('views/index.pug', array(
         'site_name' => 'Riverside Rocks'
     ));
 });
