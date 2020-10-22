@@ -16,6 +16,10 @@ $router->get('/about', function() {
     header("Location: /");
 });
 
+$router->get('/test', function() {
+    Phug::displayFile('views/php.pug');
+});
+
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     Phug::displayFile('views/404.pug');
