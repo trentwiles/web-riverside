@@ -5,3 +5,43 @@ html
     body(onload='halfmoon.toggleDarkMode()')
     link(href='https://cdn.jsdelivr.net/npm/halfmoon@1.1.0/css/halfmoon-variables.min.css' rel='stylesheet')
     script(src='https://cdn.jsdelivr.net/npm/halfmoon@1.1.0/js/halfmoon.min.js')
+    .page-wrapper.with-navbar
+    nav.navbar
+    .navbar-content
+      button.btn.btn-action(type='button')
+        i.fa.fa-bars(aria-hidden='true')
+        span.sr-only Toggle sidebar
+    a.navbar-brand(href='#')
+      img(src='...' alt='...')
+      |         Brand
+    span.navbar-text.text-monospace v3.0
+    // text-monospace = font-family shifted to monospace
+    // Navbar nav
+    ul.navbar-nav.d-none.d-md-flex
+      // d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px)
+      li.nav-item.active
+        a.nav-link(href='#') Docs
+      li.nav-item
+        a.nav-link(href='#') Products
+    // Navbar form (inline form)
+    form.form-inline.d-none.d-md-flex.ml-auto(action='...' method='...')
+      // d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px), ml-auto = margin-left: auto
+      input.form-control(type='text' placeholder='Email address' required='required')
+      button.btn.btn-primary(type='submit') Sign up
+    // Navbar content (with the dropdown menu)
+    .navbar-content.d-md-none.ml-auto
+      // d-md-none = display: none on medium screens and up (width > 768px), ml-auto = margin-left: auto
+      .dropdown.with-arrow
+        button#navbar-dropdown-toggle-btn-1.btn(data-toggle='dropdown' type='button')
+          | Menu
+          i.fa.fa-angle-down(aria-hidden='true')
+        .dropdown-menu.dropdown-menu-right.w-200(aria-labelledby='navbar-dropdown-toggle-btn-1')
+          // w-200 = width: 20rem (200px)
+          a.dropdown-item(href='#') Docs
+          a.dropdown-item(href='#') Products
+          .dropdown-divider
+          .dropdown-content
+            form(action='...' method='...')
+              .form-group
+                input.form-control(type='text' placeholder='Email address' required='required')
+              button.btn.btn-primary.btn-block(type='submit') Sign up
