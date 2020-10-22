@@ -8,7 +8,7 @@ $router->get('/', function() {
     Phug::displayFile('views/index.pug');
 });
 
-$router->get('/about/', function() {
+$router->get('/about', function() {
     Phug::displayFile('views/about.pug');
 });
 
