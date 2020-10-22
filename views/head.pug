@@ -16,27 +16,28 @@ html
         </button>
       </div>
       <!-- Navbar brand -->
-      <a href="#" class="navbar-brand">
-        <img src="..." alt="...">
-        Brand
+      <a href="/" class="navbar-brand">
+        <img src="https://avatars0.githubusercontent.com/u/59586759?s=460&u=3a65147e9589b116e6724773ea10e9773ac7c682&v=4" alt="tucker-logo">
+        Riverside Rocks
       </a>
       <!-- Navbar text -->
-      <span class="navbar-text text-monospace">v3.0</span> <!-- text-monospace = font-family shifted to monospace -->
       <!-- Navbar nav -->
       <ul class="navbar-nav d-none d-md-flex"> <!-- d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px) -->
         <li class="nav-item active">
-          <a href="#" class="nav-link">Docs</a>
+          <a href="/about/" class="nav-link">About</a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">Products</a>
+          <a href="/projects/" class="nav-link">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a href="/community/" class="nav-link">Community Forum</a>
         </li>
       </ul>
       <!-- Navbar form (inline form) -->
-      <form class="form-inline d-none d-md-flex ml-auto" action="..." method="..."> <!-- d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px), ml-auto = margin-left: auto -->
-        <input type="text" class="form-control" placeholder="Email address" required="required">
-        <button class="btn btn-primary" type="submit">Sign up</button>
+      <form class="form-inline d-none d-md-flex ml-auto" action="/search" method="get"> <!-- d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px), ml-auto = margin-left: auto -->
+        <input type="text" class="form-control" required="required">
+        <button class="btn btn-primary" type="submit" name='q' id='q'>Search</button>
       </form>
-      <!-- Navbar content (with the dropdown menu) -->
       <div class="navbar-content d-md-none ml-auto"> <!-- d-md-none = display: none on medium screens and up (width > 768px), ml-auto = margin-left: auto -->
         <div class="dropdown with-arrow">
           <button class="btn" data-toggle="dropdown" type="button" id="navbar-dropdown-toggle-btn-1">
@@ -44,11 +45,12 @@ html
             <i class="fa fa-angle-down" aria-hidden="true"></i>
           </button>
           <div class="dropdown-menu dropdown-menu-right w-200" aria-labelledby="navbar-dropdown-toggle-btn-1"> <!-- w-200 = width: 20rem (200px) -->
-            <a href="#" class="dropdown-item">Docs</a>
-            <a href="#" class="dropdown-item">Products</a>
+            <a href="/about/" class="dropdown-item">About</a>
+            <a href="/projects/" class="dropdown-item">Projects</a>
+            <a href="/community/" class="dropdown-item">Community Forum</a>
             <div class="dropdown-divider"></div>
             <div class="dropdown-content">
-              <form action="..." method="...">
+              <form action="/search" method="get">
                 <div class="form-group">
                   <input type="text" class="form-control" placeholder="Email address" required="required">
                 </div>
