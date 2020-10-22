@@ -3,9 +3,13 @@
 require __DIR__ . '/vendor/autoload.php';
 
 $router = new \Bramus\Router\Router();
+$pug = new Pug();
+
 
 $router->get('/', function() {
-    Phug::displayFile('views/index.pug');
+    $output = $pug->render('views/index.pug', array(
+        'site_name' => 'Riverside Rocks'
+    ));
 });
 
 $router->get('/about', function() {
