@@ -12,4 +12,9 @@ $router->get('/about', function() {
     Phug::displayFile('views/about.pug');
 });
 
+$router->set404(function() {
+    header('HTTP/1.1 404 Not Found');
+    Phug::displayFile('views/404.pug');
+});
+
 $router->run();
