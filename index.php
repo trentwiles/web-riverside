@@ -22,7 +22,7 @@ $router->get('/about', function() {
     Phug::displayFile('views/about.pug');
 });
 
-$router->get('/about', function() {
+$router->get('/projects', function() {
     Phug::displayFile('views/projects.pug');
 });
 
