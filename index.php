@@ -57,7 +57,14 @@ $router->set404(function() {
         "/clientaccesspolicy.xml" => "Bad web bot, ignores robots.txt",
         "/connector.sds" => "Scanning for vulns, GET /connector.sds",
         "/hudson" => "Scanning for vulns, GET /hudson",
-        "/wp-includes/js/jquery/jquery.js" => "Searching for vulns, GET /wp-includes/js/jquery/jquery.js"
+        "/wp-includes/js/jquery/jquery.js" => "Searching for vulns, GET /wp-includes/js/jquery/jquery.js",
+        "/webfig/" => "GET /webfig/",
+        "/editBlackAndWhiteList" => "GET /editBlackAndWhiteList",
+        "/boaform/admin/formLogin?username=adminisp&psd=adminisp" => "Searching for login pages",
+        "/wp-admin" => "Looking for wordpress exploits",
+        "/index.php?s=/Index/\\think\\app/invokefunction&function=call_user_func_array&vars[0]=md5&vars[1][]=HelloThinkPHP" => "ThinkPHP exploit",
+        "/wp-content/plugins/wp-file-manager/readme.txt" => "Searching for Wordpress file manager",
+        "/wp/wp-admin/" => "Looking for wordpress admin"
     );
     
     $url = $_SERVER["REQUEST_URI"];
