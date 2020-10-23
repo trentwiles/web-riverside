@@ -32,7 +32,7 @@ $router->get('/about', function() {
     Phug::displayFile('views/about.pug');
 });
 
-$router->get('/about', function() {
+$router->get('/ip', function() {
     Rocks::abuseDB($_SERVER["REMOTE_ADDR"]);
 });
 
