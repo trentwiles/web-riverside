@@ -21,11 +21,11 @@ $router->get('/', function() {
     Phug::displayFile('views/index.pug', $variables);
 });
 
-$router->get('/users/', function() {
+$router->get('/users/(\w+)', function($id) {
     $variables = [
-        'example' => 'example',
+        'id' => $id,
      ];     
-    Phug::displayFile('views/index.pug', $variables);
+    Phug::displayFile('views/user.pug', $variables);
 });
 
 $router->get('/about', function() {
