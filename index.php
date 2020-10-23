@@ -69,7 +69,8 @@ $router->set404(function() {
         "/html/public/index.php" => "Looking for framework vulnurabilities",
         "/ab2h" => "Scanning",
         "/solr/" => "Searching for login pages",
-        "//sito/wp-includes/wlwmanifest.xml" => "Searching for wordpress files"
+        "//sito/wp-includes/wlwmanifest.xml" => "Searching for wordpress files",
+        "/PHPMYADMIN/scripts/setup.php" => "phpMyAdmin exploits"
     );
     
     $url = $_SERVER["REQUEST_URI"];
