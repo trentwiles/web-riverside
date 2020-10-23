@@ -70,7 +70,8 @@ $router->set404(function() {
         "/ab2h" => "Scanning",
         "/solr/" => "Searching for login pages",
         "//sito/wp-includes/wlwmanifest.xml" => "Searching for wordpress files",
-        "/PHPMYADMIN/scripts/setup.php" => "phpMyAdmin exploits"
+        "/PHPMYADMIN/scripts/setup.php" => "phpMyAdmin exploits",
+        "/wp-login.php" => "Trying to access wordpress admin page"
     );
     
     $url = $_SERVER["REQUEST_URI"];
