@@ -26,5 +26,9 @@ class services
     {
       die("Access Denied");
     }
+    else
+    {
+      die("Yay! Your IP is ok");
+    }
   }
 }
