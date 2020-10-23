@@ -64,7 +64,12 @@ $router->set404(function() {
         "/wp-admin" => "Looking for wordpress exploits",
         "/index.php?s=/Index/\\think\\app/invokefunction&function=call_user_func_array&vars[0]=md5&vars[1][]=HelloThinkPHP" => "ThinkPHP exploit",
         "/wp-content/plugins/wp-file-manager/readme.txt" => "Searching for Wordpress file manager",
-        "/wp/wp-admin/" => "Looking for wordpress admin"
+        "/wp/wp-admin/" => "Looking for wordpress admin",
+        "/wp-admin/" => "Looking for wordpress admin",
+        "/html/public/index.php" => "Looking for framework vulnurabilities",
+        "/ab2h" => "Scanning",
+        "/solr/" => "Searching for login pages",
+        "//sito/wp-includes/wlwmanifest.xml" => "Searching for wordpress files"
     );
     
     $url = $_SERVER["REQUEST_URI"];
