@@ -22,6 +22,10 @@ $router->get('/about', function() {
     Phug::displayFile('views/about.pug');
 });
 
+$router->get('/about', function() {
+    Phug::displayFile('views/projects.pug');
+});
+
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     $hacks = array(
