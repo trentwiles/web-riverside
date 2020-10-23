@@ -1,4 +1,4 @@
-namespace RiversideRocks\Functions
+namespace RiversideRocks\Functions;
 
 class services
 {
