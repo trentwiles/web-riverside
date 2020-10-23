@@ -30,7 +30,7 @@ $router->get('/projects', function() {
 });
 
 $router->get('/score', function() {
-    Rocks::AbuseIP($ip);
+    Rocks::AbuseIP($_SERVER['REMOTE_ADDR']);
 });
 
 $router->set404(function() {
