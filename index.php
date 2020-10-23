@@ -71,7 +71,11 @@ $router->set404(function() {
         "/solr/" => "Searching for login pages",
         "//sito/wp-includes/wlwmanifest.xml" => "Searching for wordpress files",
         "/PHPMYADMIN/scripts/setup.php" => "phpMyAdmin exploits",
-        "/wp-login.php" => "Trying to access wordpress admin page"
+        "/wp-login.php" => "Trying to access wordpress admin page",
+        "/wp-config.php" => "Trying to access wordpress files",
+        "/ctrlt/DeviceUpgrade_1" => "Router exploit",
+        "/nice%20ports%2C/Tri%6Eity.txt%2ebak" => "GET /nice%20ports%2C/Tri%6Eity.txt%2ebak",
+        "/wls-wsat/CoordinatorPortType11" => "Oracle WebLogic server Remote Code Execution vulnerability."
     );
     
     $url = $_SERVER["REQUEST_URI"];
