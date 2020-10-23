@@ -1,3 +1,5 @@
+<?php
+
 namespace RiversideRocks\Functions;
 
 class services
@@ -22,13 +24,6 @@ class services
     $output = $response->getBody();
     $ipDetails = json_decode($output, true);
     $score = $ipDetails["data"]["abuseConfidenceScore"];
-    if($score > 20)
-    {
-      die("Access Denied");
-    }
-    else
-    {
-      die("Yay! Your IP is ok");
-    }
+    die($score > 20 ? "Access Denied" : "Yay! Your IP is ok");
   }
 }
