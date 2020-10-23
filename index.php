@@ -1,9 +1,9 @@
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
-require '/functions.php';
+//require '/functions.php';
 
-use RiversideRocks\functions as Rocks;
+//use RiversideRocks\functions as Rocks;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -15,6 +15,13 @@ $pug = new Pug();
 
 
 $router->get('/', function() {
+    $variables = [
+        'example' => 'example',
+     ];     
+    Phug::displayFile('views/index.pug', $variables);
+});
+
+$router->get('/users/', function() {
     $variables = [
         'example' => 'example',
      ];     
