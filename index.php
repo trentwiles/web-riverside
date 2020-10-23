@@ -21,12 +21,6 @@ $router->get('/', function() {
     Phug::displayFile('views/index.pug', $variables);
 });
 
-$router->get('/users/(\w+)', function($id) {
-    $variables = [
-        'id' => htmlspecialchars($id),
-     ];     
-    Phug::displayFile('views/user.pug', $variables);
-});
 
 $router->get('/about', function() {
     Phug::displayFile('views/about.pug');
