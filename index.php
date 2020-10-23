@@ -23,7 +23,7 @@ $router->get('/', function() {
 
 $router->get('/users/(\w+)', function($id) {
     $variables = [
-        'id' => $id,
+        'id' => htmlspecialchars($id),
      ];     
     Phug::displayFile('views/user.pug', $variables);
 });
