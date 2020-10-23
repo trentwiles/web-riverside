@@ -1,6 +1,9 @@
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
+require '/functions.php';
+
+use RiversideRocks\functions as Rocks;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -24,6 +27,10 @@ $router->get('/about', function() {
 
 $router->get('/projects', function() {
     Phug::displayFile('views/projects.pug');
+});
+
+$router->get('/score', function() {
+    Rocks::AbuseIP($ip);
 });
 
 $router->set404(function() {
