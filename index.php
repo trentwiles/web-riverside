@@ -29,10 +29,6 @@ $router->get('/projects', function() {
     Phug::displayFile('views/projects.pug');
 });
 
-$router->get('/score', function() {
-    Rocks::AbuseIP($_SERVER['REMOTE_ADDR']);
-});
-
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     $hacks = array(
