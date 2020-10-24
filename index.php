@@ -25,7 +25,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$ipinfo = json_decode(file_get_contents("http://ip-api.com/json/${ip}"));
+$ipinfo = json_decode(file_get_contents("http://ip-api.com/json/${ip}"), true);
 $country = $conn -> real_escape_string(htmlspecialchars($ipinfo["country"]));
 $epoch = time();
 
