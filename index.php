@@ -80,6 +80,7 @@ $router->get('/projects', function() {
 });
 
 $router->get('/watch/(\w+)', function($id) {
+    $pug = new Pug();
     $output = $pug->render('views/video.pug', array(
         'video' => htmlspecialchars($id)
     ));
@@ -87,6 +88,7 @@ $router->get('/watch/(\w+)', function($id) {
 });
 
 $router->get('/videos', function() {
+    $pug = new Pug();
     $ids = array("1", "2", "3");
     $output = $pug->render('views/watch.pug', array(
         'videos' => $ids
