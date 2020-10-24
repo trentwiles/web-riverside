@@ -81,8 +81,16 @@ $router->get('/projects', function() {
 
 $router->get('/watch/(\w+)', function($id) {
     $pug = new Pug();
+    $video = json_decode(file_get_contents("https://www.youtube.com/oembed?url=http://www.youtube.com/watch?v=${id}&format=json"), true);
+    if($video["author_url"] !== "https://www.youtube.com/channel/UCoHNPdbSrE2c_g95JgGiBkw"){
+        header("Location: /videos");
+        die();
+    }
+    $code = $video["html"];
+    $title = $video["title"];
     $output = $pug->render('views/video.pug', array(
-        'video' => htmlspecialchars($id)
+        'code' => $code,
+        'title' => htmlspecialchars($title)
     ));
     echo $output;
 });
