@@ -3,7 +3,7 @@
 require __DIR__ . '/vendor/autoload.php';
 require 'functions.php';
 
-use RiversideRocks\functions as Rocks;
+use RiversideRocks as Rocks;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();

@@ -1,6 +1,6 @@
 <?php
 
-namespace RiversideRocks\Functions;
+namespace RiversideRocks;
 
 class services
 {
