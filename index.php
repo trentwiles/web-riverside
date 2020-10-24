@@ -58,7 +58,7 @@ $router->get('/', function() {
     //Phug::displayFile('views/index.pug', $variables);
     $pug = new Pug();
     $output = $pug->render('views/index.pug', array(
-        'title' => times
+        'visits' => times
     ));
     echo $output;
 });
