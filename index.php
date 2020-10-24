@@ -45,7 +45,7 @@ $sql = "SELECT * FROM logs";
     define("times", $times);
 
 $router->get('/api/visits', function() {
-    echo times;
+    echo json_encode(times, true);
 });
 
 
@@ -83,15 +83,15 @@ $router->get('/watch/(\w+)', function($id) {
     if(isset($id)){
         echo "You sent a video ID";
     }else{
-        $output = $pug->render('views/watch.pug', array(
+        $output = $pug->render('views/video.pug', array(
             'videos' => array()
         ));
         echo $output;
     }
 });
 
-$router->get('/watch/(\w+)', function($id) {
-    $output = $pug->render('views/video.pug', array(
+$router->get('/videos', function($id) {
+    $output = $pug->render('views/watch.pug', array(
         'videos' => array()
     ));
     echo $output;
