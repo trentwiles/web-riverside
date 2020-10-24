@@ -32,9 +32,7 @@ $epoch = time();
 $sql = "INSERT INTO logs (epoch, country) VALUES ('${epoch}', '${country}')";
 $result = $conn->query($sql);
 
-
-$router->get('/', function() {
-    $sql = "SELECT * FROM logs";
+$sql = "SELECT * FROM logs";
     $result = $conn->query($sql);
     $times = 0;
     if (!empty($result) && $result->num_rows > 0) {
@@ -42,6 +40,8 @@ $router->get('/', function() {
             $times = $times + 1;
         }
     }
+
+$router->get('/', function() {
     $variables = [
         'visits' => $times,
      ];     
