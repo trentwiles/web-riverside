@@ -37,7 +37,7 @@ $router->get('/', function() {
     $sql = "SELECT * FROM logs";
     $result = $conn->query($sql);
     $times = 0;
-    if ($result->num_rows > 0) {
+    if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $times = $times + 1;
         }
