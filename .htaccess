@@ -35,6 +35,11 @@ Order Allow,Deny
 Deny from all
 </Files>
  
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
+
 # Remove the hashtags incase anything goes wrong
  
 # <Files "contact.php">

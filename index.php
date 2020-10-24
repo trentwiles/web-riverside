@@ -1,9 +1,9 @@
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
-//require '/functions.php';
+require 'functions.php';
 
-//use RiversideRocks\functions as Rocks;
+use RiversideRocks\functions as Rocks;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
@@ -13,24 +13,65 @@ if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) $_SERVER['REMOTE_ADDR'] = $_SERVER
 $router = new \Bramus\Router\Router();
 $pug = new Pug();
 
+$ip = $_SERVER['REMOTE_ADDR'];
+
+$servername = $_ENV['MYSQL_SERVER'];
+$username = $_ENV["MYSQL_USERNAME"];
+$password = $_ENV["MYSQL_PASSWORD"];
+$dbname = $_ENV["MYSQL_DATABASE"];
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$ipinfo = json_decode(file_get_contents("http://ip-api.com/json/${ip}"), true);
+$country = $conn -> real_escape_string(htmlspecialchars($ipinfo["country"]));
+$epoch = time();
+
+$sql = "INSERT INTO logs (epoch, country) VALUES ('${epoch}', '${country}')";
+$result = $conn->query($sql);
+
+$times = 0;
+
+$sql = "SELECT * FROM logs";
+    $result = $conn->query($sql);
+    $times = 0;
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $times = $times + 1;
+        }
+    }
+    define("times", $times);
+
+$router->get('/api/visits', function() {
+    echo times;
+});
+
 
 $router->get('/', function() {
-    $variables = [
-        'example' => 'example',
-     ];     
-    Phug::displayFile('views/index.pug', $variables);
+    $pug = new Pug();
+    $channel_id = "UCoHNPdbSrE2c_g95JgGiBkw";
+    $api_key = $_ENV["YOUTUBE"];
+    $api_response = file_get_contents('https://www.googleapis.com/youtube/v3/channels?part=statistics&id='.$channel_id.'&fields=items/statistics/subscriberCount&key='.$api_key);
+    $api_response_decoded = json_decode($api_response, true);
+    $subs = $api_response_decoded['items'][0]['statistics']['subscriberCount'];
+    $api_response2 = file_get_contents('https://www.googleapis.com/youtube/v3/channels?part=statistics&id='.$channel_id.'&fields=items/statistics/viewCount&key='.$api_key);
+    $api_response_decoded2 = json_decode($api_response2, true);
+    $views = $api_response_decoded2['items'][0]['statistics']['viewCount'];
+    $output = $pug->render('views/index.pug', array(
+        'visits' => times,
+        'subs' => $subs,
+        'views' => $views
+    ));
+    echo $output;
 });
 
-$router->get('/users/(\w+)', function($id) {
-    $variables = [
-        'id' => htmlspecialchars($id),
-     ];     
-    Phug::displayFile('views/user.pug', $variables);
-});
 
 $router->get('/about', function() {
     Phug::displayFile('views/about.pug');
 });
+
 
 $router->get('/projects', function() {
     Phug::displayFile('views/projects.pug');
