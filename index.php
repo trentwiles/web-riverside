@@ -49,6 +49,8 @@ $router->get('/api/visits', function() {
 });
 
 
+
+
 $router->get('/', function() {
     $pug = new Pug();
     $channel_id = "UCoHNPdbSrE2c_g95JgGiBkw";
@@ -75,6 +77,17 @@ $router->get('/about', function() {
 
 $router->get('/projects', function() {
     Phug::displayFile('views/projects.pug');
+});
+
+$router->get('/watch/(\w+)', function($id) {
+    if(!isset($id)){
+        $output = $pug->render('views/watch.pug', array(
+            'videos' => array()
+        ));
+        echo $output;
+    }else{
+        echo "You sent a video ID";
+    }
 });
 
 $router->set404(function() {
