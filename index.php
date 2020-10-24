@@ -35,21 +35,18 @@ $result = $conn->query($sql);
 $times = 0;
 
 $sql = "SELECT * FROM logs";
-    $result = $conn->query($sql);
-    $times = 0;
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $times = $times + 1;
-        }
+$result = $conn->query($sql);
+$times = 0;
+if (!empty($result) && $result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $times = $times + 1;
     }
-    define("times", $times);
+}
+define("times", $times);
 
 $router->get('/api/visits', function() {
     echo json_encode(times, true);
 });
-
-
-
 
 $router->get('/', function() {
     $pug = new Pug();
@@ -69,11 +66,9 @@ $router->get('/', function() {
     echo $output;
 });
 
-
 $router->get('/about', function() {
     Phug::displayFile('views/about.pug');
 });
-
 
 $router->get('/projects', function() {
     Phug::displayFile('views/projects.pug');
@@ -154,13 +149,13 @@ $router->set404(function() {
     );
     
     $url = $_SERVER["REQUEST_URI"];
-    
-    $user_agent_blacklist = array(
+
+    $baduseragent = array(
         "Go-http-client/1.1",
         "Mozilla/5.0 zgrab/0.x",
         "python-requests/2.24.0"
     );
-    
+
     $ua = $_SERVER['HTTP_USER_AGENT'];
     
     if(isset($hacks[$url]) || isset($baduseragent[$ua])){
@@ -175,24 +170,24 @@ $router->set404(function() {
         $ip = $_SERVER['REMOTE_ADDR'];
         $client = new GuzzleHttp\Client([
             'base_uri' => 'https://api.abuseipdb.com/api/v2/'
-          ]);
-          
-          $response = $client->request('POST', 'report', [
-              'query' => [
-                  'ip' => "${ip}",
-                  'categories' => '15',
-                  'comment' => "${mes}"
-              ],
-              'headers' => [
-                  'Accept' => 'application/json',
-                  'Key' => $_ENV["ABUSE_IP_DB"]
+        ]);
+
+        $response = $client->request('POST', 'report', [
+            'query' => [
+                'ip' => "${ip}",
+                'categories' => '15',
+                'comment' => "${mes}"
             ],
-          ]);
-          
-          $output = $response->getBody();
-          // Store response as a PHP object.
-          $ipDetails = json_decode($output, true);
-        }
+            'headers' => [
+                'Accept' => 'application/json',
+                'Key' => $_ENV["ABUSE_IP_DB"]
+            ],
+        ]);
+
+        $output = $response->getBody();
+        // Store response as a PHP object.
+        $ipDetails = json_decode($output, true);
+    }
     Phug::displayFile('views/404.pug');
 });
 
