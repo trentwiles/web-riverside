@@ -50,15 +50,15 @@ $router->get('/api/visits', function() {
 
 
 $router->get('/', function() {
-    /*
-    $variables = array(
-        'visits' => $times
-    );  
-    */   
-    //Phug::displayFile('views/index.pug', $variables);
     $pug = new Pug();
+    $channel_id = "UCoHNPdbSrE2c_g95JgGiBkw";
+    $api_key = $_ENV["YOUTUBE"];
+    $api_response = file_get_contents('https://www.googleapis.com/youtube/v3/channels?part=statistics&id='.$channel_id.'&fields=items/statistics/subscriberCount&key='.$api_key);
+    $api_response_decoded = json_decode($api_response, true);
+    $subs = $api_response_decoded['items'][0]['statistics']['subscriberCount'];
     $output = $pug->render('views/index.pug', array(
-        'visits' => times
+        'visits' => times,
+        'subs' => $subs
     ));
     echo $output;
 });
