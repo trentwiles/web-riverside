@@ -56,9 +56,13 @@ $router->get('/', function() {
     $api_response = file_get_contents('https://www.googleapis.com/youtube/v3/channels?part=statistics&id='.$channel_id.'&fields=items/statistics/subscriberCount&key='.$api_key);
     $api_response_decoded = json_decode($api_response, true);
     $subs = $api_response_decoded['items'][0]['statistics']['subscriberCount'];
+    $api_response2 = file_get_contents('https://www.googleapis.com/youtube/v3/channels?part=statistics&id='.$channel_id.'&fields=items/statistics/viewCount&key='.$api_key);
+    $api_response_decoded2 = json_decode($api_response2, true);
+    $views = $api_response_decoded2['items'][0]['statistics']['viewCount'];
     $output = $pug->render('views/index.pug', array(
         'visits' => times,
-        'subs' => $subs
+        'subs' => $subs,
+        'views' => $views
     ));
     echo $output;
 });
