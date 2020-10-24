@@ -80,13 +80,13 @@ $router->get('/projects', function() {
 });
 
 $router->get('/watch/(\w+)', function($id) {
-    if(!isset($id)){
+    if(isset($id)){
+        echo "You sent a video ID";
+    }else{
         $output = $pug->render('views/watch.pug', array(
             'videos' => array()
         ));
         echo $output;
-    }else{
-        echo "You sent a video ID";
     }
 });
 
