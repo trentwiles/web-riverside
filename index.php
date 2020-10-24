@@ -80,19 +80,15 @@ $router->get('/projects', function() {
 });
 
 $router->get('/watch/(\w+)', function($id) {
-    if(isset($id)){
-        echo "You sent a video ID";
-    }else{
-        $output = $pug->render('views/video.pug', array(
-            'videos' => array()
-        ));
-        echo $output;
-    }
+    $output = $pug->render('views/video.pug', array(
+        'videos' => array()
+    ));
+    echo $output;
 });
 
 $router->get('/videos', function($id) {
     $output = $pug->render('views/watch.pug', array(
-        'videos' => array()
+        'id' => htmlspecialchars($id)
     ));
     echo $output;
 });
