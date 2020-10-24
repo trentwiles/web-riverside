@@ -32,6 +32,8 @@ $epoch = time();
 $sql = "INSERT INTO logs (epoch, country) VALUES ('${epoch}', '${country}')";
 $result = $conn->query($sql);
 
+$times = 0;
+
 $sql = "SELECT * FROM logs";
     $result = $conn->query($sql);
     $times = 0;
