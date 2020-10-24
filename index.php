@@ -13,10 +13,37 @@ if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) $_SERVER['REMOTE_ADDR'] = $_SERVER
 $router = new \Bramus\Router\Router();
 $pug = new Pug();
 
+$ip = $_SERVER['REMOTE_ADDR'];
+
+$servername = $_ENV['MYSQL_SERVER'];
+$username = $_ENV["MYSQL_USERNAME"];
+$password = $_ENV["MYSQL_PASSWORD"];
+$dbname = $_ENV["MYSQL_DATABASE"];
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$ipinfo = json_decode(file_get_contents("http://ip-api.com/json/${ip}"));
+$country = $conn -> real_escape_string(htmlspecialchars($ipinfo["country"]));
+$epoch = time();
+
+$sql = "INSERT INTO logs (epoch, country) VALUES ('${epoch}', '${country}')";
+$result = $conn->query($sql);
+
 
 $router->get('/', function() {
+    $sql = "SELECT * FROM logs";
+    $result = $conn->query($sql);
+    $times = 0;
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $times = $times + 1;
+        }
+    }
     $variables = [
-        'example' => 'example',
+        'visits' => $times,
      ];     
     Phug::displayFile('views/index.pug', $variables);
 });
