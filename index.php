@@ -44,6 +44,11 @@ $sql = "SELECT * FROM logs";
     }
     define("times", $times);
 
+$router->get('/api/visits', function() {
+    echo times;
+});
+
+
 $router->get('/', function() {
     /*
     $variables = array(
