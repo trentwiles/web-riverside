@@ -42,6 +42,7 @@ $sql = "SELECT * FROM logs";
             $times = $times + 1;
         }
     }
+    define("times", $times);
 
 $router->get('/', function() {
     /*
@@ -52,8 +53,9 @@ $router->get('/', function() {
     //Phug::displayFile('views/index.pug', $variables);
     $pug = new Pug();
     $output = $pug->render('views/index.pug', array(
-        'title' => $times
+        'title' => times
     ));
+    echo $output;
 });
 
 
