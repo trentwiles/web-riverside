@@ -44,9 +44,9 @@ $sql = "SELECT * FROM logs";
     }
 
 $router->get('/', function() {
-    $variables = [
-        'visits' => $times,
-     ];     
+    $variables = array(
+        'visits' => $times
+    );     
     Phug::displayFile('views/index.pug', $variables);
 });
 
