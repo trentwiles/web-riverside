@@ -90,6 +90,13 @@ $router->get('/watch/(\w+)', function($id) {
     }
 });
 
+$router->get('/watch/(\w+)', function($id) {
+    $output = $pug->render('views/video.pug', array(
+        'videos' => array()
+    ));
+    echo $output;
+});
+
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     $hacks = array(
