@@ -81,14 +81,15 @@ $router->get('/projects', function() {
 
 $router->get('/watch/(\w+)', function($id) {
     $output = $pug->render('views/video.pug', array(
-        'videos' => array()
+        'video' => htmlspecialchars($id)
     ));
     echo $output;
 });
 
-$router->get('/videos', function($id) {
+$router->get('/videos', function() {
+    $ids = array("1", "2", "3");
     $output = $pug->render('views/watch.pug', array(
-        'id' => htmlspecialchars($id)
+        'videos' => $ids
     ));
     echo $output;
 });
