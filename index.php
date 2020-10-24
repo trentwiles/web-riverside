@@ -44,10 +44,16 @@ $sql = "SELECT * FROM logs";
     }
 
 $router->get('/', function() {
+    /*
     $variables = array(
         'visits' => $times
-    );     
-    Phug::displayFile('views/index.pug', $variables);
+    );  
+    */   
+    //Phug::displayFile('views/index.pug', $variables);
+    $pug = new Pug();
+    $output = $pug->render('views/index.pug', array(
+        'title' => $times
+    ));
 });
 
 
