@@ -108,13 +108,9 @@ $router->get('/watch/(\w+)', function($id) {
 
 $router->get('/videos', function() {
     $pug = new Pug();
-    $programming_videos = json_decode(file_get_contents("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=PLvARQ-dUfqsGS11Z893xat8ZRpNG1y4-L&key=" . $_ENV["YOUTUBE"]), true);
-    $p_videos = array();
-    foreach($programming_videos["videoId"] as $num){
-        array_push($p_videos, $programming_videos["videoId"]);
-    }
+    $ids = array("1", "2", "3");
     $output = $pug->render('views/watch.pug', array(
-        'p_videos' => $p_videos
+        'videos' => $ids
     ));
     echo $output;
 });
