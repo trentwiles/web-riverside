@@ -85,6 +85,22 @@ $router->get('/about', function() {
     Phug::displayFile('views/about.pug');
 });
 
+$router->get('/about/stats', function() {
+    $sql = "SELECT country, count(*) as SameValue from logs GROUP BY country ORDER BY SameValue DESC";
+    $result = $conn->query($sql);
+    $countries = array();
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $con = htmlspecialchars($row["country"]);
+            $val = htmlspecialchars($row["SameValue"]);
+            array_push($countries, $con, $val);
+        }
+    }
+    $output = $pug->render('views/count.pug', array(
+        'count' => $countries
+    ));
+    echo $output;
+});
 
 $router->get('/projects', function() {
     Phug::displayFile('views/projects.pug');
