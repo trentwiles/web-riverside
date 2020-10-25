@@ -112,6 +112,7 @@ class services
       $result = curl_exec($crl);
         
       if ($result === false) {
+          throw new Exception('Curl error: ' . curl_error($crl));
           $result_noti = 0; die();
       } else {
           $result_noti = 1; die();
