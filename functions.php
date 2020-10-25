@@ -7,24 +7,20 @@ class services
 {
   public function abuseDB($ip)
   {
-    $client = new GuzzleHttp\Client([
-      'base_uri' => 'https://api.abuseipdb.com/api/v2/'
+    $key = $_ENV["ABUSE_IP_DB"];
+    $curl = curl_init();
+    curl_setopt_array($curl, [
+      CURLOPT_RETURNTRANSFER => 1,
+      CURLOPT_URL => 'https://api.abuseipdb.com/api/v2?ipAddress=' . $ip . '&maxAgeInDays=90',
+      CURLOPT_USERAGENT => 'Riverside Rocks'
     ]);
-
-    $response = $client->request('GET', 'check', [
-      'query' => [
-          'ipAddress' => $ip,
-          'maxAgeInDays' => '90',
-    ],
-    'headers' => [
-        'Accept' => 'application/json',
-        'Key' => $_ENV["ABUSE_IP_DB"]
-     ],
-    ]);
-
-    $output = $response->getBody();
-    $ipDetails = json_decode($output, true);
-    $score = $ipDetails["data"]["abuseConfidenceScore"];
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+      'Accept: application/json',
+      'Key: ' . $key
+    ));
+    $resp = curl_exec($curl);
+    curl_close($curl);
+    $resp = $ipDetails["data"]["abuseConfidenceScore"];
     die($score > 20 ? "Access Denied" : "Yay! Your IP is ok");
   }
 }
