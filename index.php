@@ -173,7 +173,14 @@ $router->set404(function() {
         "/ctrlt/DeviceUpgrade_1" => "Router exploit",
         "/nice%20ports%2C/Tri%6Eity.txt%2ebak" => "GET /nice%20ports%2C/Tri%6Eity.txt%2ebak",
         "/wls-wsat/CoordinatorPortType11" => "Oracle WebLogic server Remote Code Execution vulnerability.",
-        "/_async/AsyncResponseService" => "Oracle WebLogic server Remote Code Execution vulnerability."
+        "/_async/AsyncResponseService" => "Oracle WebLogic server Remote Code Execution vulnerability.",
+        "/webmail/VERSION" => "GET /webmail/VERSION",
+        "/mail/VERSION" => "GET /mail/VERSION",
+        "/afterlogic/VERSION" => "GET /afterlogic/VERSION",
+        "/joomla/" => "Searching for Joomla",
+        "/shell.php" => "Probing, /shell.php",
+        "/desktop.ini.php" => "Probing, /desktop.ini.php",
+        "/_fragment" => "GET /_fragment (Symphony Remote Code Execution)"
     );
     
     $url = $_SERVER["REQUEST_URI"];
