@@ -87,10 +87,10 @@ $router->get('/watch/(\w+)', function($id) {
         header("Location: /videos");
         die();
     }
-    $code = $video["html"];
+    $vid = "https://www.youtube.com/embed/" . htmlspecialchars($id);
     $title = $video["title"];
     $output = $pug->render('views/video.pug', array(
-        'code' => $code,
+        'vid' => $vid,
         'title' => htmlspecialchars($title)
     ));
     echo $output;
