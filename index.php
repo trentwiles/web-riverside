@@ -55,6 +55,17 @@ $sql = "SELECT * FROM logs";
     }
     define("times", $times);
 
+    $sql = "SELECT country, count(*) as SameValue from logs GROUP BY country ORDER BY SameValue DESC";
+    $result = $conn->query($sql);
+    $countries = array();
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $con = htmlspecialchars($row["country"]);
+            $val = htmlspecialchars($row["SameValue"]);
+            array_push($countries, $con, $val);
+        }
+    }
+
 $router->get('/api/visits', function() {
     echo json_encode(times, true);
 });
@@ -86,24 +97,6 @@ $router->get('/about', function() {
 });
 
 $router->get('/about/stats', function() {
-    $servername = $_ENV['MYSQL_SERVER'];
-    $username = $_ENV["MYSQL_USERNAME"];
-    $password = $_ENV["MYSQL_PASSWORD"];
-    $dbname = $_ENV["MYSQL_DATABASE"];
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    $sql = "SELECT country, count(*) as SameValue from logs GROUP BY country ORDER BY SameValue DESC";
-    $result = $conn->query($sql);
-    $countries = array();
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $con = htmlspecialchars($row["country"]);
-            $val = htmlspecialchars($row["SameValue"]);
-            array_push($countries, $con, $val);
-        }
-    }
     $output = $pug->render('views/count.pug', array(
         'count' => $countries
     ));
