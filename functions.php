@@ -1,8 +1,7 @@
 <?php
+namespace RiversideRocks;
 
 require __DIR__ . '/vendor/autoload.php';
-
-namespace RiversideRocks;
 
 class services
 {
