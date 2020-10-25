@@ -97,6 +97,7 @@ $router->get('/about', function() {
 });
 
 $router->get('/about/stats', function() {
+    $pug = new Pug();
     $output = $pug->render('views/count.pug', array(
         'count' => $countries
     ));
