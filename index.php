@@ -126,7 +126,7 @@ $router->get('/ip', function() {
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     $path = $_SERVER['REQUEST_URI'];
-    Rocks::isHacking($path, $ip);
+    Rocks::isHacking($path, $_SERVER['REMOTE_ADDR']);
     Phug::displayFile('views/404.pug');
 });
 
