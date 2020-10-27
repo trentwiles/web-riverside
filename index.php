@@ -96,9 +96,10 @@ $router->get('/about', function() {
     Phug::displayFile('views/about.pug');
 });
 
+$stat = Rocks::statcord("764485265775263784", "logan");
+
 $router->get('/about/stats', function() {
     $pug = new Pug();
-    $stat = Rocks::statcord("764485265775263784", "logan");
     $output = $pug->render('views/count.pug', array(
         'bot_users' => $stat[0],
         'bot_servers' => $stat[1],
