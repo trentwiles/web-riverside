@@ -100,6 +100,9 @@ $router->get('/about/stats', function() {
     $pug = new Pug();
     $stat = Rocks::statcord("764485265775263784", "logan");
     echo $stat[0];
+    echo $stat[1];
+    echo $stat[2];
+    echo times;
     /*
     $output = $pug->render('views/count.pug', array(
         'bot_users' => $stat[0],
