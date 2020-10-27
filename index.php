@@ -98,8 +98,12 @@ $router->get('/about', function() {
 
 $router->get('/about/stats', function() {
     $pug = new Pug();
+    $stat = Rocks::statcord("764485265775263784", "logan");
     $output = $pug->render('views/count.pug', array(
-        'list' => $countries
+        'bot_users' => $stat[0],
+        'bot_servers' => $stat[1],
+        'bot_commands' => $stat[2],
+        'visits' => times
     ));
     echo $output;
 });

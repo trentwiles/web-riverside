@@ -23,4 +23,14 @@ class services
     $resp = $ipDetails["data"]["abuseConfidenceScore"];
     die($score > 20 ? "Access Denied" : "Yay! Your IP is ok");
   }
+  public function statcord($id, $ver)
+  {
+    $base = "https://statcord.com/${ver}/stats/${id}";
+    $api = json_decode(file_get_contents($base), true);
+    $users = $api[9]["users"];
+    $servers = $api[9]["servers"];
+    $commands = $api[9]["commands"];
+    $array = array($users, $servers, $commands);
+    return $array;
+  }
 }
