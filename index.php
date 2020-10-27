@@ -202,7 +202,9 @@ $router->set404(function() {
         "/joomla/" => "Searching for Joomla",
         "/shell.php" => "Probing, /shell.php",
         "/desktop.ini.php" => "Probing, /desktop.ini.php",
-        "/_fragment" => "GET /_fragment (Symphony Remote Code Execution)"
+        "/_fragment" => "GET /_fragment (Symphony Remote Code Execution)",
+        "/wp-content/plugins/wp-file-manager/lib/php/connector.minimal.php" => "Probing for wordpress vulns",
+        "/HNAP1/" => "Searching for router login page"
     );
     
     $url = $_SERVER["REQUEST_URI"];
