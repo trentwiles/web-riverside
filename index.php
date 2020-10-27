@@ -103,7 +103,7 @@ $router->get('/about/stats', function() {
         'bot_users' => $stat[0],
         'bot_servers' => $stat[1],
         'bot_commands' => $stat[2],
-        'visits' => times
+        'requests' => times
     ));
     echo $output;
 });
