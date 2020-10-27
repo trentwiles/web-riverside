@@ -140,6 +140,11 @@ $router->get('/videos', function() {
     echo $output;
 });
 
+$router->get('/index.php', function() {
+    header("Location: https://www.youtube.com/watch?v=E2Q52cVx7Bo");
+    die();
+});
+
 $router->get('/ip', function() {
     Rocks::abuseDB($ip);
 });
