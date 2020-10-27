@@ -211,7 +211,8 @@ $router->set404(function() {
         "/desktop.ini.php" => "Probing, /desktop.ini.php",
         "/_fragment" => "GET /_fragment (Symphony Remote Code Execution)",
         "/wp-content/plugins/wp-file-manager/lib/php/connector.minimal.php" => "Probing for wordpress vulns",
-        "/HNAP1/" => "Searching for router login page"
+        "/HNAP1/" => "Searching for router login page",
+        "/admin/" => "Searching for admin page"
     );
     
     $url = $_SERVER["REQUEST_URI"];
