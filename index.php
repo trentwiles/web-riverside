@@ -164,9 +164,9 @@ $router->post('/admin/upload', function() {
         die("400: Bad Request");
     }
     if($_POST["one"] == "public"){
-        $storage = new \Upload\Storage\FileSystem('/a/');
+        $storage = new \Upload\Storage\FileSystem('a');
     }else{
-        $storage = new \Upload\Storage\FileSystem('/assets/serve/production/app/');
+        $storage = new \Upload\Storage\FileSystem('assets/serve/production/app');
     }
     $file = new \Upload\File('foo', $storage);
 
@@ -195,7 +195,7 @@ try {
     // Fail!
     $errors = $file->getErrors();
 }
-    echo "OK";
+    echo "https://riverside.rocks" . $storage . "";
 });
 
 
