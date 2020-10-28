@@ -3,6 +3,7 @@
         "bramus/router": "~1.4",
         "pug-php/pug": "^3.4",
         "vlucas/phpdotenv": "^5.2",
-        "guzzlehttp/guzzle": "^6.0"
+        "guzzlehttp/guzzle": "^6.0",
+        "codeguy/upload": "^1.3"
     }
 }
