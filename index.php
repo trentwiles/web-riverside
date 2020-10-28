@@ -165,8 +165,10 @@ $router->post('/admin/upload', function() {
     }
     if($_POST["one"] == "public"){
         $storage = new \Upload\Storage\FileSystem('a');
+        $dir = 'a';
     }else{
         $storage = new \Upload\Storage\FileSystem('assets/serve/production/app');
+        $dir = 'assets/serve/production/app';
     }
     $file = new \Upload\File('foo', $storage);
 
@@ -195,7 +197,7 @@ try {
     // Fail!
     $errors = $file->getErrors();
 }
-    echo "https://riverside.rocks" . $storage . "";
+    echo "https://riverside.rocks/" . $dir . "/${new_filename}." . $data["extension"];
 });
 
 
