@@ -149,6 +149,56 @@ $router->get('/ip', function() {
     Rocks::abuseDB($ip);
 });
 
+/*================================
+
+     UPLOAD CONTROLLER CODE
+
+===============================*/
+
+$router->get('/admin/upload', function() {
+    Phug::displayFile('views/upload.pug');
+});
+
+$router->post('/admin/upload', function() {
+    if($_POST["key"] !== $_ENV["UPLOAD"]){
+        die("400: Bad Request");
+    }
+    if($_POST["one"] == "public"){
+        $storage = new \Upload\Storage\FileSystem('/a/');
+    }else{
+        $storage = new \Upload\Storage\FileSystem('/assets/serve/production/app/');
+    }
+    $file = new \Upload\File('foo', $storage);
+
+    $new_filename = uniqid();
+    $file->setName($new_filename);
+
+$file->addValidations(array(
+    // leaving this blank...
+));
+
+// Access data about the file that has been uploaded
+$data = array(
+    'name'       => $file->getNameWithExtension(),
+    'extension'  => $file->getExtension(),
+    'mime'       => $file->getMimetype(),
+    'size'       => $file->getSize(),
+    'md5'        => $file->getMd5(),
+    'dimensions' => $file->getDimensions()
+);
+
+// Try to upload file
+try {
+    // Success!
+    $file->upload();
+} catch (\Exception $e) {
+    // Fail!
+    $errors = $file->getErrors();
+}
+    echo "OK";
+});
+
+
 $router->get('/community', function() {
     Phug::displayFile('views/community-temp.pug');
 });

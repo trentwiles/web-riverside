@@ -1,0 +1,20 @@
+include head.pug
+br
+h1 Admin File Upload
+form(method="POST" enctype="multipart/form-data")
+    input(type="file" name="foo" value="")
+    br
+    br
+    p API key
+    input(type="text" name="key" value="")
+    br
+    br
+    p Path
+    input(type="radio" id="public" name="one" value="one" required)
+    label(for="one") /assets/...
+    br
+    input(type="radio" id="private" name="one" value="two" required)
+    label(for="two") cdn.riverside.rocks/...
+    br
+    br
+    input(type="submit" value="Upload File")
