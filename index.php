@@ -165,7 +165,10 @@ $router->get('/admin/upload', function() {
 
 $router->post('/admin/upload', function() {
     if($_POST["key"] !== $_ENV["UPLOAD"]){
-        die("400: Bad Request");
+        $output = $pug->render('views/upload-fail.pug', array(
+            'errors' => '400: Bad Request. You are missing a valid upload key.'
+        ));
+        echo $output;
     }
     if($_POST["one"] == "public"){
         $storage = new \Upload\Storage\FileSystem('a');
@@ -200,6 +203,10 @@ try {
 } catch (\Exception $e) {
     // Fail!
     $errors = $file->getErrors();
+    $output = $pug->render('views/upload-fail.pug', array(
+        'errors' => $errors
+    ));
+    echo $output;
 }
 });
 
