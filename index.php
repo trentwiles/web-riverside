@@ -175,11 +175,6 @@ $router->post('/admin/upload', function() {
     $new_filename = uniqid();
     $file->setName($new_filename);
 
-$file->addValidations(array(
-    // leaving this blank...
-));
-
-// Access data about the file that has been uploaded
 $data = array(
     'name'       => $file->getNameWithExtension(),
     'extension'  => $file->getExtension(),
