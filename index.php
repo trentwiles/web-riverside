@@ -96,13 +96,17 @@ $router->get('/about', function() {
     Phug::displayFile('views/about.pug');
 });
 
+$router->get('/about/legal', function() {
+    Phug::displayFile('views/legal.pug');
+});
+
 $stat = Rocks::statcord("764485265775263784", "logan");
 
 $timev2 = times;
 
 $router->get('/about/stats', function() {
     $pug = new Pug();
-    $output = $pug->render('views/count.pug', array(
+    $output = $pug->renderFile('views/count.pug', array(
         'bot_users' => $stat[0],
         'bot_servers' => $stat[1],
         'bot_commands' => $stat[2],
@@ -175,11 +179,6 @@ $router->post('/admin/upload', function() {
     $new_filename = uniqid();
     $file->setName($new_filename);
 
-$file->addValidations(array(
-    // leaving this blank...
-));
-
-// Access data about the file that has been uploaded
 $data = array(
     'name'       => $file->getNameWithExtension(),
     'extension'  => $file->getExtension(),
@@ -197,7 +196,6 @@ try {
     // Fail!
     $errors = $file->getErrors();
 }
-    echo "https://riverside.rocks/" . $dir . "/${new_filename}." . $data["extension"];
 });
 
 
