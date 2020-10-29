@@ -169,7 +169,7 @@ $router->post('/admin/upload', function() {
         $output = $pug->renderFile('views/upload-fail.pug', array(
             'errors' => '400: Bad Request. You are missing a valid upload key.'
         ));
-        echo $output;
+        die($output);
     }
     if($_POST["one"] == "public"){
         $storage = new \Upload\Storage\FileSystem('a');
