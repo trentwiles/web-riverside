@@ -9,7 +9,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $envRequiredFields = [
-    "MYSQL_SERVER", "MYSQL_USERNAME", "MYSQL_PASSWORD", "MYSQL_DATABASE", "YOUTUBE", "ABUSE_IP_DB"
+    "MYSQL_SERVER", "MYSQL_USERNAME", "MYSQL_PASSWORD", "MYSQL_DATABASE", "YOUTUBE", "ABUSE_IP_DB", "UPLOAD"
 ];
 
 foreach ($envRequiredFields as $field) {
@@ -221,7 +221,7 @@ $router->get('/admin/delete', function() {
 });
 
 $router->post('/admin/delete', function() {
-    if($_POST["key"] == $_ENV["key"]){
+    if($_POST["key"] == $_ENV["UPLOAD"]){
         exec("rm -f /var/www/html/assets/ && rm -f /var/www/html/assets/serve/production/app");
         die(header("Location: /admin/"));
     }else{
