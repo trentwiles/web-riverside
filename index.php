@@ -206,8 +206,8 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
-
-$sql = "INSERT INTO logs (epoch, country) VALUES ('${epoch}', '${country}')";
+$epoch = times();
+$sql = "INSERT INTO uploads (`url`, epoch) VALUES ('${path}', '${epoch}')";
 $result = $conn->query($sql);
     $output = $pug->renderFile('views/uploaded.pug', array(
         'url' => $path
