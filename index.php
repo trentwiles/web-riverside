@@ -197,7 +197,7 @@ try {
     // Fail!
     $errors = $file->getErrors();
 }
-    echo "https://riverside.rocks/" . $dir . "/${new_filename}." . $data["extension"];
+    echo "https://riverside.rocks/" . $dir . "/${new_filename}.";
 });
 
 
