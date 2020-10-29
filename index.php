@@ -197,7 +197,6 @@ try {
     // Fail!
     $errors = $file->getErrors();
 }
-    echo "https://riverside.rocks/" . $dir . "/${new_filename}.";
 });
 
 
