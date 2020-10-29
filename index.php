@@ -165,7 +165,7 @@ $router->get('/admin/upload', function() {
 
 $router->post('/admin/upload', function() {
     if($_POST["key"] !== $_ENV["UPLOAD"]){
-        $output = $pug->render('views/upload-fail.pug', array(
+        $output = $pug->renderFile('views/upload-fail.pug', array(
             'errors' => '400: Bad Request. You are missing a valid upload key.'
         ));
         echo $output;
@@ -196,14 +196,14 @@ try {
     // Success!
     $file->upload();
     $path = "https://riverside.rocks/${dir}/" . $data["name"];
-    $output = $pug->render('views/uploaded.pug', array(
+    $output = $pug->renderFile('views/uploaded.pug', array(
         'url' => $path
     ));
     echo $output;
 } catch (\Exception $e) {
     // Fail!
     $errors = $file->getErrors();
-    $output = $pug->render('views/upload-fail.pug', array(
+    $output = $pug->renderFile('views/upload-fail.pug', array(
         'errors' => $errors
     ));
     echo $output;
