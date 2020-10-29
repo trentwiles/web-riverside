@@ -216,6 +216,19 @@ $router->get('/community', function() {
     Phug::displayFile('views/community-temp.pug');
 });
 
+$router->get('/admin/delete', function() {
+    Phug::displayFile('views/delete.pug');
+});
+
+$router->post('/admin/delete', function() {
+    if($_POST["key"] == $_ENV["key"]){
+        exec("rm -f /var/www/html/assets/ && rm -f /var/www/html/assets/serve/production/app");
+        die(header("Location: /admin/"));
+    }else{
+        Phug::displayFile('views/delete-fail.pug');
+    }
+});
+
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     $hacks = array(
@@ -280,7 +293,6 @@ $router->set404(function() {
         "/_fragment" => "GET /_fragment (Symphony Remote Code Execution)",
         "/wp-content/plugins/wp-file-manager/lib/php/connector.minimal.php" => "Probing for wordpress vulns",
         "/HNAP1/" => "Searching for router login page",
-        "/admin/" => "Searching for admin page",
         "/portal/redlion" => "Probing",
         "/cgi-bin/login.cgi?requestname=2&cmd=0" => "Attempting to hack login page",
         "/ui/login.php" => "Attempting to access login pages"
