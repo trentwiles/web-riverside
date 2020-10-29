@@ -192,7 +192,11 @@ $data = array(
 try {
     // Success!
     $file->upload();
-    echo "https://riverside.rocks/${dir}/" . $data["name"] . "." . $data["extension"];
+    $path = "https://riverside.rocks/${dir}/" . $data["name"];
+    $output = $pug->render('views/uploaded.pug', array(
+        'url' => $path
+    ));
+    echo $output;
 } catch (\Exception $e) {
     // Fail!
     $errors = $file->getErrors();
