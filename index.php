@@ -96,6 +96,10 @@ $router->get('/about', function() {
     Phug::displayFile('views/about.pug');
 });
 
+$router->get('/about/legal', function() {
+    Phug::displayFile('views/legal.pug');
+});
+
 $stat = Rocks::statcord("764485265775263784", "logan");
 
 $timev2 = times;
