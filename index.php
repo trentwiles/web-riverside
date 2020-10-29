@@ -192,6 +192,7 @@ $data = array(
 try {
     // Success!
     $file->upload();
+    echo "https://riverside.rocks/${dir}/" . $data["name"] . "." . $data["extension"];
 } catch (\Exception $e) {
     // Fail!
     $errors = $file->getErrors();
