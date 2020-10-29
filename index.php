@@ -164,6 +164,7 @@ $router->get('/admin/upload', function() {
 });
 
 $router->post('/admin/upload', function() {
+    $pug = new Pug();
     if($_POST["key"] !== $_ENV["UPLOAD"]){
         $output = $pug->renderFile('views/upload-fail.pug', array(
             'errors' => '400: Bad Request. You are missing a valid upload key.'
