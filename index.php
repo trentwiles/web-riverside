@@ -102,7 +102,7 @@ $timev2 = times;
 
 $router->get('/about/stats', function() {
     $pug = new Pug();
-    $output = $pug->render('views/count.pug', array(
+    $output = $pug->renderFile('views/count.pug', array(
         'bot_users' => $stat[0],
         'bot_servers' => $stat[1],
         'bot_commands' => $stat[2],
