@@ -198,17 +198,17 @@ try {
     $file->upload();
     $path = "https://riverside.rocks/${dir}/" . $data["name"];
     $servername = $_ENV['MYSQL_SERVER'];
-$username = $_ENV["MYSQL_USERNAME"];
-$password = $_ENV["MYSQL_PASSWORD"];
-$dbname = $_ENV["MYSQL_DATABASE"];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-$epoch = times();
-$sql = "INSERT INTO uploads (`url`, epoch) VALUES ('${path}', '${epoch}')";
-$result = $conn->query($sql);
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $epoch = times();
+    $sql = "INSERT INTO uploads (`url`, epoch) VALUES ('${path}', '${epoch}')";
+    $result = $conn->query($sql);
     $output = $pug->renderFile('views/uploaded.pug', array(
         'url' => $path
     ));
