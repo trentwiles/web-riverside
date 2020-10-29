@@ -216,17 +216,9 @@ $router->get('/community', function() {
     Phug::displayFile('views/community-temp.pug');
 });
 
-$router->get('/admin/delete', function() {
-    Phug::displayFile('views/delete.pug');
-});
-
-$router->post('/admin/delete', function() {
-    if($_POST["key"] == $_ENV["UPLOAD"]){
-        exec("rm -f /var/www/html/assets/ && rm -f /var/www/html/assets/serve/production/app");
-        die(header("Location: /admin/"));
-    }else{
-        Phug::displayFile('views/delete-fail.pug');
-    }
+$router->get('/admin', function() {
+    header("Location: /admin/upload/");
+    die();
 });
 
 $router->set404(function() {
