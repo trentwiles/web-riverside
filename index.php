@@ -269,7 +269,10 @@ $router->set404(function() {
         "/_fragment" => "GET /_fragment (Symphony Remote Code Execution)",
         "/wp-content/plugins/wp-file-manager/lib/php/connector.minimal.php" => "Probing for wordpress vulns",
         "/HNAP1/" => "Searching for router login page",
-        "/admin/" => "Searching for admin page"
+        "/admin/" => "Searching for admin page",
+        "/portal/redlion" => "Probing",
+        "/cgi-bin/login.cgi?requestname=2&cmd=0" => "Attempting to hack login page",
+        "/ui/login.php" => "Attempting to access login pages"
     );
     
     $url = $_SERVER["REQUEST_URI"];
