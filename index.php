@@ -281,7 +281,14 @@ $router->set404(function() {
           // Store response as a PHP object.
           $ipDetails = json_decode($output, true);
         }
-    Phug::displayFile('views/404.pug');
+    if(Secure::isPathExploit($_SERVER["REQUEST_URI"]))
+    {
+        Phug::displayFile('views/403.pug');
+    }
+    else
+    {
+        Phug::displayFile('views/404.pug');
+    }
 });
 
 $router->run();
