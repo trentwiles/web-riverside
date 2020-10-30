@@ -206,7 +206,7 @@ try {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $epoch = times();
+    $epoch = time();
     $sql = "INSERT INTO uploads (`url`, epoch) VALUES ('${path}', '${epoch}')";
     $result = $conn->query($sql);
     $output = $pug->renderFile('views/uploaded.pug', array(
