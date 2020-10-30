@@ -90,5 +90,16 @@ class security
 
             return $exploits;
     }
+    public function isPathExploit($path)
+    {
+        $hacks = returnExploits();
+        if(in_array($path, $hacks))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 }
-
