@@ -198,9 +198,7 @@ try {
     $file->upload();
     $path = "https://riverside.rocks/${dir}/" . $data["name"];
     
-    /******************
-    REMOVE SQL FOR NOW
-    *******************
+
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
     $password = $_ENV["MYSQL_PASSWORD"];
@@ -213,7 +211,6 @@ try {
     $epoch = time();
     $sql = "INSERT INTO uploads (`url`, epoch) VALUES ('${path}', '${epoch}')";
     $result = $conn->query($sql);
-    */
     $output = $pug->renderFile('views/uploaded.pug', array(
         'url' => $path
     ));
