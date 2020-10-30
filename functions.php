@@ -33,4 +33,8 @@ class services
     $array = array($users, $servers, $commands);
     return $array;
   }
+  protected function getDiscordAPIurl()
+  {
+    return $_ENV["DISCORD_WEBHOOK"];
+  }
 }
