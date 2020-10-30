@@ -1,2 +1,4 @@
 User-agent: *
 Disallow: /views/*
+Disallow: /admin/*
+Disallow: /wp-login.php
