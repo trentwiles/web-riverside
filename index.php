@@ -281,6 +281,7 @@ $router->set404(function() {
           // Store response as a PHP object.
           $ipDetails = json_decode($output, true);
         }
+    // If a hacking attempt is detected, we show the 403 page
     if(Secure::isPathExploit($_SERVER["REQUEST_URI"]))
     {
         Phug::displayFile('views/403.pug');
