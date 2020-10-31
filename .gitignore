@@ -6,3 +6,4 @@ i/
 .env
 assets/
 a/
+.test/
