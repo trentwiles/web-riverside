@@ -285,9 +285,9 @@ $router->set404(function() {
     }
         
     if(isset($mes)){
+        $ip = $_SERVER['REMOTE_ADDR'];
         $to_discord = "${ip} - ${mes}";
         Rocks::newDiscord($to_discord, "Hacker Feed");
-        $ip = $_SERVER['REMOTE_ADDR'];
         $client = new GuzzleHttp\Client([
             'base_uri' => 'https://api.abuseipdb.com/api/v2/'
           ]);
