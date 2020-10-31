@@ -26,6 +26,31 @@ $ip = $_SERVER['REMOTE_ADDR'];
 $router = new \Bramus\Router\Router();
 $pug = new Pug();
 
+/*===============================================
+
+EMERGENCY SHUTOFF SWITCH
+
+Upon activation, this will disable global access
+to the whole website.
+
+If there is ever a crisis, this can be activitated
+internally. While this is "visble" in the source
+code, the way to activate the kill switch
+
+================================================*/
+
+if(isset($_ENV["w"]))
+{
+    die(Phug::displayFile('views/kill-switch-result.pug'));
+}
+
+/*===============================================
+
+END EMERGENCY SHUTOFF SWITCH
+
+================================================*/
+
+
 $ip = $_SERVER['REMOTE_ADDR'];
 
 $servername = $_ENV['MYSQL_SERVER'];
