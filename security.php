@@ -85,7 +85,9 @@ class security
                 "/shopdb/index.php" => "Probing for sql admin pages.",
                 "/phpiMyAdmin/index.php" => "Probing for sql admin pages.",
                 "/phpiMyAdmin/index.php" => "Probing for sql admin pages.",
-                "/phpMyAdmina/index.php" => "Probing for sql admin pages."
+                "/phpMyAdmina/index.php" => "Probing for sql admin pages.",
+                "/vendor/phpunit/phpunit/LICENSE" => "Searching for PHPUnit",
+                "/xmlrpc.php" => "/xmlrpc.php"
             );
 
             return $exploits;
