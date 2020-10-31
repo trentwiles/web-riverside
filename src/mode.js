@@ -4,11 +4,11 @@ functon getMode($val)
 {
   if(val !== "")
   {
-    if(val == "light")
+    if(val == "light") //detect light mode
     {
       halfmoon.toggleDarkMode(); // While this looks like we are making the theme dark, in reality we are undoing the dark theme.
     }
-  }else{
+  }else{ // else
     document.cookie = "theme=dark; expires=Thu, 18 Dec 2073 12:00:00 UTC; path=/"; // Write the cookie that the default mode is dark
   }
 }
