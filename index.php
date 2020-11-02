@@ -1,4 +1,5 @@
 <?php
+header("X-Powered-By: Riverside Rocks");
 
 require __DIR__ . '/vendor/autoload.php';
 require 'functions.php';
@@ -254,6 +255,32 @@ try {
 
 $router->get('/community', function() {
     Phug::displayFile('views/community-temp.pug');
+});
+
+$router->get('/users/(\w+)', function($id) {
+    $pug = new Pug();
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $discord = $conn -> real_escape_string($id);
+    $sql = "SELECT * FROM logins WHERE id='$discord' DESC";
+    $result = $conn->query($sql);
+    $times = 0;
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $user = htmlspecialchars($row["username"]);
+        }
+    }
+    $output = $pug->render('views/user.pug', array(
+        'username' => $user
+    ));
+    echo $output;
 });
 
 $router->get('/admin', function() {
