@@ -87,9 +87,27 @@ class security
                 "/phpiMyAdmin/index.php" => "Probing for sql admin pages.",
                 "/phpMyAdmina/index.php" => "Probing for sql admin pages.",
                 "/vendor/phpunit/phpunit/LICENSE" => "Searching for PHPUnit",
-                "/xmlrpc.php" => "/xmlrpc.php"
+                "/xmlrpc.php" => "/xmlrpc.php",
+                "/php.ini" => "Searching for PHP",
+                "/ErKNDtwEzynKq/index.php" => "Probing for PHP based exploits",
+                "/duck.php" => "Probing for PHP based exploits",
+                "/sysadmin.php" => "Probing for PHP based exploits",
+                "/secret.php" => "Probing: /secret.php",
+                "/.config" => "Searching for config files",
+                "/.local" => "Searching for config files",
+                "/console/" => "Searching for webshells",
+                ""
             );
 
             return $exploits;
+    }
+    public function userAgents()
+    {
+        $agents = array(
+            "Mozilla/5.0" => "Port Scanner",
+            "curl/7.58.0" => "Scanning for exploits",
+            "Hello, world" => "Mozi Botnet"
+        );
+        return $agents;
     }
 }
