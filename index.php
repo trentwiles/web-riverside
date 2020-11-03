@@ -285,7 +285,7 @@ $router->get('/users/(\w+)', function($id) {
                 $bio = "Looks like this user hasn't set a bio!";
             }
             $pre_join = $row["epoch"];
-            $join = date("m-d-Y H:i:s", substr("${pre_join}", 0, 10));
+            $join = date("m-d-Y H:i:s", $pre_join;
         }
     }
     $output = $pug->render('views/user.pug', array(
