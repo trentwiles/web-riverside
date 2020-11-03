@@ -65,18 +65,6 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-function sql_signin()
-{
-    $servername = $_ENV['MYSQL_SERVER'];
-    $username = $_ENV["MYSQL_USERNAME"];
-    $password = $_ENV["MYSQL_PASSWORD"];
-    $dbname = $_ENV["MYSQL_DATABASE"];
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-}
 
 $ipinfo = json_decode(file_get_contents("http://ip-api.com/json/${ip}"), true);
 $country = $conn -> real_escape_string(htmlspecialchars($ipinfo["country"]));
@@ -354,6 +342,16 @@ $router->get('/oauth/github', function() {
             /*==========================================
             Insert or Update the Database
             ===========================================*/
+            $servername = $_ENV['MYSQL_SERVER'];
+            $username = $_ENV["MYSQL_USERNAME"];
+            $password = $_ENV["MYSQL_PASSWORD"];
+            $dbname = $_ENV["MYSQL_DATABASE"];
+
+            $conn = new mysqli($servername, $username, $password, $dbname);
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+            
             echo "Hello ${github_username}, your ID is ${github_id}";
             $sql = "SELECT * FROM logins WHERE username='${github_username}'";
             $result = $conn->query($sql);
@@ -364,7 +362,7 @@ $router->get('/oauth/github', function() {
 
                     $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `login_time`) VALUES ('$remote_ip', '$user_agent', 'Not Found', '${github_username}', '${github_id}', '${github_time}')";
                     $result = $conn->query($sql);
-                    
+
                     break;
                 }
             }
