@@ -36,10 +36,11 @@ include tags.pug
         </li>
       </ul>
       <!-- Navbar form (inline form) -->
-      <form class="form-inline d-none d-md-flex ml-auto" action="/search" method="get"> <!-- d-none = display: none, d-md-flex = display: flex on medium screens and up (width > 768px), ml-auto = margin-left: auto -->
-        <input type="text" class="form-control" required="required">
-        <button class="btn btn-primary" type="submit" name='q' id='q'>Search</button>
-      </form>
+      <ul>
+        <li class="nav-item">
+          <a href="/account/login/" class="nav-link">Sign In</a>
+        </li>
+      </ul>
       <div class="navbar-content d-md-none ml-auto"> <!-- d-md-none = display: none on medium screens and up (width > 768px), ml-auto = margin-left: auto -->
         <div class="dropdown with-arrow">
           <button class="btn" data-toggle="dropdown" type="button" id="navbar-dropdown-toggle-btn-1">

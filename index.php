@@ -381,7 +381,8 @@ $router->get('/oauth/github', function() {
                         $pug = new Pug();
                         $output = $pug->renderFile('views/banned.pug', array(
                             'rule' => htmlspecialchars($row["rule"]),
-                            'note' => htmlspecialchars($row["note"])
+                            'note' => htmlspecialchars($row["note"]),
+                            'type' => htmlspecialchars($row["type"])
                         ));
                         echo $output;
                         die();
