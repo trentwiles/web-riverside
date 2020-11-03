@@ -65,6 +65,19 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+function sql_signin()
+{
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+}
+
 $ipinfo = json_decode(file_get_contents("http://ip-api.com/json/${ip}"), true);
 $country = $conn -> real_escape_string(htmlspecialchars($ipinfo["country"]));
 $epoch = time();
@@ -330,15 +343,31 @@ $router->get('/oauth/github', function() {
     
             // We got an access token, let's now get the user's details
             $user = $provider->getResourceOwner($token);
-    
+            sql_signin();
             // Use these details to create a new profile
             $github_username = htmlspecialchars($user->getNickname());
             $github_id = htmlspecialchars($user->getId());
+            $github_time = time();
+            $remote_ip = $_SERVER['REMOTE_ADDR'];
+            $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
             /*==========================================
             Insert or Update the Database
             ===========================================*/
             echo "Hello ${github_username}, your ID is ${github_id}";
+            $sql = "SELECT * FROM logins WHERE username='${github_username}'";
+            $result = $conn->query($sql);
+            if (!empty($result) && $result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    $sql = "DELETE FROM logins WHERE username='${github_username}'";
+                    $result = $conn->query($sql);
+
+                    $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `login_time`) VALUES ('$remote_ip', '$user_agent', 'Not Found', '${github_username}', '${github_id}', '${github_time}')";
+                    $result = $conn->query($sql);
+                    
+                    break;
+                }
+            }
     
         } catch (Exception $e) {
     
