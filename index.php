@@ -1,4 +1,5 @@
 <?php
+session_start();
 header("X-Powered-By: Riverside Rocks");
 
 require __DIR__ . '/vendor/autoload.php';
