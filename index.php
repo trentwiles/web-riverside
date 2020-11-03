@@ -256,7 +256,16 @@ try {
 
 $router->get('/v1/web', function() {
     $pug = new Pug();
-    $output = $pug->renderFile('views/client-v1.pug');
+    if(! $_SESSION["username"])
+    {
+        header("Location: /account/login/");
+        die();
+    }
+    $output = $pug->renderFile('views/client-v1.pug', array(
+        'username' => $_SESSION["username"],
+        'id' => $_SESSION["id"]
+    ));
+    echo $output;
 });
 
 $router->get('/v1/new', function() {
