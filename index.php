@@ -269,7 +269,7 @@ $router->get('/users/(\w+)', function($id) {
         die("Connection failed: " . $conn->connect_error);
     }
     $discord = $conn -> real_escape_string($id);
-    $sql = "SELECT * FROM logins WHERE username=${discord}";
+    $sql = "SELECT * FROM logins WHERE username='${discord}'";
     $result = $conn->query($sql);
     $times = 0;
     if (!empty($result) && $result->num_rows > 0) {
