@@ -337,8 +337,7 @@ $router->get('/oauth/github', function() {
             $_SESSION["username"] = $github_username;
             $_SESSION["id"] = $github_id;
             $github_time = time();
-            $remote_ip = $conn -> real_escape_string(htmlspecialchars($_SERVER['REMOTE_ADDR']));
-            $user_agent = $conn -> real_escape_string(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
+            
 
             /*==========================================
             Insert or Update the Database
@@ -352,6 +351,8 @@ $router->get('/oauth/github', function() {
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
+            $remote_ip = $conn -> real_escape_string(htmlspecialchars($_SERVER['REMOTE_ADDR']));
+            $user_agent = $conn -> real_escape_string(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
 
             echo "Hello ${github_username}, your ID is ${github_id}";
             $sql = "SELECT * FROM logins WHERE username='${github_username}'";
@@ -383,6 +384,7 @@ $router->get('/oauth/github', function() {
                             'note' => htmlspecialchars($row["note"])
                         ));
                         echo $output;
+                        die();
                     }
                 }
             }
