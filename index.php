@@ -254,6 +254,36 @@ try {
 }
 });
 
+$router->get('/v1/web', function() {
+    $pug = new Pug();
+    if(! $_SESSION["username"])
+    {
+        header("Location: /account/login/");
+        die();
+    }
+    $output = $pug->renderFile('views/client-v1.pug', array(
+        'username' => $_SESSION["username"],
+        'id' => $_SESSION["id"]
+    ));
+});
+
+$router->get('/v1/new', function() {
+    $options = array(
+        'cluster' => 'us2',
+        'useTLS' => true
+    );
+    $pusher = new Pusher\Pusher(
+        $_ENV["PUSHER_APP_KEY"],
+        $_ENV["PUSHER_APP_SECRET"],
+        $_ENV["PUSHER_APP_ID"],
+        $options
+    );
+
+    $data['message'] = $_GET["m"];
+    $pusher->trigger('general', 'message', $data);
+});
+
+
 
 $router->get('/community', function() {
     Phug::displayFile('views/community-temp.pug');
