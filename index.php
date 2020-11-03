@@ -279,8 +279,8 @@ $router->get('/v1/new', function() {
         $_ENV["PUSHER_APP_ID"],
         $options
     );
-
-    $data['message'] = $_GET["m"];
+    $username = htmlspecialchars($_SESSION["username"]);
+    $data['message'] = "<a href='/users/${username}'>" . $_SESSION["username"] . "</a>:" . htmlspecialchars($_GET["m"]);
     $pusher->trigger('general', 'message', $data);
     echo "OK";
 });
