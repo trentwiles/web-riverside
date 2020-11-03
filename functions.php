@@ -68,4 +68,15 @@ class services
       $response = curl_exec( $ch );
       curl_close( $ch );
   }
+  function base64rand($l)
+  {
+      $chars = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_-";
+      $letter = substr($chars, $number2, $number1);
+      $char = $letter[0];
+      $final = "";
+      for ($x = 0; $x <= $l; $x++) {
+        $final .= $char;
+      }
+      return $final;
+  }
 }

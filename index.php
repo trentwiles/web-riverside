@@ -398,7 +398,9 @@ $router->get('/oauth/github', function() {
                 }
             }
 
-            $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `login_time`) VALUES ('${remote_ip}', '${user_agent}', 'Not Found', '${github_username}', '${github_id}', '${github_time}')";
+            $temp_auto_api_key = Rocks::base64rand(30);
+
+            $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `login_time`, `temp_auto_api_key`) VALUES ('${remote_ip}', '${user_agent}', 'Not Found', '${github_username}', '${github_id}', '${github_time}', '${temp_auto_api_key}')";
             $result = $conn->query($sql);
 
             $sql = "SELECT * FROM bans";
