@@ -377,6 +377,12 @@ $router->get('/oauth/github', function() {
                         session_start();
                         session_unset();
                         session_destroy();
+                        $pug = new Pug();
+                        $output = $pug->renderFile('views/banned.pug', array(
+                            'rule' => htmlspecialchars($row["rule"]),
+                            'note' => htmlspecialchars($row["note"])
+                        ));
+                        echo $output;
                     }
                 }
             }
