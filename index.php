@@ -347,7 +347,7 @@ $router->get('/oauth/github', function() {
         }
     
         // Use this to interact with an API on the users behalf
-        echo $token->getToken();
+        //echo $token->getToken();
     }
 });
 $router->get('/admin', function() {
