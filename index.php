@@ -279,8 +279,33 @@ $router->get('/v1/new', function() {
         $_ENV["PUSHER_APP_ID"],
         $options
     );
-    $username = htmlspecialchars($_SESSION["username"]);
-    $data['message'] = $_SESSION["username"] . ": " . htmlspecialchars($_GET["m"]);
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sent_api_key = $conn -> real_escape_string($_GET["key"]);
+    $sql = "SELECT * FROM logins WHERE temp_auto_api_key='$sent_api_key'";
+    $result = $conn->query($sql);
+
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            if($row["temp_auto_api_key"] == "")
+            {
+                die("Bad API key");
+            }
+            else
+            {
+                $username = $row["username"];
+            }
+        }
+    }
+
+    $data['message'] = $username . ": " . htmlspecialchars($_GET["m"]);
     $pusher->trigger('general', 'message', $data);
     echo "OK";
 });
