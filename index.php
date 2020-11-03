@@ -282,6 +282,7 @@ $router->get('/v1/new', function() {
 
     $data['message'] = $_GET["m"];
     $pusher->trigger('general', 'message', $data);
+    echo "OK";
 });
 
 
