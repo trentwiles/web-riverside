@@ -7,4 +7,8 @@ var pusher = new Pusher('d3f96738bc8f4a369b91', {
 var channel = pusher.subscribe('general');
 channel.bind('message', function(data) {
     alert(JSON.stringify(data));
+    var node = document.createElement("p");
+    var textnode = document.createTextNode(data.message);
+    node.appendChild(textnode);
+    document.getElementById("m").appendChild(node);
 });
