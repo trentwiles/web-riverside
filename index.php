@@ -332,7 +332,13 @@ $router->get('/oauth/github', function() {
             $user = $provider->getResourceOwner($token);
     
             // Use these details to create a new profile
-            printf('Hello %s!', $user->getNickname());
+            $github_username = htmlspecialchars($user->getNickname());
+            $github_id = htmlspecialchars($user->getId());
+
+            /*==========================================
+            Insert or Update the Database
+            ===========================================*/
+            echo "Hello ${github_username}, your ID is ${github_id}";
     
         } catch (Exception $e) {
     
