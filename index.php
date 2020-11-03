@@ -291,7 +291,11 @@ $router->get('/users/(\w+)', function($id) {
     $output = $pug->render('views/user.pug', array(
         'username' => $user,
         'bio' => $bio,
-        'join' => $join
+        'join' => $join,
+        'posts' => array(
+            "title" => "pog",
+            "content" => "yes"
+        )
     ));
     echo $output;
 });

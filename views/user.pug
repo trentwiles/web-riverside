@@ -2,5 +2,8 @@ include head.pug
 br
 h1 #{username}
 p #{bio}
+each post in posts
+    ul
+        li #{book.title}
 br
 i Join Date: #{join}
