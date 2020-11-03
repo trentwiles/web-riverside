@@ -334,6 +334,8 @@ $router->get('/oauth/github', function() {
             // Use these details to create a new profile
             $github_username = htmlspecialchars($user->getNickname());
             $github_id = htmlspecialchars($user->getId());
+            $_SESSION["username"] = $github_username;
+            $_SESSION["id"] = $github_id;
             $github_time = time();
             $remote_ip = $_SERVER['REMOTE_ADDR'];
             $user_agent = $_SERVER['HTTP_USER_AGENT'];
@@ -365,6 +367,9 @@ $router->get('/oauth/github', function() {
 
             $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `login_time`) VALUES ('${remote_ip}', '${user_agent}', 'Not Found', '${github_username}', '${github_id}', '${github_time}')";
             $result = $conn->query($sql);
+
+            header("Location: /account/dashboard");
+            die();
     
         } catch (Exception $e) {
     
@@ -381,6 +386,11 @@ $router->get('/admin', function() {
     die();
 });
 
+
+$router->get('/account/dashboard', function() {
+    echo "Soon...";
+    // Note to self, work on this!
+});
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     
