@@ -337,8 +337,8 @@ $router->get('/oauth/github', function() {
             $_SESSION["username"] = $github_username;
             $_SESSION["id"] = $github_id;
             $github_time = time();
-            $remote_ip = $_SERVER['REMOTE_ADDR'];
-            $user_agent = $_SERVER['HTTP_USER_AGENT'];
+            $remote_ip = $conn -> real_escape_string(htmlspecialchars($_SERVER['REMOTE_ADDR']));
+            $user_agent = $conn -> real_escape_string(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
 
             /*==========================================
             Insert or Update the Database
@@ -367,6 +367,19 @@ $router->get('/oauth/github', function() {
 
             $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `login_time`) VALUES ('${remote_ip}', '${user_agent}', 'Not Found', '${github_username}', '${github_id}', '${github_time}')";
             $result = $conn->query($sql);
+
+            $sql = "SELECT * FROM bans";
+            $result = $conn->query($sql);
+            if (!empty($result) && $result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    if($row["id"] == $github_id)
+                    {
+                        session_start();
+                        session_unset();
+                        session_destroy();
+                    }
+                }
+            }
 
             header("Location: /account/dashboard");
             die();
