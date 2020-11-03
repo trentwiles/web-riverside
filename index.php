@@ -359,7 +359,7 @@ $router->get('/oauth/github', function() {
                     $sql = "DELETE FROM logins WHERE username='${github_username}'";
                     $result = $conn->query($sql);
 
-                    $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `login_time`) VALUES ('$remote_ip', '$user_agent', 'Not Found', '${github_username}', '${github_id}', '${github_time}')";
+                    $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `login_time`) VALUES ('${remote_ip}', '${user_agent}', 'Not Found', '${github_username}', '${github_id}', '${github_time}')";
                     $result = $conn->query($sql);
 
                     break;
