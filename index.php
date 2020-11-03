@@ -275,7 +275,7 @@ $router->get('/users/(\w+)', function($id) {
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $user = htmlspecialchars($row["username"]);
-            if(!isset($user))
+            if($row["username"] == "")
             {
                 die(Phug::displayFile('views/user-404.pug'));
             }
