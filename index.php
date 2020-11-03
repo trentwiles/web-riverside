@@ -280,7 +280,7 @@ $router->get('/v1/new', function() {
         $options
     );
     $username = htmlspecialchars($_SESSION["username"]);
-    $data['message'] = "<a href='/users/${username}'>" . $_SESSION["username"] . "</a>:" . htmlspecialchars($_GET["m"]);
+    $data['message'] = $_SESSION["username"] . ":" . htmlspecialchars($_GET["m"]);
     $pusher->trigger('general', 'message', $data);
     echo "OK";
 });
