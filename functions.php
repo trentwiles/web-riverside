@@ -71,12 +71,12 @@ class services
   function base64rand($l)
   {
       $chars = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_-";
-      $number1 = rand(1,62);
-      $number2 = $number1 - 1;
-      $letter = substr($chars, $number2, $number1);
-      $char = $letter[0];
       $final = "";
       for ($x = 0; $x <= $l; $x++) {
+        $number1 = rand(1,62);
+        $number2 = $number1 - 1;
+        $letter = substr($chars, $number2, $number1);
+        $char = $letter[0];
         $final .= $char;
       }
       return $final;
