@@ -269,7 +269,7 @@ $router->get('/users/(\w+)', function($id) {
         die("Connection failed: " . $conn->connect_error);
     }
     $discord = $conn -> real_escape_string($id);
-    $sql = "SELECT * FROM logins WHERE id='$discord' DESC";
+    $sql = "SELECT * FROM logins WHERE id=${discord}";
     $result = $conn->query($sql);
     $times = 0;
     if (!empty($result) && $result->num_rows > 0) {
@@ -278,7 +278,7 @@ $router->get('/users/(\w+)', function($id) {
         }
     }
     $output = $pug->render('views/user.pug', array(
-        'username' => htmlspecialchars($discord)
+        'username' => htmlspecialchars($user)
     ));
     echo $output;
 });
