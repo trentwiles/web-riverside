@@ -331,7 +331,6 @@ $router->get('/oauth/github', function() {
     
             // We got an access token, let's now get the user's details
             $user = $provider->getResourceOwner($token);
-            sql_signin();
             // Use these details to create a new profile
             $github_username = htmlspecialchars($user->getNickname());
             $github_id = htmlspecialchars($user->getId());
@@ -351,7 +350,7 @@ $router->get('/oauth/github', function() {
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
-            
+
             echo "Hello ${github_username}, your ID is ${github_id}";
             $sql = "SELECT * FROM logins WHERE username='${github_username}'";
             $result = $conn->query($sql);
