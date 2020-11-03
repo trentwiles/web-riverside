@@ -269,16 +269,23 @@ $router->get('/users/(\w+)', function($id) {
         die("Connection failed: " . $conn->connect_error);
     }
     $discord = $conn -> real_escape_string($id);
-    $sql = "SELECT * FROM logins WHERE id=${discord}";
+    $sql = "SELECT * FROM logins WHERE username=${discord}";
     $result = $conn->query($sql);
     $times = 0;
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $user = htmlspecialchars($row["username"]);
+            $bio = htmlspecialchars($row["bio"]);
+            if(! $bio)
+            {
+                $bio = "Looks like this user hasn't set a bio!";
+            }
+
         }
     }
     $output = $pug->render('views/user.pug', array(
-        'username' => htmlspecialchars($user)
+        'username' => $user,
+        'bio' => $bio
     ));
     echo $output;
 });
