@@ -278,7 +278,7 @@ $router->get('/users/(\w+)', function($id) {
         }
     }
     $output = $pug->render('views/user.pug', array(
-        'username' => $user
+        'username' => htmlspecialchars($discord)
     ));
     echo $output;
 });
