@@ -28,6 +28,7 @@ function sendMessage(message, key){
 // If the key is valid, OK should be returned
 addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
-        sendMessage("o", key)
+        var c = document.getElementById("mess").value
+        sendMessage(c, key)
     }
 })
