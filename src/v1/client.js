@@ -27,8 +27,8 @@ function sendMessage(message, key){
 // Example request: https://riverside.rocks/v1/new?m=hello!&key=abcdefg
 // If the key is valid, OK should be returned
 var content = document.getElementById("mess").value
-("keyup", function(event) {
+addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
-        sendMessage(content, key)
+        sendMessage("o", key)
     }
 })
