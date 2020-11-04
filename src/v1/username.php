@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
+require '/vendor/autoload.php';
 
 session_start();
 header("Content-type: text/javascript");
