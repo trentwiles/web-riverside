@@ -150,7 +150,7 @@ $router->get('/code/production/cred.js', function() {
         }
     }
     echo "const key = Cookies.get('key');\n";
-    echo "const username = " . $user . ";\n";
+    echo "const username = '" . $user . "';\n";
 });
 
 $router->get('/account/login', function() {
