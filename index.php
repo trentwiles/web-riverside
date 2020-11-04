@@ -139,7 +139,7 @@ $router->get('/code/production/cred.js', function() {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $_COOKIE["key"] = $key;
+    $key = $_COOKIE["key"];
     $sql_key = $conn -> real_escape_string(htmlspecialchars($key));
     $sql = "SELECT * FROM logins WHERE temp_auto_api_key='$sql_key'";
     $result = $conn->query($sql);
@@ -149,8 +149,8 @@ $router->get('/code/production/cred.js', function() {
             break;
         }
     }
-    echo "const key = " . $sql_key . ";\n";
-    echo "const key = " . $user . ";\n";
+    echo "const key = Cookies.get('key');\n";
+    echo "const username = " . $user . ";\n";
 });
 
 $router->get('/account/login', function() {
