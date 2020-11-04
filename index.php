@@ -130,6 +130,10 @@ $router->get('/about/legal', function() {
     Phug::displayFile('views/legal.pug');
 });
 
+$router->get('/account/login', function() {
+    Phug::displayFile('views/signin.pug');
+});
+
 $stat = Rocks::statcord("764485265775263784", "logan");
 
 $router->get('/about/stats', function() {
