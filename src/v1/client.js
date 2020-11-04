@@ -26,3 +26,8 @@ function sendMessage(message, key){
 }
 // Example request: https://riverside.rocks/v1/new?m=hello!&key=abcdefg
 // If the key is valid, OK should be returned
+function form(id) {
+    var content = document.getElementById("mess").value
+    sendMessage(content, key);
+    document.getElementById("mess") = ""
+}
