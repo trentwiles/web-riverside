@@ -139,16 +139,18 @@ $router->get('/code/production/cred.js', function() {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
-    $sql = "SELECT * FROM logins WHERE username='$username'";
+    $_COOKIE["key"] = $key;
+    $sql_key = $conn -> real_escape_string(htmlspecialchars($key));
+    $sql = "SELECT * FROM logins WHERE temp_auto_api_key='$sql_key'";
     $result = $conn->query($sql);
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            $key = $row["temp_auto_api_key"];
+            $user = $row["username"];
             break;
         }
     }
-    echo "const key = " . $key . ";\n";
+    echo "const key = " . $sql_key . ";\n";
+    echo "const key = " . $user . ";\n";
 });
 
 $router->get('/account/login', function() {
@@ -449,7 +451,9 @@ $router->get('/oauth/github', function() {
             }
 
             $temp_auto_api_key = Rocks::base64rand(30);
-
+            $cookie_name = "key";
+            $cookie_value = $temp_auto_api_key;
+            setcookie($cookie_name, $cookie_value, time() + (864000 * 30), "/"); // 10 days, might change this in the future
             $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `login_time`, `temp_auto_api_key`) VALUES ('${remote_ip}', '${user_agent}', 'Not Found', '${github_username}', '${github_id}', '${github_time}', '${temp_auto_api_key}')";
             $result = $conn->query($sql);
 
