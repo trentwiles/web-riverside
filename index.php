@@ -130,6 +130,23 @@ $router->get('/about/legal', function() {
     Phug::displayFile('views/legal.pug');
 });
 
+$router->get('/code/production/cred.js', function() {
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "SELECT * FROM logins WHERE username='$username'";
+    $result = $conn->query($sql);
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $key = $row["temp_auto_api_key"];
+            break;
+        }
+    }
+    echo "const key = " . $key . ";\n";
+});
+
 $router->get('/account/login', function() {
     Phug::displayFile('views/signin.pug');
 });
