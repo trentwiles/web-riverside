@@ -326,7 +326,7 @@ $router->get('/v1/new', function() {
 
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            $username = $row["username"];
+            $_username = $row["username"];
             break;
         }
     }
@@ -336,10 +336,10 @@ $router->get('/v1/new', function() {
         die("400 Bad Request");
     }
 
-    $data['message'] = $username . ": " . htmlspecialchars($_GET["m"]);
+    $data['message'] = $_username . ": " . htmlspecialchars($_GET["m"]);
     $pusher->trigger('general', 'message', $data);
 
-    $_user = $conn -> real_escape_string(htmlspecialchars($username));
+    $_user = $conn -> real_escape_string(htmlspecialchars($_username));
     $_mes = $conn -> real_escape_string(htmlspecialchars($_GET["m"]));
     $_time = $conn -> real_escape_string(htmlspecialchars(time()));
     $_mess_id = $_time . rand() . rand();
