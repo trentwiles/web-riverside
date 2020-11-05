@@ -331,7 +331,7 @@ $router->get('/v1/new', function() {
         }
     }
 
-    if(! $username)
+    if(! $_username)
     {
         die("400 Bad Request");
     }
