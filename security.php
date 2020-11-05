@@ -95,9 +95,8 @@ class security
                 "/secret.php" => "Probing: /secret.php",
                 "/.config" => "Searching for config files",
                 "/.local" => "Searching for config files",
-                "/console/" => "Searching for webshells",
-                ""
-            );
+                "/console/" => "Searching for webshells"
+        );
 
             return $exploits;
     }
