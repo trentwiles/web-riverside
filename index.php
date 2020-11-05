@@ -345,6 +345,10 @@ $router->get('/v1/new', function() {
     $_mess_id = $_time . rand() . rand();
 
     $sent_api_key = $conn -> real_escape_string($data['message']);
+    if($_user = "tucker")
+    {
+        die("400");
+    }
     $sql = "INSERT INTO `msg`(`username`, `message`, `time`, `mess_id`) VALUES ('${_user}', '${_mes}', '${_time}', '${_mess_id}')";
     $result = $conn->query($sql);
     echo "OK";
