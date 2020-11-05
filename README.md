@@ -1,5 +1,9 @@
 # Riverside Rocks
-New website for Riverside Rocks.
+Website for Riverside Rocks.
+
+Live at:
+
+https://riverside.rocks
 
 ## Requirements
 
@@ -15,5 +19,22 @@ Begin by cloning the repo:
 Install all dependencies:
 
 `composer install`
+
+## Setting up API keys and secrets
+
+Currently our .env file accepts:
+
+- MySQL server *
+- MySQL username *
+- MySQL password *
+- MySQL database *
+- Google API key with access to the youtube API *
+- AbuseIPDB API key
+- Uploading key, a password used to upload assets to the site
+- Github Oauth Secret
+- Github Oauth Client
+- Github Callback
+
+*A start indicates that the key is required and the site will not function without it.*
 
 You are ready to go!
