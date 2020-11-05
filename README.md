@@ -9,6 +9,7 @@ https://riverside.rocks
 
 - PHP 7 or higher
 - Apache2 (Nginx *should* work, but I've never tried it myself.)
+- MySQL
 
 ## Installing
 
@@ -34,6 +35,7 @@ Currently our .env file accepts:
 - Github Oauth Secret
 - Github Oauth Client
 - Github Callback
+- Pusher API Key
 
 *A start indicates that the key is required and the site will not function without it.*
 
