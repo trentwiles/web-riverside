@@ -319,17 +319,21 @@ $router->get('/v1/new', function() {
     $sql = "SELECT * FROM logins WHERE temp_auto_api_key='$sent_api_key'";
     $result = $conn->query($sql);
 
+    if(!$_GET["key"])
+    {
+        die("400 Bad Request");
+    }
+
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            if($row["temp_auto_api_key"] == "")
-            {
-                die("Bad API key");
-            }
-            else
-            {
-                $username = $row["username"];
-            }
+            $username = $row["username"];
+            break;
         }
+    }
+
+    if(! $username)
+    {
+        die("400 Bad Request");
     }
 
     $data['message'] = $username . ": " . htmlspecialchars($_GET["m"]);
