@@ -7,7 +7,7 @@ https://riverside.rocks
 
 ## Requirements
 
-- PHP 7 or higher
+- PHP 7 or higher (our server runs PHP 7.3 at the moment)
 - Apache2 (Nginx *should* work, but I've never tried it myself.)
 - MySQL
 
