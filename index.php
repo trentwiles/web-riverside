@@ -334,6 +334,15 @@ $router->get('/v1/new', function() {
 
     $data['message'] = $username . ": " . htmlspecialchars($_GET["m"]);
     $pusher->trigger('general', 'message', $data);
+
+    $_user = $conn -> real_escape_string(htmlspecialchars($username));
+    $_mes = $conn -> real_escape_string(htmlspecialchars($data["message"]));
+    $_time = $conn -> real_escape_string(htmlspecialchars(time()));
+    $_mess_id = $_time . rand() . rand();
+
+    $sent_api_key = $conn -> real_escape_string($data['message']);
+    $sql = "INSERT INTO `msg`(`username`, `message`, `time`, `mess_id`) VALUES ('${_user}', '${_mes}', '${_time}', '${_mess_id}')";
+    $result = $conn->query($sql);
     echo "OK";
 });
 
