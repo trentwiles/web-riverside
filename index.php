@@ -339,7 +339,9 @@ $router->get('/v1/new', function() {
     $data['message'] = $_username . ": " . htmlspecialchars($_GET["m"]);
     $pusher->trigger('general', 'message', $data);
 
-    $_user = $conn -> real_escape_string(htmlspecialchars($_username));
+    $_username = $new;
+
+    $_user = $conn -> real_escape_string(htmlspecialchars($new));
     $_mes = $conn -> real_escape_string(htmlspecialchars($_GET["m"]));
     $_time = $conn -> real_escape_string(htmlspecialchars(time()));
     $_mess_id = $_time . rand() . rand();
