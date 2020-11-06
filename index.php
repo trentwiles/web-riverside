@@ -339,7 +339,7 @@ $router->get('/v1/new', function() {
     $data['message'] = $_username . ": " . htmlspecialchars($_GET["m"]);
     $pusher->trigger('general', 'message', $data);
 
-    $new; = $_username;
+    $new = $_username;
 
     $_user = $conn -> real_escape_string(htmlspecialchars($new));
     $_mes = $conn -> real_escape_string(htmlspecialchars($_GET["m"]));
