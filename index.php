@@ -171,10 +171,11 @@ $router->get('/code/production/m.js', function() {
             array_push($messages, $row["message"]);
         }
     }
-    foreach($messages as $message){
+    foreach($messages as $_message){
         $rand = Rocks::base64rand(6);
-        echo "var ${rand} = \"" . $message . "\"; \n";
+        echo "var ${rand} = \"" . $_message . "\"; \n";
     }
+    print_r($messages);
 });
 
 $router->get('/account/login', function() {
