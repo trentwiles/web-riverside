@@ -351,6 +351,11 @@ $router->get('/v1/new', function() {
     {
         die("400");
     }
+    if(!isset($_user))
+    {
+        die("400 Bad Request");
+    }
+
     $sql = "INSERT INTO `msg` (`username`, `message`, `time`, `mess_id`) VALUES ('${_user}', '${_mes}', '${_time}', '${_mess_id}')";
     $result = $conn->query($sql);
     echo "OK";
