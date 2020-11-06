@@ -1,0 +1,23 @@
+include head.pug
+br
+h1 Contact Us
+p Use this form to send feedback, bugs, and concerns.
+form(method="post" class="w-400 mw-full")
+    div(class="form-group")
+      label(for="full-name" class="required") Full name
+      input(type="text" class="form-control" id="name" placeholder="Your name" required="required")
+    div(class="form-group")
+      label(for="full-name" class="required") Full name
+      input(type="text" class="form-control" id="email" placeholder="never@gonnagiveyouup.com" required="required")
+    div(class="form-group")
+      label(for="area-of-specialization" class="required") Type
+      select(class="form-control" id="type" required="required")
+        option(value="" selected="selected" disabled="disabled")Select a type of comment
+        option(value="General Comment") General Comment
+        option(value="Feedback") Feedback
+        option(value="Bug") Bug
+        option(value="Question") Question
+    div(class="form-group")
+      label(for="description") Comment
+      textarea(class="form-control" id="description" placeholder="Comment")
+    input(class="btn btn-primary" type="submit" value="Submit")

@@ -1,4 +1,18 @@
 <?php
+/*
+   +----------------------------------------------------------------------+
+   | Copyright (c) 2020 Trent Wiles and the Riverside Rocks authors       |
+   +----------------------------------------------------------------------+
+   | This source file is subject to the Apache 2.0 Lisence.               |
+   |                                                                      |
+   | If you did not receive a copy of the license and are unable to       |
+   | obtain it through the world-wide-web, please send a email to         |
+   | support@riverside.rocks so we can mail you a copy immediately.       |
+   +----------------------------------------------------------------------+
+   | Authors: Trent "Riverside Rocks" Wiles <trent@riverside.rocks>       |
+   +----------------------------------------------------------------------+
+*/
+
 session_start();
 header("X-Powered-By: Riverside Rocks");
 
@@ -85,6 +99,18 @@ $sql = "SELECT * FROM logs";
     }
     define("times", $times);
 
+$sql = "SELECT * FROM msg";
+    $result = $conn->query($sql);
+    $times = 0;
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $times = $times + 1;
+        }
+    }
+
+    define("mess", $times);
+
+
     $sql = "SELECT country, count(*) as SameValue from logs GROUP BY country ORDER BY SameValue DESC";
     $result = $conn->query($sql);
     $countries = array();
@@ -128,6 +154,10 @@ $router->get('/about', function() {
 
 $router->get('/about/legal', function() {
     Phug::displayFile('views/legal.pug');
+});
+
+$router->get('/about/hacking', function() {
+    Phug::displayFile('views/hacking.pug');
 });
 
 $router->get('/code/production/cred.js', function() {
@@ -198,6 +228,29 @@ $router->get('/about/stats', function() {
 
 $router->get('/projects', function() {
     Phug::displayFile('views/projects.pug');
+});
+
+$router->get('/contact', function() {
+   header("Location: /about/contact");
+});
+
+$router->get('/about/contact', function() {
+    Phug::displayFile('views/contact.pug'); // might make this dynamic later, might not
+});
+
+$router->post('/about/contact', function() {
+   if(!isset($_POST["name"]))
+   {
+      die("400 Bad Request");
+   }
+   $name = $_POST["name"];
+   $email = $_POST["email"];
+   $type = $_POST["type"];
+   $comment = $_POST["comment"];
+   // No need to worry about XSS or SQL injections, thats now Discord's problem hehe
+   $final = "From ${name} <${email}> regarding ${type}: **${comment}**";
+   Rocks::newDiscord($final, "Mail"); // Note that this will go to the "hacker feed" on my discord server
+   Phug::displayFile('views/thanks.pug');
 });
 
 $router->get('/watch/(\w+)', function($id) {
