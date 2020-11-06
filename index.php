@@ -246,7 +246,8 @@ $router->post('/about/contact', function() {
    // No need to worry about XSS or SQL injections, thats now Discord's problem hehe
    $final = "From ${name} <${email}> regarding ${type}: **${comment}**";
    Rocks::newDiscord($final, "Mail"); // Note that this will go to the "hacker feed" on my discord server
-   Phug::displayFile('views/thanks.pug');
+    print_r($_POST);
+   //Phug::displayFile('views/thanks.pug');
 });
 
 $router->get('/watch/(\w+)', function($id) {
