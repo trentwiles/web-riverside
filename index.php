@@ -153,7 +153,7 @@ $router->get('/code/production/cred.js', function() {
     echo "const username = \"" . $user . "\";\n";
 });
 
-$router->get('/code/production/cred.js', function() {
+$router->get('/code/production/m.js', function() {
     $one_min_ago = time() - 60;
     $messages = array();
     $sql = "SELECT * FROM logins WHERE epoch > ${one_min_ago}";
