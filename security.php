@@ -96,7 +96,10 @@ class security
                 "/.config" => "Searching for config files",
                 "/.local" => "Searching for config files",
                 "/console/" => "Searching for webshells",
-                "/currentsetting.htm" => "Netgear config page"
+                "/currentsetting.htm" => "Netgear config page",
+                "/status?full&json" => "Searching for server status pages",
+                "/server-status?format=plain" => "Searching for server status pages",
+                "/admin/api.php?version" => "Searching for admin pages"
         );
 
             return $exploits;
