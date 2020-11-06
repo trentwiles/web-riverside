@@ -153,6 +153,22 @@ $router->get('/code/production/cred.js', function() {
     echo "const username = \"" . $user . "\";\n";
 });
 
+$router->get('/code/production/cred.js', function() {
+    $one_min_ago = time() - 60;
+    $messages = array();
+    $sql = "SELECT * FROM logins WHERE epoch > ${one_min_ago}";
+    $result = $conn->query($sql);
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            array_push($messages, $row["message"]);
+        }
+    }
+    foreach($messages as $message){
+        $rand = Rocks::base64rand(6);
+        echo "var ${rand} = \"" . $message . "\"; \n";
+    }
+});
+
 $router->get('/account/login', function() {
     Phug::displayFile('views/signin.pug');
 });
