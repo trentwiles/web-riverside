@@ -99,6 +99,18 @@ $sql = "SELECT * FROM logs";
     }
     define("times", $times);
 
+$sql = "SELECT * FROM msg";
+    $result = $conn->query($sql);
+    $times = 0;
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $times = $times + 1;
+        }
+    }
+
+    define("mess", $times);
+
+
     $sql = "SELECT country, count(*) as SameValue from logs GROUP BY country ORDER BY SameValue DESC";
     $result = $conn->query($sql);
     $countries = array();
