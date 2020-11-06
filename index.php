@@ -175,7 +175,7 @@ $router->get('/code/production/m.js', function() {
         $rand = Rocks::base64rand(6);
         echo "var ${rand} = \"" . $_message . "\"; \n";
     }
-    print_r($messages);
+    print_r($messages); // comment this
 });
 
 $router->get('/account/login', function() {
