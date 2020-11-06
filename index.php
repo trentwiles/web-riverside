@@ -144,6 +144,10 @@ $router->get('/about/legal', function() {
     Phug::displayFile('views/legal.pug');
 });
 
+$router->get('/about/hacking', function() {
+    Phug::displayFile('views/hacking.pug');
+});
+
 $router->get('/code/production/cred.js', function() {
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
