@@ -347,7 +347,7 @@ $router->get('/v1/new', function() {
     $_mess_id = $_time . rand() . rand();
 
     $sent_api_key = $conn -> real_escape_string($data['message']);
-    if($_user = "tucker")
+    if($_user == "tucker")
     {
         die("400");
     }
