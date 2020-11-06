@@ -351,7 +351,7 @@ $router->get('/v1/new', function() {
     {
         die("400");
     }
-    $sql = "INSERT INTO `msg`(`username`, `message`, `time`, `mess_id`) VALUES ('${_user}', '${_mes}', '${_time}', '${_mess_id}')";
+    $sql = "INSERT INTO `msg` (`username`, `message`, `time`, `mess_id`) VALUES ('${_user}', '${_mes}', '${_time}', '${_mess_id}')";
     $result = $conn->query($sql);
     echo "OK";
 });
