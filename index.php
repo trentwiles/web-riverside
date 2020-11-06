@@ -239,10 +239,6 @@ $router->get('/about/contact', function() {
 });
 
 $router->post('/about/contact', function() {
-   if(!isset($_POST["name"]))
-   {
-      die("400 Bad Request");
-   }
    $name = $_POST["name"];
    $email = $_POST["email"];
    $type = $_POST["type"];
