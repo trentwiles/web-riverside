@@ -373,9 +373,41 @@ $router->get('/v1/web', function() {
         header("Location: /account/login/");
         die();
     }
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT * FROM msg BY epoch DESC";
+    $result = $conn->query($sql);
+    $c = 0;
+    $mess = array();
+    $users = array();
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            array_push($mess, $row["message"]);
+            array_push($users, $row["username"]);
+            $c = $c + 1;
+            if($c > 5)
+            {
+                die();
+            }
+        }
+    }
     $output = $pug->renderFile('views/client-v1.pug', array(
         'username' => $_SESSION["username"],
-        'id' => $_SESSION["id"]
+        'id' => $_SESSION["id"],
+        'mes1' => $mess[0],
+        'user1' => $users[0],
+        'mes2' => $mess[1],
+        'user2' => $users[1],
+        'mes3' => $mess[2],
+        'user3' => $users[2],
+        'mes4' => $mess[3],
+        'user4' => $users[3],
     ));
     echo $output;
 });
@@ -396,7 +428,8 @@ $router->get('/v1/new', function() {
     $password = $_ENV["MYSQL_PASSWORD"];
     $dbname = $_ENV["MYSQL_DATABASE"];
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $conn = new mysqli($servername, $username,             array_push($mess, $row["message"]);
+$password, $dbname);
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
