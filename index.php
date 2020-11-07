@@ -397,6 +397,7 @@ $router->get('/v1/web', function() {
             }
         }
     }
+    die(print_r($users));
     $output = $pug->renderFile('views/client-v1.pug', array(
         'username' => $_SESSION["username"],
         'id' => $_SESSION["id"],
