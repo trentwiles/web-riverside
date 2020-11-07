@@ -383,7 +383,7 @@ $router->get('/v1/web', function() {
     }
     $mess = array();
     $users = array();
-    $sql = "SELECT * FROM msg ORDER BY epoch DESC";
+    $sql = "SELECT * FROM msg ORDER BY `time` DESC";
     $result = $conn->query($sql);
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
