@@ -393,7 +393,6 @@ $router->get('/v1/web', function() {
             }
         }
     }
-    die($row["message"]);
     $output = $pug->renderFile('views/client-v1.pug', array(
         'username' => $_SESSION["username"],
         'id' => $_SESSION["id"],
