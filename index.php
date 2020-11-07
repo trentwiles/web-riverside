@@ -381,17 +381,15 @@ $router->get('/v1/web', function() {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT * FROM msg ORDER BY `epoch` DESC";
-    $result = $conn->query($sql);
-    $c = 0;
     $mess = array();
     $users = array();
+    $sql = "SELECT * FROM msg";
+    $result = $conn->query($sql);
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             for ($x = 0; $x <= 4; $x++) {
                 array_push($mess, $row["message"]);
                 array_push($users, $row["username"]);
-                
             }
         }
     }
