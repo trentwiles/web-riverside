@@ -37,6 +37,6 @@ Currently our .env file accepts:
 - Github Callback
 - Pusher API Key
 
-*A start indicates that the key is required and the site will not function without it.*
+*\* key is required and the site will not function without it*
 
 You are ready to go!

@@ -1,6 +1,12 @@
 div.chat{
     overflow: scroll;
     width: 75%;
+    height: 300px;
+        -webkit-animation-name: move;
+    	-webkit-animation-duration: 4s;
+    	-webkit-animation-iteration-count: infinite;
+    	-webkit-animation-direction: down;
+    	-webkit-animation-timing-function: linear;
 }
 
 .warnings {
