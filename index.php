@@ -387,10 +387,8 @@ $router->get('/v1/web', function() {
     $result = $conn->query($sql);
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            for ($x = 0; $x <= 4; $x++) {
                 array_push($mess, $row["message"]);
                 array_push($users, $row["username"]);
-            }
         }
     }
     $output = $pug->renderFile('views/client-v1.pug', array(
