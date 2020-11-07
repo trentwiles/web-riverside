@@ -437,6 +437,7 @@ $router->get('/v1/new', function() {
 
     if(!$_GET["key"])
     {
+        header("HTTP/1.1 400 Bad Request");
         die("400 Bad Request");
     }
 
@@ -449,6 +450,7 @@ $router->get('/v1/new', function() {
 
     if(!isset($_username))
     {
+        header("HTTP/1.1 400 Bad Request");
         die("400 Bad Request");
     }
 
@@ -465,10 +467,12 @@ $router->get('/v1/new', function() {
     $sent_api_key = $conn -> real_escape_string($data['message']);
     if($_user == "tucker")
     {
+        header("HTTP/1.1 400 Bad Request");
         die("400");
     }
     if(!isset($_user))
     {
+        header("HTTP/1.1 400 Bad Request");
         die("400 Bad Request");
     }
 
