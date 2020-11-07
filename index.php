@@ -393,7 +393,7 @@ $router->get('/v1/web', function() {
             $c = $c + 1;
             if($c > 5)
             {
-                die();
+                break;
             }
         }
     }
