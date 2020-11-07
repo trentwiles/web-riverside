@@ -1,7 +1,6 @@
 div.chat{
     overflow: scroll;
-    width: 100%;
-    height: 70%;
+    width: 75%;
 }
 
 .warnings {
