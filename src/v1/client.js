@@ -30,5 +30,6 @@ addEventListener("keyup", function(event) {
     if (event.keyCode === 13) {
         var c = document.getElementById("mess").value
         sendMessage(c, key)
+        document.getElementById("mess").value = ""
     }
 })
