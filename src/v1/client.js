@@ -17,6 +17,8 @@ function sendMessage(message, key){
     xhttp.onreadystatechange=function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log("OK")
+        }else if(this.status == 400){
+            document.getElementById("mess").value = "This account is not able to send messages."
         }else{
             console.log("Sorry, something went wrong. Server returned status code of "+this.status)
         }
