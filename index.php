@@ -391,6 +391,7 @@ $router->get('/v1/web', function() {
             for ($x = 0; $x <= 4; $x++) {
                 array_push($mess, $row["message"]);
                 array_push($users, $row["username"]);
+                die($row["message"]);
             }
         }
     }
