@@ -381,7 +381,7 @@ $router->get('/v1/web', function() {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT * FROM msg BY epoch DESC";
+    $sql = "SELECT * FROM msg ORDER BY `epoch` DESC";
     $result = $conn->query($sql);
     $c = 0;
     $mess = array();
@@ -397,7 +397,6 @@ $router->get('/v1/web', function() {
             }
         }
     }
-    die(print_r($users));
     $output = $pug->renderFile('views/client-v1.pug', array(
         'username' => $_SESSION["username"],
         'id' => $_SESSION["id"],
