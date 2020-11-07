@@ -10,8 +10,7 @@ channel.bind('message', function(data) {
     var textnode = document.createTextNode(data.message);
     node.appendChild(textnode);
     document.getElementById("m").appendChild(node);
-    var objDiv = document.getElementById("chat");
-    objDiv.scrollTop = objDiv.scrollHeight;
+    $('#chat').scrollTop($('#chat')[0].scrollHeight);
 });
 
 function sendMessage(message, key){
