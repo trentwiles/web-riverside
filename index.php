@@ -388,12 +388,9 @@ $router->get('/v1/web', function() {
     $users = array();
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            array_push($mess, $row["message"]);
-            array_push($users, $row["username"]);
-            $c = $c + 1;
-            if($c > 5)
-            {
-                break;
+            for ($x = 0; $x <= 4; $x++) {
+                array_push($mess, $row["message"]);
+                array_push($users, $row["username"]);
             }
         }
     }
