@@ -408,6 +408,7 @@ $router->get('/v1/web', function() {
         'user3' => $users[2],
         'mes4' => $mess[3],
         'user4' => $users[3],
+        'debug' => print_r($mess)
     ));
     echo $output;
 });
