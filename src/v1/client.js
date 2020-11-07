@@ -5,12 +5,16 @@ var pusher = new Pusher('d3f96738bc8f4a369b91', {
 });
 
 var channel = pusher.subscribe('general');
+window.onload=function () {
 channel.bind('message', function(data) {
     var node = document.createElement("p");
     var textnode = document.createTextNode(data.message);
     node.appendChild(textnode);
     document.getElementById("m").appendChild(node);
+    var objDiv = document.getElementById("chat");
+    objDiv.scrollTop = objDiv.scrollHeight;
 });
+}
 
 function sendMessage(message, key){
     var xhttp = new XMLHttpRequest();
