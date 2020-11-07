@@ -342,6 +342,11 @@ try {
     $epoch = time();
     $sql = "INSERT INTO uploads (`url`, epoch) VALUES ('${path}', '${epoch}')";
     $result = $conn->query($sql);
+    if($_GET["api"] == "true")
+    {
+        echo $path;
+        die();
+    }
     $output = $pug->renderFile('views/uploaded.pug', array(
         'url' => $path
     ));
@@ -349,6 +354,11 @@ try {
 } catch (\Exception $e) {
     // Fail!
     $errors = $file->getErrors();
+    if($_GET["api"] == "true")
+    {
+        echo $errors;
+        die();
+    }
     $output = $pug->renderFile('views/upload-fail.pug', array(
         'errors' => $errors
     ));
