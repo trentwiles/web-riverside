@@ -284,6 +284,10 @@ $router->get('/ip', function() {
     Rocks::abuseDB($ip);
 });
 
+$router->get('/discord', function() {
+    header("Location: https://discord.gg/Pa7S4Hm");
+});
+
 /*================================
 
      UPLOAD CONTROLLER CODE
