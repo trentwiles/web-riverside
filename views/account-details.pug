@@ -1,0 +1,13 @@
+include head.pug
+br
+h1 Before you sign in, let get to know you.
+p Create a bio
+form(method="post" class="w-400 mw-full")
+    div(class="form-group")
+        label(for="bio" class="required") Short Description
+        input(type="text" class="form-control" id="bio" name="bio" placeholder="Hello! I am..." required="required")
+    div(class="form-group")
+        div(class="custom-checkbox")
+            input(type="checkbox" id="agree-to-terms")
+            label(for="agree-to-terms") I agree to all the #[a(href="#" class="hyperlink") terms and conditions]
+    input(class="btn btn-primary" type="submit" value="Submit")
