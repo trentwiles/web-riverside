@@ -1,7 +1,7 @@
 include head.pug
-br
-h1 Before you sign in, let get to know you.
-p Create a bio
+h1 Welcome to Riverside Rocks, #{username}!
+h3 Before you create your account, let us get to know you.
+strong Create a bio
 form(method="post" class="w-400 mw-full")
     div(class="form-group")
         label(for="bio" class="required") Short Description
@@ -9,5 +9,5 @@ form(method="post" class="w-400 mw-full")
     div(class="form-group")
         div(class="custom-checkbox")
             input(type="checkbox" id="agree-to-terms")
-            label(for="agree-to-terms") I agree to all the #[a(href="#" class="hyperlink") terms and conditions]
+            label(for="agree-to-terms") I agree to all the #[a(href="/about/legal/" target="_blank" class="hyperlink") terms and conditions]
     input(class="btn btn-primary" type="submit" value="Submit")

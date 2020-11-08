@@ -600,6 +600,10 @@ $router->get('/oauth/github', function() {
             if (!empty($result) && $result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     // Erase old logins
+                    if(!isset($row["bio"]))
+                    {
+                        $show_onboarding = "true";
+                    }
                     $sql = "DELETE FROM logins WHERE username='${github_username}'";
                     $result = $conn->query($sql);
                     break;
@@ -634,6 +638,11 @@ $router->get('/oauth/github', function() {
                 }
             }
 
+            if($show_onboarding == "true"){
+                header("Location /account/welcome");
+                die();
+            }
+
             header("Location: /account/dashboard");
             die();
     
@@ -651,6 +660,22 @@ $router->get('/admin', function() {
     header("Location: /admin/upload/");
     die();
 });
+
+$router->get('/account/welcome', function() {
+    if(!isset($_SESSION["username"]))
+    {
+        die(header("Location: /account/dashboard")); // Should prompt user to sign in
+    }
+    $pug = new Pug();
+    $output = $pug->renderFile('views/account-details.pug', array(
+        'username' => $_SESSION["username"],
+    ));
+});
+
+$router->post('/account/welcome', function() {
+    
+});
+
 
 
 $router->get('/account/dashboard', function() {
