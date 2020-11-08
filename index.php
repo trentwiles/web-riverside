@@ -493,12 +493,23 @@ $router->get('/users/(\w+)', function($id) {
     $username = $_ENV["MYSQL_USERNAME"];
     $password = $_ENV["MYSQL_PASSWORD"];
     $dbname = $_ENV["MYSQL_DATABASE"];
+    $badge = "";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     $discord = $conn -> real_escape_string($id);
+    $sql = "SELECT * FROM admins WHERE username='${discord}'";
+    $result = $conn->query($sql);
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            if(isset($row["username"]))
+            {
+                $badge = '<i class="fas fa-shield-alt"></i>';
+            }
+        }
+    }
     $sql = "SELECT * FROM logins WHERE username='${discord}'";
     $result = $conn->query($sql);
     $times = 0;
@@ -519,9 +530,9 @@ $router->get('/users/(\w+)', function($id) {
         }
     }
     $output = $pug->render('views/user.pug', array(
-        'username' => $user,
+        'username' => $user . $badge,
         'bio' => $bio,
-        'join' => $join
+        'join' => $join,
     ));
     echo $output;
 });
