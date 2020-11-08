@@ -600,7 +600,7 @@ $router->get('/oauth/github', function() {
             if (!empty($result) && $result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
                     // Erase old logins
-                    if(!isset($row["bio"]))
+                    if($row["bio"] == "")
                     {
                         $show_onboarding = "true";
                     }
@@ -670,6 +670,7 @@ $router->get('/account/welcome', function() {
     $output = $pug->renderFile('views/account-details.pug', array(
         'username' => $_SESSION["username"],
     ));
+    echo $output;
 });
 
 $router->post('/account/welcome', function() {
