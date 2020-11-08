@@ -506,7 +506,7 @@ $router->get('/users/(\w+)', function($id) {
         while($row = $result->fetch_assoc()) {
             if(isset($row["username"]))
             {
-                $badge = '<i class="fas fa-shield-alt"></i>';
+                $badge = 'fas fa-shield-alt';
             }
         }
     }
@@ -530,9 +530,10 @@ $router->get('/users/(\w+)', function($id) {
         }
     }
     $output = $pug->render('views/user.pug', array(
-        'username' => $user . $badge,
+        'username' => $user,
         'bio' => $bio,
         'join' => $join,
+        'badge' => $badge
     ));
     echo $output;
 });
