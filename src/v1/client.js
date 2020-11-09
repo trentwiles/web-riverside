@@ -39,4 +39,4 @@ addEventListener("keyup", function(event) {
 window.setInterval(function() {
     var elem = document.getElementById('chat');
     elem.scrollTop = elem.scrollHeight;
-  }, 1000);
+  }, 10);
