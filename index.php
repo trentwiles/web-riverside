@@ -714,6 +714,7 @@ $router->get('/account/dashboard', function() {
     $output = $pug->renderFile('views/dashboard.pug', array(
         'username' => $_SESSION["username"],
         'icon' => "https://avatars0.githubusercontent.com/u/" . $_SESSION["id"],
+        'url' => "/users" . "/" . $_SESSION["username"]
     ));
     echo $output;
     // Note to self, work on this!
