@@ -615,6 +615,10 @@ $router->get('/oauth/github', function() {
             $cookie_name = "key";
             $cookie_value = $temp_auto_api_key;
             $bio = $row["bio"];
+            if(!isset($bio))
+            {
+                $bio = "Looks like this user has not set a bio yet!";
+            }
             setcookie($cookie_name, $cookie_value, time() + (864000 * 30), "/"); // 10 days, might change this in the future
             $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `bio`, `login_time`, `temp_auto_api_key`) VALUES ('${remote_ip}', '${user_agent}', 'Not Found', '${github_username}', '${github_id}', '${bio}', '${github_time}', '${temp_auto_api_key}')";
             $result = $conn->query($sql);
