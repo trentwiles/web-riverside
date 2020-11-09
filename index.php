@@ -615,6 +615,7 @@ $router->get('/oauth/github', function() {
             $temp_auto_api_key = Rocks::base64rand(30);
             $cookie_name = "key";
             $cookie_value = $temp_auto_api_key;
+            setcookie($cookie_name, $cookie_value, time() + (864000 * 30), "/");
             $bio = $row["bio"];
             if(!isset($bio))
             {
