@@ -649,10 +649,12 @@ $router->get('/oauth/github', function() {
             if($show_onboarding == "true"){
                 header("Location /account/welcome");
                 die();
+            }else{
+                header("Location: /account/dashboard");
+                die();
             }
 
-            header("Location: /account/dashboard");
-            die();
+
     
         } catch (Exception $e) {
     
