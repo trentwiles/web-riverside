@@ -703,6 +703,8 @@ $router->post('/account/welcome', function() {
     $auth_u = $_SESSION["username"];
     $sql = "UPDATE `logins` SET `bio`='${updated_bio}' WHERE username='$auth_u'";
     $result = $conn->query($sql);
+    header("Location: /account/dashboard");
+    die();
 });
 
 
