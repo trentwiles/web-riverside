@@ -610,6 +610,7 @@ $router->get('/oauth/github', function() {
                     break;
                 }
             }
+            echo "\n DEBUG: SELECTED USERNAME + DELETE OLD RECORD \n";
 
             $temp_auto_api_key = Rocks::base64rand(30);
             $cookie_name = "key";
@@ -619,9 +620,9 @@ $router->get('/oauth/github', function() {
             {
                 $bio = "Looks like this user has not set a bio yet!";
             }
-            setcookie($cookie_name, $cookie_value, time() + (864000 * 30), "/"); // 10 days, might change this in the future
             $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `bio`, `login_time`, `temp_auto_api_key`) VALUES ('${remote_ip}', '${user_agent}', 'Not Found', '${github_username}', '${github_id}', '${bio}', '${github_time}', '${temp_auto_api_key}')";
             $result = $conn->query($sql);
+            echo "\n DEBUG: INSERT NEW RECORD \n";
 
             $sql = "SELECT * FROM bans";
             $result = $conn->query($sql);
@@ -643,6 +644,7 @@ $router->get('/oauth/github', function() {
                     }
                 }
             }
+            echo "\n DEBUG: CHECK BAN \n";
 
             if($show_onboarding == "true"){
                 header("Location /account/welcome");
