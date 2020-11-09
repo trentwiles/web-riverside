@@ -574,6 +574,7 @@ $router->get('/oauth/github', function() {
             // Use these details to create a new profile
             $github_username = htmlspecialchars($user->getNickname());
             $github_id = htmlspecialchars($user->getId());
+            define("id", $github_id);
             $_SESSION["username"] = $github_username;
             $_SESSION["id"] = $github_id;
             $github_time = time();
@@ -593,7 +594,7 @@ $router->get('/oauth/github', function() {
             }
             $remote_ip = $conn -> real_escape_string(htmlspecialchars($_SERVER['REMOTE_ADDR']));
             $user_agent = $conn -> real_escape_string(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
-
+            $show_onboarding = "false";
             echo "Hello ${github_username}, your ID is ${github_id}";
             $sql = "SELECT * FROM logins WHERE username='${github_username}'";
             $result = $conn->query($sql);
@@ -613,15 +614,16 @@ $router->get('/oauth/github', function() {
             $temp_auto_api_key = Rocks::base64rand(30);
             $cookie_name = "key";
             $cookie_value = $temp_auto_api_key;
+            $bio = $row["bio"];
             setcookie($cookie_name, $cookie_value, time() + (864000 * 30), "/"); // 10 days, might change this in the future
-            $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `login_time`, `temp_auto_api_key`) VALUES ('${remote_ip}', '${user_agent}', 'Not Found', '${github_username}', '${github_id}', '${github_time}', '${temp_auto_api_key}')";
+            $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `bio`, `login_time`, `temp_auto_api_key`) VALUES ('${remote_ip}', '${user_agent}', 'Not Found', '${github_username}', '${github_id}', '${bio}', '${github_time}', '${temp_auto_api_key}')";
             $result = $conn->query($sql);
 
             $sql = "SELECT * FROM bans";
             $result = $conn->query($sql);
             if (!empty($result) && $result->num_rows > 0) {
                 while($row = $result->fetch_assoc()) {
-                    if($row["id"] == $github_id)
+                    if($row["id"] == id)
                     {
                         session_start();
                         session_unset();
