@@ -644,14 +644,14 @@ $router->get('/oauth/github', function() {
                     }
                 }
             }
-            die(header("Location /account/welcome"));
+            echo "<meta http-equiv='refresh' content='4; URL='/account/dashboard'' />";
             /*
             Everything after this can be ignored
             */
             echo "\n DEBUG: CHECK BAN \n";
 
             if($show_onboarding == "true"){
-                
+                header("Location: /account/welcome");
                 die();
             }else{
                 header("Location: /account/dashboard");
