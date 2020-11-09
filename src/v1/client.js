@@ -36,3 +36,7 @@ addEventListener("keyup", function(event) {
         sendMessage(c, key)
     }
 })
+window.setInterval(function() {
+    var elem = document.getElementById('chat');
+    elem.scrollTop = elem.scrollHeight;
+  }, 1000);
