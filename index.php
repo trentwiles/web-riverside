@@ -386,6 +386,13 @@ $router->get('/app', function() {
     die();
 });
 
+$router->get('/app/channels', function() {
+    header("Location: /app/channels/general");
+    die();
+});
+
+
+
 $router->get('/app/channels/(\w+)', function($channel) {
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
