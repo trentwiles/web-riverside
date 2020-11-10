@@ -180,6 +180,7 @@ $router->get('/code/production/cred.js', function() {
         }
     }
     echo "const key = Cookies.get('key');\n";
+    echo "const channel = \"" . $_SESSION["channel"] . "\";\n";
     echo "const username = \"" . $user . "\";\n";
 });
 
