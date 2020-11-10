@@ -24,7 +24,7 @@ function sendMessage(message, key){
             console.log("Sorry, something went wrong. Server returned status code of "+this.status)
         }
     };
-    xhttp.open("GET", "/v1/new?m="+message+"&key="+key+"&c_id="+channel, true);
+    xhttp.open("GET", "/v1/new?m="+message+"&key="+key+"&c_id="+channel_send, true);
     xhttp.send();
 }
 // Example request: https://riverside.rocks/v1/new?m=hello!&key=abcdefg
