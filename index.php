@@ -500,7 +500,7 @@ $router->get('/v1/new', function() {
     }
 
     $data['message'] = $_username . " ${_badge}" . " : " . htmlspecialchars($_GET["m"]);
-    $pusher->trigger('general', 'message', $data);
+    $pusher->trigger($_GET["c_id"], 'message', $data);
 
     $new = $_username;
 
