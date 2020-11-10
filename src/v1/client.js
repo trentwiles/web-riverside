@@ -60,4 +60,4 @@ function downtimeNotice() {
     })
   }
 
-  downtimeNotice();
+downtimeNotice();
