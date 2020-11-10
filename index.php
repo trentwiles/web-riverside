@@ -371,12 +371,23 @@ try {
 });
 
 $router->get('/v1/web', function() {
+    header("Location: /app/");
+    die();
+});
+
+$router->get('/app', function() {
     $pug = new Pug();
     if(! $_SESSION["username"])
     {
         header("Location: /account/login/");
         die();
     }
+    header("Location: /app/channels/general");
+    die();
+});
+
+$router->get('/app/channels/(\w+)', function($channel) {
+    $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
     $password = $_ENV["MYSQL_PASSWORD"];
@@ -385,9 +396,17 @@ $router->get('/v1/web', function() {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+    $channel_select = $conn -> real_escape_string(htmlspecialchars($channel));
+    if(!$channel_select)
+    {
+        header("Location: /app/channels/general");
+        die();
+    }
+    $_SESSION["channel"] = $channel_select;
     $mess = array();
     $users = array();
-    $sql = "SELECT * FROM msg ORDER BY `time` DESC";
+    $channel_sql = $conn -> real_escape_string(htmlspecialchars($channel));
+    $sql = "SELECT * FROM msg WHERE `channel`='${channel_sql}' ORDER BY `time` DESC";
     $result = $conn->query($sql);
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -398,6 +417,7 @@ $router->get('/v1/web', function() {
     $output = $pug->renderFile('views/client-v1.pug', array(
         'username' => $_SESSION["username"],
         'id' => $_SESSION["id"],
+        'channel' => "#" . $channel_sql,
         'mes1' => $mess[0],
         'user1' => $users[0],
         'mes2' => $mess[1],
@@ -434,11 +454,17 @@ $router->get('/v1/new', function() {
     $sent_api_key = $conn -> real_escape_string($_GET["key"]);
     $sql = "SELECT * FROM logins WHERE temp_auto_api_key='$sent_api_key'";
     $result = $conn->query($sql);
-
+    $channel_select = $conn -> real_escape_string(htmlspecialchars($_GET["c_id"]));
     if(!$_GET["key"])
     {
         header("HTTP/1.1 400 Bad Request");
         die("400 Bad Request");
+    }
+
+    if(!$_GET["c_id"])
+    {
+        header("HTTP/1.1 400 Bad Request");
+        die("400 Bad Request - Please specifiy a channel");
     }
 
     if (!empty($result) && $result->num_rows > 0) {
@@ -454,7 +480,18 @@ $router->get('/v1/new', function() {
         die("400 Bad Request");
     }
 
-    $data['message'] = $_username . ": " . htmlspecialchars($_GET["m"]);
+    $sql = "SELECT * FROM admins WHERE username='${_username}'";
+    $result = $conn->query($sql);
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            if($row["username"] == $_username)
+            {
+                $_badge = '<i class="fas fa-shield-alt" aria-hidden="true"></i>';
+            }
+        }
+    }
+
+    $data['message'] = $_username . " ${_badge}" . " : " . htmlspecialchars($_GET["m"]);
     $pusher->trigger('general', 'message', $data);
 
     $new = $_username;
@@ -476,7 +513,8 @@ $router->get('/v1/new', function() {
         die("400 Bad Request");
     }
 
-    $sql = "INSERT INTO `msg` (`username`, `message`, `time`, `mess_id`) VALUES ('${_user}', '${_mes}', '${_time}', '${_mess_id}')";
+
+    $sql = "INSERT INTO `msg` (`username`, `message`, `time`, `mess_id`, `channel`) VALUES ('${_user}', '${_mes}', '${_time}', '${_mess_id}', '${channel_select}')";
     $result = $conn->query($sql);
     echo "OK";
 });
