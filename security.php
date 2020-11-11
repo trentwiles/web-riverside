@@ -127,7 +127,8 @@ class security
         $agents = array(
             "Mozilla/5.0" => "Port Scanner",
             "curl/7.58.0" => "Scanning for exploits",
-            "Hello, world" => "Mozi Botnet"
+            "Hello, world" => "Mozi Botnet",
+            "polaris botnet" => "Polaris Botnet"
         );
         return $agents;
     }
