@@ -181,6 +181,7 @@ $router->get('/code/production/cred.js', function() {
     }
     echo "const key = Cookies.get('key');\n";
     echo "const channel_send = \"" . $_SESSION["channel"] . "\";\n";
+    echo "const channel = \"" . $_SESSION["channel"] . "\";\n";
     echo "const username = \"" . $user . "\";\n";
 });
 
@@ -494,7 +495,7 @@ $router->get('/v1/new', function() {
         while($row = $result->fetch_assoc()) {
             if($row["username"] == $_username)
             {
-                $_badge = '<i class="fas fa-shield-alt" aria-hidden="true"></i>';
+                $_badge = ''; // for the moment we have admin off due to pusher escaping html
             }
         }
     }
