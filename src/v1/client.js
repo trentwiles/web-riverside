@@ -12,6 +12,15 @@ channel.bind('message', function(data) {
     document.getElementById("m").appendChild(node);
 });
 
+/*
+Autoscroll service, may be removed in the future once we find a better solution
+*/
+
+window.setInterval(function() {
+    var elem = document.getElementById('chat');
+    elem.scrollTop = elem.scrollHeight;
+  }, 10);
+
 function sendMessage(message, key){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange=function() {
