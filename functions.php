@@ -84,7 +84,7 @@ class services
   }
   function base64rand($l)
   {
-      $chars = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM_-";
+      $chars = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
       $final = "";
       for ($x = 0; $x <= $l; $x++) {
         $number1 = rand(1,62);

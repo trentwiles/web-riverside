@@ -391,8 +391,17 @@ $router->get('/app/channels', function() {
     header("Location: /app/channels/general");
     die();
 });
+//
 
-
+$router->get('/app/create', function() {
+    $pug = new Pug();
+    $gen_id = Rocks::base64rand(5);
+    $output = $pug->render('views/clientv1-create.pug', array(
+        'id' => $gen_id,
+        'url' => "https://riverside.rocks/app/channels/" . $gen_id
+    ));
+    echo $output;
+});
 
 $router->get('/app/channels/(\w+)', function($channel) {
     $pug = new Pug();
