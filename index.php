@@ -396,7 +396,7 @@ $router->get('/app/channels', function() {
 $router->get('/app/create', function() {
     $pug = new Pug();
     $gen_id = Rocks::base64rand(5);
-    $output = $pug->render('views/clientv1-create.pug', array(
+    $output = $pug->render('views/client-v1-create.pug', array(
         'id' => $gen_id,
         'url_custom' => "https://riverside.rocks/app/channels/" . $gen_id
     ));
