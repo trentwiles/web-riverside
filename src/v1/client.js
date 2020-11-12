@@ -10,6 +10,7 @@ channel.bind('message', function(data) {
     var textnode = document.createTextNode(data.message);
     node.appendChild(textnode);
     document.getElementById("m").appendChild(node);
+    $("chat").scrollTop($("chat").prop("scrollHeight"));
 });
 
 function sendMessage(message, key){
@@ -35,3 +36,28 @@ addEventListener("keyup", function(event) {
         sendMessage(c, key)
     }
 })
+window.setInterval(function() {
+    var elem = document.getElementById('chat');
+    elem.scrollTop = elem.scrollHeight;
+  }, 10);
+
+/*=====================
+
+Downtime/Bug Alerts Code
+
+======================*/
+
+function downtimeNotice() {
+    var alertContent = "Due to an issue with our websocket provider, chat may not work at this time.";
+    // Built-in function
+    halfmoon.initStickyAlert({
+      content: alertContent, 
+      title: "Notice",
+      alertType: "",
+      fillType: "",               
+      hasDismissButton: true,     
+      timeShown: 5000             
+    })
+  }
+
+downtimeNotice();
