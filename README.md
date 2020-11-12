@@ -39,4 +39,6 @@ Currently our .env file accepts:
 
 *\* key is required and the site will not function without it*
 
+If you need some help, please check out our [example .env file.](https://github.com/RiversideRocks/web-riverside/blob/master/.env-example)
+
 You are ready to go!
