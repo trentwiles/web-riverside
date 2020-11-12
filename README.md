@@ -1,5 +1,5 @@
 # Riverside Rocks
-Website for Riverside Rocks.
+Website for Riverside Rocks. Powered by Bramus router, Pug, Pusher, and PHP 7.
 
 Live at:
 
