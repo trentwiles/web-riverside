@@ -767,6 +767,10 @@ $router->post('/account/welcome', function() {
 
 $router->get('/account/dashboard', function() {
     $pug = new Pug();
+    if(!isset($_SESSION["username"]))
+    {
+       die(header("Location: /account/login/"));
+    }
     $output = $pug->renderFile('views/dashboard.pug', array(
         'username' => $_SESSION["username"],
         'icon' => "https://avatars0.githubusercontent.com/u/" . $_SESSION["id"],
