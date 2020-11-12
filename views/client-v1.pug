@@ -7,10 +7,14 @@ script(src="/src/v1/client.js")
 link(href="/src/v1/client.css" rel="stylesheet")
 div(class="chat" id="chat")
     h1 #{channel}
-    p(style="width:70%") #{user4}: #{mes4}
-    p(style="width:70%") #{user3}: #{mes3}
-    p(style="width:70%") #{user2}: #{mes2}
-    p(style="width:70%") #{user1}: #{mes1}
+    if user4
+        p(style="width:70%") #{user4}: #{mes4}
+    if user3
+        p(style="width:70%") #{user3}: #{mes3}
+    if user2
+        p(style="width:70%") #{user2}: #{mes2}
+    if user1
+        p(style="width:70%") #{user1}: #{mes1}
     p(id="m" style="width:70%")
 input(id="mess" style="width:70%")
 br
