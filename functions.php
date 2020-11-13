@@ -102,7 +102,7 @@ class services
       $timestamp = date("c", strtotime("now"));
 
       $json_data = json_encode([
-          "content" => $mess,
+          "content" => $content,
           
           "username" => "Message Bot",
 
