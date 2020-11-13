@@ -97,10 +97,6 @@ class services
   }
    public function newDiscordContact($content)
    {
-      if(!isset($mess))
-      {
-        throw new Exception("Missing at least one parameter in function newDiscord. This function takes two arguments");
-      }
       $webhookurl = $_ENV["DISCORD_WEBHOOK_2"];
 
       $timestamp = date("c", strtotime("now"));
