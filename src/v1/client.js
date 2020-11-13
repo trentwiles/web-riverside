@@ -45,4 +45,4 @@ addEventListener("keyup", function(event) {
     }
 })
 
-$('#channel_option').draggable({cancel:false});
+$('input[type=button]').draggable({cancel:false});
