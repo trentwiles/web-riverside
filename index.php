@@ -243,10 +243,10 @@ $router->post('/about/contact', function() {
    $name = $_POST["name"];
    $email = $_POST["email"];
    $type = $_POST["type"];
-   $comment = $_POST["comment"];
+   $comment = $_POST["description"];
    // No need to worry about XSS or SQL injections, thats now Discord's problem hehe
    $final = "From ${name} <${email}> regarding ${type}: **${comment}**";
-   Rocks::newDiscord($final, "Mail"); // Note that this will go to the "hacker feed" on my discord server
+   Rocks::newDiscordContact($final, "Mail"); // Note that this will go to the "hacker feed" on my discord server
     print_r($_POST);
    //Phug::displayFile('views/thanks.pug');
 });
