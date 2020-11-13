@@ -44,3 +44,5 @@ addEventListener("keyup", function(event) {
         sendMessage(c, key)
     }
 })
+
+$('channel_option').draggable({cancel:false});
