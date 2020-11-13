@@ -9,7 +9,7 @@ channel.bind('message', function(data) {
     var node = document.createElement("p");
     var textnode = document.createTextNode(data.message);
     node.appendChild(textnode);
-    var final = "<a href='/users/'>"+document.getElementById("m")+"</a>"
+    var final = document.getElementById("m")
     final.appendChild(node);
 });
 
