@@ -309,7 +309,7 @@ $router->get('/admin/upload', function() {
 
 $router->post('/v1/ugc-handler', function() {
     $storage = new \Upload\Storage\FileSystem('assets/serve/production/app');
-    die(var_dump($_POST));
+    die($_POST["data"]);
     $file = new \Upload\File('file-0', $storage);
 
     // Optionally you can rename the file on upload
