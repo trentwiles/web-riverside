@@ -59,13 +59,18 @@ async function uploadFile()
       
       if (file) {
         const reader = new FileReader()
-        reader.onload = (e) => {
-          Swal.fire({
-            title: 'Your uploaded picture',
-            imageUrl: e.target.result,
-            imageAlt: 'The uploaded picture'
-          })
-        }
+          jQuery.ajax({
+            url: '/v1/ugc-handler',
+            data: e.target.result,
+            cache: false,
+            contentType: false,
+            processData: false,
+            method: 'POST',
+            type: 'POST', // For jQuery < 1.9
+            success: function(data){
+                alert(data);
+            }
+          });
         reader.readAsDataURL(file)
       }
 }
