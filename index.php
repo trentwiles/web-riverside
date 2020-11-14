@@ -372,6 +372,7 @@ try {
 });
 
 $router->get('/v1/web', function() {
+    echo "Endpoint deprecated. Redirecting you to /app/";
     header("Location: /app/");
     die();
 });
@@ -380,11 +381,14 @@ $router->get('/app', function() {
     $pug = new Pug();
     if(! $_SESSION["username"])
     {
-        header("Location: /account/login/");
+        $output = $pug->render('views/client-v1-preview.pug', array());
+        echo $output;
+    }
+    else
+    {
+        header("Location: /app/channels/general");
         die();
     }
-    header("Location: /app/channels/general");
-    die();
 });
 
 $router->get('/app/channels', function() {
