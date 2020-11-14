@@ -1,4 +1,4 @@
-const cacheName = "my-awesome-pwa";
+const cacheName = "Riverside-Rocks";
 const precacheResources = ["/"];
 self.addEventListener("install", event => {
   console.log("Service worker install event!");
