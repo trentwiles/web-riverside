@@ -329,7 +329,7 @@ $router->post('/v1/ugc-handler', function() {
     $response = curl_exec($curl);
 
     curl_close($curl);
-    echo $response["url"];
+    echo $response["link"];
 });
 
 $router->post('/admin/upload', function() {
