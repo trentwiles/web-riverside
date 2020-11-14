@@ -320,7 +320,7 @@ $router->post('/v1/ugc-handler', function() {
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => array('image' => substr($_POST["img"], 22)),
+    CURLOPT_POSTFIELDS => array('image' => substr($_POST["img"], 23)),
     CURLOPT_HTTPHEADER => array(
         "Authorization: Client-ID " . $_ENV["IMG_CLIENT"]
     ),
