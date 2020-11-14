@@ -65,7 +65,10 @@ async function uploadFile()
             img: e.target.result
           },
           function(data,status){
-            alert("Data: " + data + "\nStatus: " + status);
+          Swal.fire({
+            title: 'Check this out!',
+            text: '<img src="'+data+'" />',
+          });
           });
         }
         reader.readAsDataURL(file)
