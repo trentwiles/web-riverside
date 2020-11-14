@@ -308,46 +308,15 @@ $router->get('/admin/upload', function() {
 });
 
 $router->post('/v1/ugc-handler', function() {
-    $storage = new \Upload\Storage\FileSystem('assets/serve/production/app');
-    $file = new \Upload\File($_POST["img"], $storage);
+    $client = new \Imgur\Client();
+    $client->setOption('client_id', $_ENV["IMG_CLIENT"]);
+    $client->setOption('client_secret', $_ENV["IMG_SECRET"]);
+    $imageData = [
+        'image' => $_POST["img"],
+        'type'  => 'base64',
+    ];
 
-    // Optionally you can rename the file on upload
-    $new_filename = uniqid();
-    $file->setName($new_filename);
-
-    // Validate file upload
-    // MimeType List => http://www.iana.org/assignments/media-types/media-types.xhtml
-    $file->addValidations(array(
-        // Ensure file is of type "image/png"
-        new \Upload\Validation\Mimetype('image/png'),
-
-        //You can also add multi mimetype validation
-        //new \Upload\Validation\Mimetype(array('image/png', 'image/gif'))
-
-        // Ensure file is no larger than 5M (use "B", "K", M", or "G")
-        new \Upload\Validation\Size('5M')
-    ));
-
-    // Access data about the file that has been uploaded
-    $data = array(
-        'name'       => $file->getNameWithExtension(),
-        'extension'  => $file->getExtension(),
-        'mime'       => $file->getMimetype(),
-        'size'       => $file->getSize(),
-        'md5'        => $file->getMd5(),
-        'dimensions' => $file->getDimensions()
-    );
-
-    // Try to upload file
-    try {
-        // Success!
-        $file->upload();
-        $path = "https://riverside.rocks/assets/serve/production/app/" . $data["name"];
-    } catch (\Exception $e) {
-        // Fail!
-        $errors = $file->getErrors();
-        header("HTTP/1.1 400 Bad Request");
-    }
+    $client->api('image')->upload($imageData);
 });
 
 $router->post('/admin/upload', function() {
