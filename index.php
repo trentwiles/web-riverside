@@ -309,8 +309,7 @@ $router->get('/admin/upload', function() {
 
 $router->post('/v1/ugc-handler', function() {
     $storage = new \Upload\Storage\FileSystem('assets/serve/production/app');
-    die($_POST["data"]);
-    $file = new \Upload\File('file-0', $storage);
+    $file = new \Upload\File('data', $storage);
 
     // Optionally you can rename the file on upload
     $new_filename = uniqid();
@@ -343,6 +342,7 @@ $router->post('/v1/ugc-handler', function() {
     try {
         // Success!
         $file->upload();
+        $path = "https://riverside.rocks/assets/serve/production/app/" . $data["name"];
     } catch (\Exception $e) {
         // Fail!
         $errors = $file->getErrors();

@@ -60,18 +60,12 @@ async function uploadFile()
       if (file) {
         const reader = new FileReader()
         reader.onload = (e) => {
-          jQuery.ajax({
-            url: '/v1/ugc-handler',
-            data: e.target.result,
-            cache: false,
-            contentType: false,
-            processData: false,
-            method: 'POST',
-            type: 'POST', // For jQuery < 1.9
-            success: function(data){
-                alert(data);
-            }
-
+          $.post("/v1/ugc-handler",
+          {
+            img: e.target.result
+          },
+          function(data,status){
+            alert("Data: " + data + "\nStatus: " + status);
           });
         }
         reader.readAsDataURL(file)
