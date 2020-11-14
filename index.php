@@ -396,9 +396,30 @@ $router->get('/app', function() {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+    $sql = "SELECT * FROM msg";
+    $result = $conn->query($sql);
+    $times = 0;
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $times = $times + 1;
+        }
+    }
+    $timez = $times;
+    $sql = "SELECT * FROM logins";
+    $result = $conn->query($sql);
+    $times = 0;
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $times = $times + 1;
+        }
+    }
+
     if(! $_SESSION["username"])
     {
-        $output = $pug->render('views/client-v1-preview.pug', array());
+        $output = $pug->render('views/client-v1-preview.pug', array(
+            "sent" => $timez,
+            "users" => $times
+        ));
         echo $output;
     }
     else
