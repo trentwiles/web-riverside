@@ -126,7 +126,15 @@ $router->get('/api/visits', function() {
     echo json_encode(times, true);
 });
 
+$router->get('/api/bycountry', function() {
+    print_r($countries);
+});
 
+/*===========================
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+END EXPERIMENTAL API ENDPOINTS
+/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+===========================*/
 
 
 $router->get('/', function() {
@@ -379,6 +387,15 @@ $router->get('/v1/web', function() {
 
 $router->get('/app', function() {
     $pug = new Pug();
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
     if(! $_SESSION["username"])
     {
         $output = $pug->render('views/client-v1-preview.pug', array());
@@ -782,6 +799,7 @@ $router->get('/account/dashboard', function() {
     ));
     echo $output;
     // Note to self, work on this!
+    // As of 11/13 this endpoint is pretty bare it could use quite a bit of work (~riversiderocks)
 });
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
