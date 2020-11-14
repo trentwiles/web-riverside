@@ -308,15 +308,28 @@ $router->get('/admin/upload', function() {
 });
 
 $router->post('/v1/ugc-handler', function() {
-    $client = new \Imgur\Client();
-    $client->setOption('client_id', $_ENV["IMG_CLIENT"]);
-    $client->setOption('client_secret', $_ENV["IMG_SECRET"]);
-    $imageData = [
-        'image' => $_POST["img"],
-        'type'  => 'base64',
-    ];
+    
+    $curl = curl_init();
 
-    $client->api('image')->upload($imageData);
+    curl_setopt_array($curl, array(
+    CURLOPT_URL => "https://api.imgur.com/3/image",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => "",
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => "POST",
+    CURLOPT_POSTFIELDS => array('image' => $_POST["img"]),
+    CURLOPT_HTTPHEADER => array(
+        "Authorization: Client-ID " . $_ENV["IMG_CLIENT"]
+    ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+    echo $response;
 });
 
 $router->post('/admin/upload', function() {
