@@ -46,4 +46,26 @@ addEventListener("keyup", function(event) {
     }
 })
 
-$('input[type=button]').draggable({cancel:false});
+function uploadFile()
+{
+    const { value: file } = await Swal.fire({
+        title: 'Select image',
+        input: 'file',
+        inputAttributes: {
+          'accept': 'image/*',
+          'aria-label': 'Upload something cool'
+        }
+      })
+      
+      if (file) {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          Swal.fire({
+            title: 'Your uploaded picture',
+            imageUrl: e.target.result,
+            imageAlt: 'The uploaded picture'
+          })
+        }
+        reader.readAsDataURL(file)
+      }
+}

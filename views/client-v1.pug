@@ -1,6 +1,7 @@
 include head.pug
 br
-script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+script(src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.0/dist/sweetalert2.all.min.js")
+link(href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4.0.1/dark.min.css" rel="stylesheet")
 script(src="/code/production/cred.js")
 script(src="https://js.pusher.com/7.0/pusher.min.js")
 script(src="/src/v1/client.js")
@@ -17,6 +18,7 @@ div(class="chat" id="chat" style="overflow:hidden;")
         p(style="width:70%") #{user1}: #{mes1}
     p(id="m" style="width:70%")
 input(id="mess" style="width:70%")
+button(class="btn btn-success" id="channel_option" type="button" style="margin-left:10px;margin-bottom:10px;" onclick="uploadFile()") Upload an Image
 br
 p Popular Channels
 a(href="/app/channels/general")
