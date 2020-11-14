@@ -326,7 +326,7 @@ $router->post('/v1/ugc-handler', function() {
     ),
     ));
 
-    $response = json_decode(curl_exec($curl));
+    $response = json_decode(curl_exec($curl), true);
 
     curl_close($curl);
     echo $response["data"]["link"];
