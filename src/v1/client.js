@@ -46,7 +46,7 @@ addEventListener("keyup", function(event) {
     }
 })
 
-function uploadFile()
+async function uploadFile()
 {
     const { value: file } = await Swal.fire({
         title: 'Select image',
