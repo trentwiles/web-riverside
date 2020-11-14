@@ -82,7 +82,7 @@ class services
       $response = curl_exec( $ch );
       curl_close( $ch );
   }
-  function base64rand($l)
+  public function base64rand($l)
   {
       $chars = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
       $final = "";
@@ -95,4 +95,32 @@ class services
       }
       return $final;
   }
+   public function newDiscordContact($content)
+   {
+      $webhookurl = $_ENV["DISCORD_WEBHOOK_2"];
+
+      $timestamp = date("c", strtotime("now"));
+
+      $json_data = json_encode([
+          "content" => $content,
+          
+          "username" => "Message Bot",
+
+          "tts" => false,
+
+      ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+
+
+      $ch = curl_init( $webhookurl );
+      curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+      curl_setopt( $ch, CURLOPT_POST, 1);
+      curl_setopt( $ch, CURLOPT_POSTFIELDS, $json_data);
+      curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+      curl_setopt( $ch, CURLOPT_HEADER, 0);
+      curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+
+      $response = curl_exec( $ch );
+      curl_close( $ch );
+      return true;
+   }
 }
