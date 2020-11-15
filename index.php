@@ -255,8 +255,8 @@ $router->post('/about/contact', function() {
    // No need to worry about XSS or SQL injections, thats now Discord's problem hehe
    $final = "From ${name} <${email}> regarding ${type}: **${comment}**";
    Rocks::newDiscordContact($final); // Note that this will go to the "hacker feed" on my discord server
-    print_r($_POST);
-   //Phug::displayFile('views/thanks.pug');
+    //print_r($_POST);
+   Phug::displayFile('views/thanks.pug');
 });
 
 $router->get('/watch/(\w+)', function($id) {
@@ -320,7 +320,7 @@ $router->post('/v1/ugc-handler', function() {
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
     CURLOPT_CUSTOMREQUEST => "POST",
-    CURLOPT_POSTFIELDS => array('image' => substr($_POST["img"], 23)),
+    CURLOPT_POSTFIELDS => array('image' => substr($_POST["img"], 5)),
     CURLOPT_HTTPHEADER => array(
         "Authorization: Client-ID " . $_ENV["IMG_CLIENT"]
     ),
@@ -542,13 +542,34 @@ $router->get('/v1/new', function() {
     if(!$_GET["key"])
     {
         header("HTTP/1.1 400 Bad Request");
-        die("400 Bad Request");
+        $json = array(
+            "success" => "false",
+            "message" => "Missing API key"
+        );
+        $final = json_encode($json, true);
+        die($final);
     }
 
     if(!$_GET["c_id"])
     {
         header("HTTP/1.1 400 Bad Request");
-        die("400 Bad Request - Please specifiy a channel");
+        $json = array(
+            "success" => "false",
+            "message" => "Please specifiy a channel"
+        );
+        $final = json_encode($json, true);
+        die($final);
+    }
+
+    if(!$_GET["m"])
+    {
+        header("HTTP/1.1 400 Bad Request");
+        $json = array(
+            "success" => "false",
+            "message" => "Please send a message"
+        );
+        $final = json_encode($json, true);
+        die($final);
     }
 
     if (!empty($result) && $result->num_rows > 0) {
@@ -561,7 +582,12 @@ $router->get('/v1/new', function() {
     if(!isset($_username))
     {
         header("HTTP/1.1 400 Bad Request");
-        die("400 Bad Request");
+        $json = array(
+            "success" => "false",
+            "message" => "Invalid API key"
+        );
+        $final = json_encode($json, true);
+        die($final);
     }
 
     $sql = "SELECT * FROM admins WHERE username='${_username}'";
@@ -589,18 +615,42 @@ $router->get('/v1/new', function() {
     if($_user == "tucker")
     {
         header("HTTP/1.1 400 Bad Request");
-        die("400");
+        $json = array(
+            "success" => "false",
+            "message" => "Something went wrong, please contact us trent@riverside.rock is you see this message"
+        );
+        $final = json_encode($json, true);
+        die($final);
+    }
+    if(strlen($_mes) >= 500)
+    {
+        $json = array(
+            "success" => "false",
+            "message" => "Messages cannot be over 500 characters"
+        );
+        $final = json_encode($json, true);
+        die($final);
     }
     if(!isset($_user))
     {
         header("HTTP/1.1 400 Bad Request");
-        die("400 Bad Request");
+        $json = array(
+            "success" => "false",
+            "message" => "Something went wrong, please contact us trent@riverside.rock is you see this message"
+        );
+        $final = json_encode($json, true);
+        die($final);
     }
 
 
     $sql = "INSERT INTO `msg` (`username`, `message`, `time`, `mess_id`, `channel`) VALUES ('${_user}', '${_mes}', '${_time}', '${_mess_id}', '${channel_select}')";
     $result = $conn->query($sql);
-    echo "OK";
+    $json = array(
+        "success" => "true",
+        "message" => "OK"
+    );
+    $final = json_encode($json, true);
+    die($final);
 });
 
 
