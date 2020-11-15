@@ -28,7 +28,11 @@ function sendMessage(message, key){
         if (this.readyState == 4 && this.status == 200) {
             console.log("OK")
         }else if(this.status == 401){
-            document.getElementById("mess").value = "This account is not able to send messages at this time."
+          Swal.fire(
+            'Warning!',
+            'It looks like you are using an invalid API token. Please consider signing back in.',
+            'error'
+          )
         }else if(this.status == 400){
           Swal.fire(
             'Something went wrong',
