@@ -27,10 +27,22 @@ function sendMessage(message, key){
     xhttp.onreadystatechange=function() {
         if (this.readyState == 4 && this.status == 200) {
             console.log("OK")
-        }else if(this.status == 400){
+        }else if(this.status == 401){
             document.getElementById("mess").value = "This account is not able to send messages at this time."
+        }else if(this.status == 400){
+          Swal.fire(
+            'Something went wrong',
+            'Our API could not process your request. Maybe you sent a blank message?',
+            'error'
+          )
+        }else if(this.status == 429){
+          Swal.fire(
+            'Woah! Slow down!',
+            'You are sending way too many messages!',
+            'error'
+          )
         }else{
-            console.log("Sorry, something went wrong. Server returned status code of "+this.status)
+            console.log(this.status)
         }
     };
     xhttp.open("GET", "/v1/new?m="+message+"&key="+key+"&c_id="+channel_send, true);

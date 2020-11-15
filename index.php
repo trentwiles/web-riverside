@@ -542,7 +542,7 @@ $router->get('/v1/new', function() {
     $channel_select = $conn -> real_escape_string(htmlspecialchars($_GET["c_id"]));
     if(!$_GET["key"])
     {
-        header("HTTP/1.1 400 Bad Request");
+        header("HTTP/1.1 401 Unauthorized");
         $json = array(
             "success" => "false",
             "message" => "Missing API key"
@@ -582,7 +582,7 @@ $router->get('/v1/new', function() {
 
     if(!isset($_username))
     {
-        header("HTTP/1.1 400 Bad Request");
+        header("HTTP/1.1 401 Unauthorized");
         $json = array(
             "success" => "false",
             "message" => "Invalid API key"
