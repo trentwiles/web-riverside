@@ -1,11 +1,14 @@
 include head.pug
-h1 Welcome to Riverside Rocks, #{username}!
-h3 Before you create your account, let us get to know you.
-strong Create a bio
+script(src="/src/apiKeyReveal.js")
+h1 Settings for #{username}
+br
+p Your current API key (do not share this): #[a href="#" onclick="showKey()"] Click to show
+br
+strong Bio
 form(method="post" class="w-400 mw-full")
     div(class="form-group")
-        label(for="bio" class="required") Short Description
-        input(type="text" class="form-control" id="bio" name="bio" placeholder="Hello! I am..." required="required")
+        label(for="bio" class="required")
+        input(type="text" class="form-control" id="bio" name="bio" placeholder="Hello! I am..." required="required") #{current_bio}
     div(class="form-group")
         div(class="custom-checkbox")
             input(type="checkbox" id="agree-to-terms" required="required")

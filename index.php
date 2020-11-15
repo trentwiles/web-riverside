@@ -833,9 +833,6 @@ $router->get('/oauth/github', function() {
                 while($row = $result->fetch_assoc()) {
                     if($row["id"] == id)
                     {
-                        session_start();
-                        session_unset();
-                        session_destroy();
                         $pug = new Pug();
                         $output = $pug->renderFile('views/banned.pug', array(
                             'rule' => htmlspecialchars($row["rule"]),
@@ -843,6 +840,9 @@ $router->get('/oauth/github', function() {
                             'type' => htmlspecialchars($row["type"])
                         ));
                         echo $output;
+                        session_start();
+                        session_unset();
+                        session_destroy();
                         die();
                     }
                 }
@@ -881,8 +881,25 @@ $router->get('/account/welcome', function() {
         die(header("Location: /account/dashboard")); // Should prompt user to sign in
     }
     $pug = new Pug();
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT * FROM logins WHERE username='${github_username}'";
+    $result = $conn->query($sql);
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $bio_pre = htmlspecialchars($row["bio"]);
+        }
+    }
     $output = $pug->renderFile('views/account-details.pug', array(
         'username' => $_SESSION["username"],
+        'current_bio' => $bio_pre,
     ));
     echo $output;
 });
