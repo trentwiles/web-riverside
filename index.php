@@ -681,6 +681,14 @@ $router->get('/community', function() {
     Phug::displayFile('views/community-temp.pug');
 });
 
+$router->get('/account/signout', function() {
+    session_start();
+    session_unset();
+    session_destroy();
+    header("Location: /");
+    die();
+});
+
 $router->get('/users/(\w+)', function($id) {
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
