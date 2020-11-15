@@ -471,7 +471,6 @@ $router->get('/app/create', function() {
 });
 
 $router->get('/app/channels/(\w+)', function($channel) {
-    header("Content-type: application/json");
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
@@ -517,6 +516,7 @@ $router->get('/app/channels/(\w+)', function($channel) {
 });
 
 $router->get('/v1/new', function() {
+    header("Content-type: application/json");
     $options = array(
         'cluster' => 'us2',
         'useTLS' => true
