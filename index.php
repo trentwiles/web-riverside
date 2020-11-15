@@ -642,6 +642,27 @@ $router->get('/v1/new', function() {
         die($final);
     }
 
+    $runtime = time() - 10;
+    $sql = "SELECT * FROM `msg` WHERE username='${_user}' AND `time` > ${runtime}";
+    $result = $conn->query($sql);
+    $rate = 0;
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $rate = $rate + 1;
+        }
+    }
+
+    if($rate >= 3)
+    {
+        header("HTTP/1.1 429 Too Many Requests");
+        $json = array(
+            "success" => "false",
+            "message" => "Woah there! Slow down! You are sending too many messages."
+        );
+        $final = json_encode($json, true);
+        die($final);
+    }
+
 
     $sql = "INSERT INTO `msg` (`username`, `message`, `time`, `mess_id`, `channel`) VALUES ('${_user}', '${_mes}', '${_time}', '${_mess_id}', '${channel_select}')";
     $result = $conn->query($sql);
