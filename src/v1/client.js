@@ -32,7 +32,7 @@ function sendMessage(message, key){
         }else if(this.status == 400){
           Swal.fire(
             'Something went wrong',
-            'Our API could not process your request. Maybe you sent a blank message?',
+            'Our API could not process your request. Maybe you sent a blank message or a message over 500 characters?',
             'error'
           )
         }else if(this.status == 429){
