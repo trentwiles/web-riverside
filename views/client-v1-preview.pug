@@ -2,7 +2,9 @@ include head.pug
 br
 h1 Chat with your friends in one place
 // I hate not using pug, but I use HTML for the message tag as pug and images are weird
-<img src="https://riverside.rocks/assets/serve/production/app/5faf2de8c1f1e.png" height="50%" width="75%" />
-p #{sent} messages sent and #{users} served!
+
+h3 #{sent} messages sent and #{users} served!
 a(href="/account/login/")
     button(class="btn btn-success" id="channel_option" type="button" style="margin-left:10px;margin-bottom:10px;") Sign Up / Log In
+
+<img src="https://riverside.rocks/assets/serve/production/app/5faf2de8c1f1e.png" height="50%" width="75%" style="border:2px solid white;" />
