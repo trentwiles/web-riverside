@@ -527,7 +527,7 @@ $router->get('/help/(\w+)', function($wiki) {
     $wtitle = htmlspecialchars($wiki);
     $wiki_content = $wiki_apis["query"]["pages"]["0"]["slots"]["main"]["*"];
 
-    $parser = new WikitextParser($wiki_content);
+    $parser = new \WikitextParser($wiki_content);
     $output = $parser -> result;
     
     file_put_contents(__DIR__ . "/output.html", $output);
