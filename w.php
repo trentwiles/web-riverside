@@ -1,6 +1,6 @@
 <?php
 require __DIR__ . '/vendor/autoload.php';
-use Mike42\Wikitext\WikitextParser as WikitextParser;
+use Mike42\Wikitext\WikitextParser;
 
 $wiki = $_GET["w"];
 
