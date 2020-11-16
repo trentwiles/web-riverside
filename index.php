@@ -526,13 +526,15 @@ $router->get('/help/(\w+)', function($wiki) {
 
     $output = file_get_contents("https://riverside.rocks/w.php?w=${wiki}");
     
-    
+    echo $output;
+    /*
 
     $wikipage = $pug->render('views/wiki.pug', array(
         'title' => htmlspecialchars($wiki),
         'content' => $output,
     ));
     echo $wikipage;
+    */
 });
 
 
