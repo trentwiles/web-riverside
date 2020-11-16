@@ -81,6 +81,28 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+$sql = "SELECT * FROM blocklist WHERE ip='${ip}'";
+$result = $conn->query($sql);
+
+$blocks = 0;
+if (!empty($result) && $result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $blocks = $blocks + 1;
+        $reason = $row["reason"];
+    }
+}
+
+if($blocks !== 0)
+{
+    header("Content-type: application/json");
+    header("HTTP/1.1 403 Forbidden");
+    $reasons = array(
+        "message" => "403 Forbidden",
+        "reason" => htmlspecialchars($reason)
+    );
+    $return = json_encode($reasons, true);
+    die($return);
+}
 
 $ipinfo = json_decode(file_get_contents("http://ip-api.com/json/${ip}"), true);
 $country = $conn -> real_escape_string(htmlspecialchars($ipinfo["country"]));
