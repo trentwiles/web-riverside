@@ -518,6 +518,7 @@ $router->get('/app/channels/(\w+)', function($channel) {
 });
 
 $router->get('/help/(\w+)', function($wiki) {
+    $pug = new Pug();
     if(!isset($wiki))
     {
         die(header("Location: /help/Main_Page"));
