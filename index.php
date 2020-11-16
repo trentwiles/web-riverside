@@ -1015,6 +1015,17 @@ $router->set404(function() {
           $output = $response->getBody();
           // Store response as a PHP object.
           $ipDetails = json_decode($output, true);
+          $servername = $_ENV['MYSQL_SERVER'];
+          $username = $_ENV["MYSQL_USERNAME"];
+          $password = $_ENV["MYSQL_PASSWORD"];
+          $dbname = $_ENV["MYSQL_DATABASE"];
+
+          $conn = new mysqli($servername, $username, $password, $dbname);
+          if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+          }
+          $sql = "INSERT INTO `blocklist` (`ip`, `reason`) VALUES ('${ip}','Hacking attempt (HTTP)')";
+          $result = $conn->query($sql);
         }
     // If a hacking attempt is detected, we show the 403 page
     if(in_array($_SERVER["REQUEST_URI"], $hacks))
