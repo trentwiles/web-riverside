@@ -6,7 +6,7 @@ $wiki = $_GET["w"];
 
 $wiki_apis = json_decode(file_get_contents("https://wiki.riverside.rocks/api.php?action=query&prop=revisions&titles=${wiki}&rvslots=*&rvprop=content&format=json"), true);
 
-$wiki_content = $wiki_apis["query"]["pages"]["0"]["slots"]["main"]["*"];
+$wiki_content = $wiki_apis["query"]["pages"]["3"]["revisions"]["0"]["slots"]["main"]["*"];
 
 
 /* The most rudimentary way to invoke the parser */
