@@ -524,7 +524,7 @@ $router->get('/help/(\w+)', function($wiki) {
         die(header("Location: /help/Main_Page"));
     }
 
-    $output = file_get_contents("/w.php?w=${wiki}");
+    $output = file_get_contents("https://riverside.rocks/w.php?w=${wiki}");
     
     
 
