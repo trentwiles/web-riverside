@@ -8,7 +8,8 @@ var channel = pusher.subscribe(channel_send);
 channel.bind('message', function(data) {
     var node = document.createElement("p");
     var textnode = document.createTextNode(data.message);
-    node.appendChild(textnode);
+    var badge = document.createTextNode(data.badge);
+    node.appendChild(badge+textnode);
     var final = document.getElementById("m")
     final.appendChild(node);
 });

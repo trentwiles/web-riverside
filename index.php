@@ -619,13 +619,16 @@ $router->get('/v1/new', function() {
         while($row = $result->fetch_assoc()) {
             if($row["username"] == $_username)
             {
-                $_badge = ''; // for the moment we have admin off due to pusher escaping html
+                $_badge = 'fas fa-shield-alt'; // for the moment we have admin off due to pusher escaping html
             }
         }
     }
 
-    $data['message'] = $_username . " ${_badge}" . " : " . htmlspecialchars($_GET["m"]);
+    $data['message'] = $_username . " : " . htmlspecialchars($_GET["m"]);
     $pusher->trigger($_GET["c_id"], 'message', $data);
+
+    $data['badge'] = $_badge;
+    $pusher->trigger($_GET["c_id"], 'badge', $data);
 
     $new = $_username;
 
