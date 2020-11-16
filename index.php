@@ -23,6 +23,9 @@ require 'security.php';
 use RiversideRocks\services as Rocks;
 use RiversideRocks\security as Secure;
 
+
+use Mike42\Wikitext\WikitextParser;
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
@@ -514,6 +517,27 @@ $router->get('/app/channels/(\w+)', function($channel) {
     ));
     echo $output;
 });
+
+$router->get('/help/(\w+)', function($wiki) {
+    if(!isset($wiki))
+    {
+        die(header("Location: /help/Main_Page"));
+    }
+    $wiki_apis = json_decode(file_get_contents("https://wiki.riverside.rocks/api.php?action=query&prop=revisions&titles=${wiki}&rvslots=*&rvprop=content&format=json"), true);
+    $wtitle = htmlspecialchars($wiki);
+    $wiki_content = $wiki_apis["query"]["pages"]["0"]["slots"]["main"]["*"];
+
+    $parser = new WikitextParser($wiki_content);
+    $output = $parser -> result;
+    
+    file_put_contents(__DIR__ . "/output.html", $output);
+    $wikipage = $pug->render('views/wiki.pug', array(
+        'title' => $wtitle,
+        'content' => $output,
+    ));
+    echo $wikipage;
+});
+
 
 $router->get('/v1/new', function() {
     header("Content-type: application/json");
