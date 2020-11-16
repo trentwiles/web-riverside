@@ -46,6 +46,8 @@ function sendMessage(message, key){
             'You are sending way too many messages!',
             'error'
           )
+        }else if(this.status == 403){
+          location.reload(); 
         }else{
             console.log(this.status)
         }
