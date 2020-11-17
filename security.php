@@ -139,7 +139,8 @@ class security
                 "/tmui/login.jsp/..;/tmui/locallb/workspace/tmshCmd.jsp?command=create+cli+alias+private+list+command+bash" => "Command Injections",
                 "/wp-content/plugins/angwp/package.json" => "Wordpress scan",
                 "/owa/auth/logon.aspx" => "Searching for outlook admin page",
-                "/autodiscover/autodiscover.xml" => "GET /autodiscover/autodiscover.xml"
+                "/autodiscover/autodiscover.xml" => "GET /autodiscover/autodiscover.xml",
+                "/wp-config.good" => "Wordpress exploits"
         );
 
             return $exploits;
