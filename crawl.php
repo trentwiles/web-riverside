@@ -18,5 +18,5 @@ $document = new Document($content);
 $posts = $document->find('a');
 
 foreach($posts as $post) {
-    echo $post->href(), "\n";
+    echo $post->getAttribute('href'), "\n";
 }
