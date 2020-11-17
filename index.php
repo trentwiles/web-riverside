@@ -993,7 +993,7 @@ $router->get('/account/dashboard', function() {
 });
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
-    
+    echo "Under header <br>";
     $hacks = Secure::returnExploits();
     
     $url = $_SERVER["REQUEST_URI"];
@@ -1013,7 +1013,7 @@ $router->set404(function() {
     if(isset($baduseragent[$ua])){
         $mes = "AUTOMATED REPORT: Port Scanning: " . $url;
     }
-        
+        echo "Before report <br>";
     if(isset($mes)){
         $ip = $_SERVER['REMOTE_ADDR'];
         $to_discord = "${ip} - ${mes}";
@@ -1021,7 +1021,7 @@ $router->set404(function() {
         $client = new GuzzleHttp\Client([
             'base_uri' => 'https://api.abuseipdb.com/api/v2/'
           ]);
-          
+          echo "Before POST <br>";
           $response = $client->request('POST', 'report', [
               'query' => [
                   'ip' => "${ip}",
@@ -1033,22 +1033,24 @@ $router->set404(function() {
                   'Key' => $_ENV["ABUSE_IP_DB"]
             ],
           ]);
-          
+          echo "After send <br>";
           $output = $response->getBody();
           // Store response as a PHP object.
           $ipDetails = json_decode($output, true);
-        
+          echo "after full report <br>";
           $servername = $_ENV['MYSQL_SERVER'];
           $username = $_ENV["MYSQL_USERNAME"];
           $password = $_ENV["MYSQL_PASSWORD"];
           $dbname = $_ENV["MYSQL_DATABASE"];
 
           $conn = new mysqli($servername, $username, $password, $dbname);
+          echo "Before db <br>";
           if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
           }
           $sql = "INSERT INTO `blocklist`(`ip`, `reason`) VALUES ('${ip}', 'Hacking attempt (HTTP)')";
           $result = $conn->query($sql);
+          echo "After DB <br>";
           
         }
 
