@@ -995,13 +995,14 @@ $router->get('/account/dashboard', function() {
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     echo "Under header <br>";
-    $hacks = Secure::returnExploits();
+    
     
     $url = $_SERVER["REQUEST_URI"];
 
     
     $ua = $_SERVER['HTTP_USER_AGENT'];
     echo "Before issets <br>";
+    $hacks = Secure::returnExploits();
     if(isset($hacks[$url])){
         $mes = "AUTOMATED REPORT: " . $hacks[$url];
     }
