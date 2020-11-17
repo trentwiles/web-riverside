@@ -998,21 +998,12 @@ $router->set404(function() {
     $hacks = Secure::returnExploits();
     
     $url = $_SERVER["REQUEST_URI"];
-    
-    $user_agent_blacklist = array(
-        "Go-http-client/1.1",
-        "Mozilla/5.0 zgrab/0.x",
-        "python-requests/2.24.0"
-    );
+
     
     $ua = $_SERVER['HTTP_USER_AGENT'];
     echo "Before issets <br>";
-    if(isset($hacks[$url]) || isset($baduseragent[$ua])){
+    if(isset($hacks[$url])){
         $mes = "AUTOMATED REPORT: " . $hacks[$url];
-    }
-    
-    if(isset($baduseragent[$ua])){
-        $mes = "AUTOMATED REPORT: Port Scanning: " . $url;
     }
         echo "Before report <br>";
     if(isset($mes)){
@@ -1054,37 +1045,6 @@ $router->set404(function() {
           echo "After DB <br>";
           
         }
-
-        echo "0_0";
-    $list = Secure::userAgents();
-    if(in_array($ua, $list))
-    {
-        $mes = $list[$ua];
-        if(isset($mes)){
-            $ip = $_SERVER['REMOTE_ADDR'];
-            $to_discord = "${ip} - ${mes}";
-            Rocks::newDiscord($to_discord, "Hacker Feed");
-            $client = new GuzzleHttp\Client([
-                'base_uri' => 'https://api.abuseipdb.com/api/v2/'
-              ]);
-              
-              $response = $client->request('POST', 'report', [
-                  'query' => [
-                      'ip' => "${ip}",
-                      'categories' => '15',
-                      'comment' => "${mes}"
-                  ],
-                  'headers' => [
-                      'Accept' => 'application/json',
-                      'Key' => $_ENV["ABUSE_IP_DB"]
-                ],
-              ]);
-              
-              $output = $response->getBody();
-              // Store response as a PHP object.
-              $ipDetails = json_decode($output, true);
-            }
-    }
 });
 
 
