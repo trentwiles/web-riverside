@@ -140,7 +140,8 @@ class security
                 "/wp-content/plugins/angwp/package.json" => "Wordpress scan",
                 "/owa/auth/logon.aspx" => "Searching for outlook admin page",
                 "/autodiscover/autodiscover.xml" => "GET /autodiscover/autodiscover.xml",
-                "/wp-config.good" => "Wordpress exploits"
+                "/wp-config.good" => "Wordpress exploits",
+                "/js/mage/cookies.js" => "/js/mage/cookies.js"
         );
 
             return $exploits;
