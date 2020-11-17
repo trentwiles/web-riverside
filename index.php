@@ -1037,7 +1037,7 @@ $router->set404(function() {
           $output = $response->getBody();
           // Store response as a PHP object.
           $ipDetails = json_decode($output, true);
-        /*
+        
           $servername = $_ENV['MYSQL_SERVER'];
           $username = $_ENV["MYSQL_USERNAME"];
           $password = $_ENV["MYSQL_PASSWORD"];
@@ -1049,17 +1049,10 @@ $router->set404(function() {
           }
           $sql = "INSERT INTO `blocklist`(`ip`, `reason`) VALUES ('${ip}', 'Hacking attempt (HTTP)')";
           $result = $conn->query($sql);
-          */
+          
         }
-    // If a hacking attempt is detected, we show the 403 page
-    if(in_array($_SERVER["REQUEST_URI"], $hacks))
-    {
-        Phug::displayFile('views/403.pug');
-    }
-    else
-    {
-        Phug::displayFile('views/404.pug');
-    }
+
+        echo "0_0";
     $list = Secure::userAgents();
     if(in_array($ua, $list))
     {
