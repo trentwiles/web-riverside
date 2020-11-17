@@ -1,7 +1,7 @@
-ErrorDocument 404 /404.php
-ErrorDocument 403 /403.php
-ErrorDocument 400 /request-error?code=400
-ErrorDocument 500 /404.php
+# ErrorDocument 404 /404.php
+# ErrorDocument 403 /403.php
+# ErrorDocument 400 /request-error?code=400
+# ErrorDocument 500 /404.php
  
 DirectoryIndex index.php
   
