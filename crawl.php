@@ -2,7 +2,20 @@
 
 require "vendor/autoload.php";
 
-use Spatie\Crawler\Crawler;
+use DiDom\Document;
 
-Crawler::create()
-    ->startCrawling("https://riverside.rocks");
+$crawl = $_GET["url"];
+
+$cURLConnection = curl_init();
+curl_setopt($cURLConnection, CURLOPT_URL, $crawl);
+curl_setopt($cURLConnection, CURLOPT_RETURNTRANSFER, true);
+$content = curl_exec($cURLConnection);
+curl_close($cURLConnection);
+
+$document = new Document($content, true);
+
+$posts = $document->find('a');
+
+foreach($posts as $post) {
+    echo $post->text(), "\n";
+}
