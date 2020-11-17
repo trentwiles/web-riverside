@@ -13,7 +13,7 @@
    +----------------------------------------------------------------------+
 */
 
-die("Offline for matinence, sorry. Contact trent@riverside.rocks for assistance.");
+//die("Offline for matinence, sorry. Contact trent@riverside.rocks for assistance.");
 
 session_start();
 header("X-Powered-By: Riverside Rocks");
