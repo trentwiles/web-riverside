@@ -13,7 +13,7 @@ curl_setopt( $cURLConnection, CURLOPT_USERAGENT, "Mozilla/5.0 (compatible; River
 $content = curl_exec($cURLConnection);
 curl_close($cURLConnection);
 
-$document = new Document($content, true);
+$document = new Document($content);
 
 $posts = $document->find('a');
 
