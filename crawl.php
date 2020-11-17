@@ -3,8 +3,24 @@
 require "vendor/autoload.php";
 
 use DiDom\Document;
+$parser = new \Roboxt\Parser();
 
+# Parse your robots.txt file
 $crawl = $_GET["url"];
+$page = $_GET["page"];
+
+if(! $crawl)
+{
+    die("Missing URL");
+}
+
+if(! $page)
+{
+    die("Missing URL");
+}
+
+$file = $parser->parse($crawl . "/robots.txt");
+
 
 $cURLConnection = curl_init();
 curl_setopt($cURLConnection, CURLOPT_URL, $crawl);
@@ -17,6 +33,9 @@ $document = new Document($content);
 
 $posts = $document->find('a');
 
+$links = array();
+
 foreach($posts as $post) {
-    echo $post->getAttribute('href'), "\n";
+    array_push($links, $post->getAttribute('href'));
 }
+
