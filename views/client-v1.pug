@@ -19,6 +19,10 @@ div(class="chat" id="chat" style="overflow:hidden;")
 input(id="mess" style="width:70%")
 button(class="btn btn-success" id="channel_option" type="button" style="margin-left:10px;margin-bottom:10px;" onclick="uploadFile()") Upload an Image
 br
+div(class="custom-switch")
+  input(type="checkbox" id="switch-1" value="" onclick="checkFilter();")
+  label(for="switch-1") Enable Content Filter
+
 p Popular Channels
 a(href="/app/channels/general")
     button(class="btn btn-success" id="channel_option" type="button" style="margin-left:10px;margin-bottom:10px;") #general

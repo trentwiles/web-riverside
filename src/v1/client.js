@@ -4,9 +4,18 @@ var pusher = new Pusher('d3f96738bc8f4a369b91', {
     cluster: 'us2'
 });
 
+function arrayContains(needle, arrhaystack)
+{
+    return (arrhaystack.indexOf(needle) > -1);
+}
+
 var channel = pusher.subscribe(channel_send);
 channel.bind('message', function(data) {
     var node = document.createElement("p");
+    if(Cookies.get('filter') == "1")
+    {
+      if(arrayContains(data.message, )
+    }
     var textnode = document.createTextNode(data.message);
     console.log(data.badge);
     node.appendChild(textnode);
@@ -92,4 +101,26 @@ async function uploadFile()
         }
         reader.readAsDataURL(file)
       }
+}
+
+function checkFilter()
+{
+  if(Cookies.get('filter') == "" || Cookies.get('filter') == "0")
+  {
+    Cookies.set('filter', '1')
+    Swal.fire(
+      'Content Filter Enabled',
+      'Content filtering is now enabled. Messages with foul language will be censored.',
+      'success'
+    )
+  }
+  else
+  {
+    Cookies.set('filter', '0')
+    Swal.fire(
+      'Content Filter Disbaled',
+      'All messages will be shown',
+      'success'
+    )
+  }
 }
