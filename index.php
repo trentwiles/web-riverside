@@ -1005,7 +1005,7 @@ $router->set404(function() {
     );
     
     $ua = $_SERVER['HTTP_USER_AGENT'];
-    
+    echo "Before issets <br>";
     if(isset($hacks[$url]) || isset($baduseragent[$ua])){
         $mes = "AUTOMATED REPORT: " . $hacks[$url];
     }
