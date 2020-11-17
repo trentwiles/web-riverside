@@ -4,8 +4,8 @@ require __DIR__ . '/vendor/autoload.php';
 require 'functions.php';
 require 'security.php';
 
-use RiversideRocks\services as Rocks;
-use RiversideRocks\security as Secure;
+$rocks = new \RiversideRocks\services;
+$secure = \RiversideRocks\security;
 
 $router = new \Bramus\Router\Router();
 $pug = new Pug();
@@ -15,7 +15,7 @@ $pug = new Pug();
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     echo "Under header <br>";
-    $hacks = Secure::returnExploits();
+    $hacks = $secure->returnExploits();
     
     $url = $_SERVER["REQUEST_URI"];
     
@@ -38,7 +38,7 @@ $router->set404(function() {
     if(isset($mes)){
         $ip = $_SERVER['REMOTE_ADDR'];
         $to_discord = "${ip} - ${mes}";
-        Rocks::newDiscord($to_discord, "Hacker Feed");
+        $rocks->newDiscord($to_discord, "Hacker Feed");
         $client = new GuzzleHttp\Client([
             'base_uri' => 'https://api.abuseipdb.com/api/v2/'
           ]);
@@ -76,14 +76,14 @@ $router->set404(function() {
         }
 
         echo "0_0";
-    $list = Secure::userAgents();
+    $list = $secure->userAgents();
     if(in_array($ua, $list))
     {
         $mes = $list[$ua];
         if(isset($mes)){
             $ip = $_SERVER['REMOTE_ADDR'];
             $to_discord = "${ip} - ${mes}";
-            Rocks::newDiscord($to_discord, "Hacker Feed");
+            $rocks->newDiscord($to_discord, "Hacker Feed");
             $client = new GuzzleHttp\Client([
                 'base_uri' => 'https://api.abuseipdb.com/api/v2/'
               ]);
