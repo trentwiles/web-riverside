@@ -70,7 +70,7 @@ END EMERGENCY SHUTOFF SWITCH
 
 
 $ip = $_SERVER['REMOTE_ADDR'];
-
+/*
 $url = $_SERVER["REQUEST_URI"];
 
     
@@ -120,6 +120,7 @@ $url = $_SERVER["REQUEST_URI"];
           echo "After DB <br>";
           
         }
+        */
 
 $servername = $_ENV['MYSQL_SERVER'];
 $username = $_ENV["MYSQL_USERNAME"];
