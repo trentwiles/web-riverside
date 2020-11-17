@@ -10,7 +10,8 @@ $secure = \RiversideRocks\security;
 $router = new \Bramus\Router\Router();
 $pug = new Pug();
 
-
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
