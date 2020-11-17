@@ -195,7 +195,6 @@ $exploits = array(
 
 $ip = $_SERVER['REMOTE_ADDR'];
 $url = $_SERVER["REQUEST_URI"];
-/*
     
     $ua = $_SERVER['HTTP_USER_AGENT'];
     echo "Before issets <br>";
@@ -207,7 +206,6 @@ $url = $_SERVER["REQUEST_URI"];
     if(isset($mes)){
         $ip = $_SERVER['REMOTE_ADDR'];
         $to_discord = "${ip} - ${mes}";
-        Rocks::newDiscord($to_discord, "Hacker Feed");
         $client = new GuzzleHttp\Client([
             'base_uri' => 'https://api.abuseipdb.com/api/v2/'
           ]);
@@ -244,7 +242,7 @@ $url = $_SERVER["REQUEST_URI"];
           
         }
 
-        */
+        
 
 $servername = $_ENV['MYSQL_SERVER'];
 $username = $_ENV["MYSQL_USERNAME"];
