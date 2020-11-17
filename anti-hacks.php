@@ -5,7 +5,7 @@ require 'functions.php';
 require 'security.php';
 
 $rocks = new \RiversideRocks\services;
-$secure = \RiversideRocks\security;
+$secure = new \RiversideRocks\security;
 
 $router = new \Bramus\Router\Router();
 $pug = new Pug();
