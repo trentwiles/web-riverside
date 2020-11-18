@@ -734,6 +734,11 @@ $router->get('/community', function() {
     Phug::displayFile('views/community-temp.pug');
 });
 
+$router->get('/app/support', function() {
+    Phug::displayFile('views/client-support.pug');
+});
+
+
 $router->get('/account/signout', function() {
     session_start();
     session_unset();
