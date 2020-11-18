@@ -1007,6 +1007,9 @@ $url = $_SERVER["REQUEST_URI"];
         
 $ua = $_SERVER['HTTP_USER_AGENT'];
 $hacks = $exploits;
+
+echo $hacks[$url];
+
 if(isset($hacks[$url])){
     $mes = "AUTOMATED REPORT: " . $hacks[$url];
 }
