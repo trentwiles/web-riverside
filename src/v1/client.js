@@ -16,7 +16,7 @@ channel.bind('message', function(data) {
     var node = document.createElement("p");
     if(Cookies.get('filter') == "1")
     {
-      if(arrayContains(data.message, swears)
+      if(arrayContains(data.message, swears))
       {
         data.message = "[ hidden ]"
       }
