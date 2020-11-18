@@ -5,6 +5,7 @@ require "vendor/autoload.php";
 use DiDom\Document;
 $parser = new \Roboxt\Parser();
 
+die("Closed to the public");
 # Parse your robots.txt file
 $crawl = $_GET["url"];
 $page = $_GET["page"];
