@@ -150,47 +150,7 @@ $sql = "SELECT * FROM msg";
         }
     }
 
-$ip = $_SERVER['REMOTE_ADDR'];
-$url = $_SERVER["REQUEST_URI"];
-        
-$ua = $_SERVER['HTTP_USER_AGENT'];
-$hacks = $exploits;
-if(isset($hacks[$url])){
-    $mes = "AUTOMATED REPORT: " . $hacks[$url];
-}
-if(isset($mes)){
-    $ip = $_SERVER['REMOTE_ADDR'];
-    $to_discord = "${ip} - ${mes}";
-    $client = new GuzzleHttp\Client([
-        'base_uri' => 'https://api.abuseipdb.com/api/v2/'
-        ]);
-        $response = $client->request('POST', 'report', [
-            'query' => [
-                'ip' => "${ip}",
-                'categories' => '15',
-                'comment' => "${mes}"
-            ],
-            'headers' => [
-                'Accept' => 'application/json',
-                'Key' => $_ENV["ABUSE_IP_DB"]
-        ],
-        ]);
-        $output = $response->getBody();
-        // Store response as a PHP object.
-        $ipDetails = json_decode($output, true);
-        $servername = $_ENV['MYSQL_SERVER'];
-        $username = $_ENV["MYSQL_USERNAME"];
-        $password = $_ENV["MYSQL_PASSWORD"];
-        $dbname = $_ENV["MYSQL_DATABASE"];
 
-        $conn = new mysqli($servername, $username, $password, $dbname);
-        if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-        }
-        $sql = "INSERT INTO `blocklist`(`ip`, `reason`) VALUES ('${ip}', 'Hacking attempt (HTTP)')";
-        $result = $conn->query($sql);
-        
-    }
 
 $router->get('/api/visits', function() {
     echo json_encode(times, true);
@@ -1042,7 +1002,47 @@ $router->get('/account/dashboard', function() {
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
     echo "404: Not Found";
-    
+    $ip = $_SERVER['REMOTE_ADDR'];
+$url = $_SERVER["REQUEST_URI"];
+        
+$ua = $_SERVER['HTTP_USER_AGENT'];
+$hacks = $exploits;
+if(isset($hacks[$url])){
+    $mes = "AUTOMATED REPORT: " . $hacks[$url];
+}
+if(isset($mes)){
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $to_discord = "${ip} - ${mes}";
+    $client = new GuzzleHttp\Client([
+        'base_uri' => 'https://api.abuseipdb.com/api/v2/'
+        ]);
+        $response = $client->request('POST', 'report', [
+            'query' => [
+                'ip' => "${ip}",
+                'categories' => '15',
+                'comment' => "${mes}"
+            ],
+            'headers' => [
+                'Accept' => 'application/json',
+                'Key' => $_ENV["ABUSE_IP_DB"]
+        ],
+        ]);
+        $output = $response->getBody();
+        // Store response as a PHP object.
+        $ipDetails = json_decode($output, true);
+        $servername = $_ENV['MYSQL_SERVER'];
+        $username = $_ENV["MYSQL_USERNAME"];
+        $password = $_ENV["MYSQL_PASSWORD"];
+        $dbname = $_ENV["MYSQL_DATABASE"];
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+        }
+        $sql = "INSERT INTO `blocklist`(`ip`, `reason`) VALUES ('${ip}', 'Hacking attempt (HTTP)')";
+        $result = $conn->query($sql);
+        
+    }
 
     // Where is this comming from??????????????????????????????????????????????????????
     
