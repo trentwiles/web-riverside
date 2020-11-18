@@ -214,8 +214,13 @@ $router->get('/code/production/cred.js', function() {
     }
     $key = $_COOKIE["key"];
     $sql_key = $conn -> real_escape_string(htmlspecialchars($key));
-    $sql = "SELECT * FROM logins WHERE temp_auto_api_key='$sql_key'";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM logins WHERE temp_auto_api_key=?");
+    $stmt->bind_param("s", $key_sql);
+
+    $key_sql = $sql_key;
+    $stmt->execute();
+    $stmt->close();
+
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
             $user = $row["username"];
@@ -416,8 +421,15 @@ try {
         die("Connection failed: " . $conn->connect_error);
     }
     $epoch = time();
-    $sql = "INSERT INTO uploads (`url`, epoch) VALUES ('${path}', '${epoch}')";
-    $result = $conn->query($sql);
+
+    $stmt = $conn->prepare("INSERT INTO uploads (`url`, epoch) VALUES (?, ?)");
+    $stmt->bind_param("si", $key_sql);
+
+    $path0 = $path;
+    $epoch0 = $epoch;
+    $stmt->execute();
+    $stmt->close();
+    
     if($_GET["api"] == "true")
     {
         echo $path;
