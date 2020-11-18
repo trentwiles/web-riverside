@@ -113,7 +113,12 @@ $country = $conn -> real_escape_string(htmlspecialchars($ipinfo["country"]));
 $epoch = time();
 
 $stmt = $conn->prepare("INSERT INTO logs (epoch, country) VALUES (?, ?)");
-$stmt->bind_param("is", $epoch, $country);
+$stmt->bind_param("is", $epoch1, $country1);
+
+$epoch1 = $epoch;
+$country1 = $country;
+$stmt->execute();
+$stmt->close();
 
 $times = 0;
 
