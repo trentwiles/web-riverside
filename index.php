@@ -25,7 +25,7 @@ require 'security.php';
 use RiversideRocks\services as Rocks;
 use RiversideRocks\security as Secure;
 
-$exploits = Secure::showExploits();
+$exploits = Secure::returnExploits();
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
