@@ -307,6 +307,9 @@ $router->get('/watch/(\w+)', function($id) {
 
 $router->get('/videos', function() {
     $pug = new Pug();
+    die(header("Location: https://www.youtube.com/RiversideRocks"));
+
+    // This is all ignored for now...
     $ids = array("1", "2", "3");
     $output = $pug->render('views/watch.pug', array(
         'videos' => $ids
