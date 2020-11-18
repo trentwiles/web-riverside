@@ -9,12 +9,17 @@ function arrayContains(needle, arrhaystack)
     return (arrhaystack.indexOf(needle) > -1);
 }
 
+var swears = ['frick'];
+
 var channel = pusher.subscribe(channel_send);
 channel.bind('message', function(data) {
     var node = document.createElement("p");
     if(Cookies.get('filter') == "1")
     {
-      if(arrayContains(data.message, )
+      if(arrayContains(data.message, swears)
+      {
+        data.message = "[ hidden ]"
+      }
     }
     var textnode = document.createTextNode(data.message);
     console.log(data.badge);
