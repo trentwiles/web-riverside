@@ -124,6 +124,6 @@ $exploits = array(
     "/js/mage/cookies.js" => "/js/mage/cookies.js"
 );
 
-$tosend = json_decode($exploits, true);
+$tosend = json_encode($exploits, true);
 
 echo $tosend;
