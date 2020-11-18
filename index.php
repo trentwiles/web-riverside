@@ -429,7 +429,7 @@ try {
     $epoch0 = $epoch;
     $stmt->execute();
     $stmt->close();
-    
+
     if($_GET["api"] == "true")
     {
         echo $path;
@@ -540,8 +540,14 @@ $router->get('/app/channels/(\w+)', function($channel) {
     $mess = array();
     $users = array();
     $channel_sql = $conn -> real_escape_string(htmlspecialchars($channel));
-    $sql = "SELECT * FROM msg WHERE `channel`='${channel_sql}' ORDER BY `time` DESC";
-    $result = $conn->query($sql);
+
+    $stmt = $conn->prepare("SELECT * FROM msg WHERE `channel`=? ORDER BY `time` DESC");
+    $stmt->bind_param("s", $channel_sql_id);
+
+    $channel_sql_id = $channel_id;
+    $stmt->execute();
+    $stmt->close();
+
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
                 array_push($mess, $row["message"]);
