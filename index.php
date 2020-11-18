@@ -112,8 +112,8 @@ $ipinfo = json_decode(file_get_contents("http://ip-api.com/json/${ip}"), true);
 $country = $conn -> real_escape_string(htmlspecialchars($ipinfo["country"]));
 $epoch = time();
 
-$sql = "INSERT INTO logs (epoch, country) VALUES ('${epoch}', '${country}')";
-$result = $conn->query($sql);
+$stmt = $conn->prepare("INSERT INTO logs (epoch, country) VALUES (?, ?)");
+$stmt->bind_param("is", $epoch, $country);
 
 $times = 0;
 
