@@ -1,4 +1,7 @@
-Pusher.logToConsole = true;
+console.log('%cSTOP!','background: red; color: white; font-size: 78px;');
+console.log("%cWARNING! Be careful when using the console.","background: grey; color: white; font-size: 18px;");
+console.log("%cBeleive it or not, you can get hacked by pasting malicious code here or by following the directions of a hacker.","background: grey; color: white; font-size: 14px;");console.log("%cOnly use this if you know what you are doing or if you are following the directions of somebody you 110% trust.","background: grey; color: white; font-size: 14px;");console.log("%cIf in doubt, you can always contact me and if you are using the console on your own, you ask questions using our chat (riverside.rocks/app) \n","background: grey; color: white; font-size: 14px;");
+Pusher.logToConsole = false;
 
 var pusher = new Pusher('d3f96738bc8f4a369b91', {
     cluster: 'us2'
