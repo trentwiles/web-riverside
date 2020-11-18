@@ -545,6 +545,51 @@ $router->get('/app/channels/(\w+)', function($channel) {
     echo $output;
 });
 
+$router->get('/app/channels/pm/(\w+)', function($channel) {
+    $pug = new Pug();
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $channel_select = $conn -> real_escape_string(htmlspecialchars($channel));
+    if(!$channel_select)
+    {
+        header("Location: /app/create");
+        die();
+    }
+    $_SESSION["channel"] = $channel_select;
+    $mess = array();
+    $users = array();
+    $channel_sql = $conn -> real_escape_string(htmlspecialchars($channel));
+    $sql = "SELECT * FROM msg WHERE `channel`='${channel_sql}' ORDER BY `time` DESC";
+    $result = $conn->query($sql);
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+                array_push($mess, $row["message"]);
+                array_push($users, $row["username"]);
+        }
+    }
+    $output = $pug->renderFile('views/client-v1.pug', array(
+        'username' => $_SESSION["username"],
+        'id' => $_SESSION["id"],
+        'channel' => "#" . $channel_sql,
+        'mes1' => $mess[0],
+        'user1' => $users[0],
+        'mes2' => $mess[1],
+        'user2' => $users[1],
+        'mes3' => $mess[2],
+        'user3' => $users[2],
+        'mes4' => $mess[3],
+        'user4' => $users[3],
+        'debug' => ""
+    ));
+    echo $output;
+});
+
 $router->get('/help/(\w+)', function($wiki) {
     $pug = new Pug();
     if(!isset($wiki))
