@@ -25,7 +25,7 @@ require 'security.php';
 use RiversideRocks\services as Rocks;
 use RiversideRocks\security as Secure;
 
-$exploits = json_decode(file_get_contents("https://riverside.rocks/blacklist.php"), true);
+$exploits = Secure::showExploits();
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
