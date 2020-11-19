@@ -99,6 +99,17 @@ function changeChannel(channel) {
   history.pushState({}, null, url);
 }
 
+function tosUpdate(){
+  if(Cookies.get('seen_tos') !== true)
+  {
+    Swal.fire(
+      'Terms of Service Updated',
+      'We recently updated our TOS and Privacy Policy. Please review then <a href="/about/legal">here.</a>',
+      'success'
+    )
+  }
+}
+
 async function uploadFile()
 {
     const { value: file } = await Swal.fire({
@@ -133,11 +144,7 @@ function checkFilter()
   if(Cookies.get('filter') == "" || Cookies.get('filter') == "0")
   {
     Cookies.set('filter', '1')
-    Swal.fire(
-      'Content Filter Enabled',
-      'Content filtering is now enabled. Messages with foul language will be censored.',
-      'success'
-    )
+    c
   }
   else
   {
