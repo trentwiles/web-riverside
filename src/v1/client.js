@@ -86,6 +86,19 @@ addEventListener("keyup", function(event) {
     }
 })
 
+function changeChannel(channel) {
+  var url = "https://riverside.rocks/app/channels/"+channel;
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+     document.write(this.responseText);
+    }
+  };
+  xhttp.open("GET", url, true);
+  xhttp.send();
+  history.pushState({}, null, url);
+}
+
 async function uploadFile()
 {
     const { value: file } = await Swal.fire({
