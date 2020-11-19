@@ -287,6 +287,10 @@ $router->get('/about/contact', function() {
     Phug::displayFile('views/contact.pug'); // might make this dynamic later, might not
 });
 
+$router->get('/community', function() {
+    Phug::displayFile('views/community-concept.pug');
+});
+
 $router->post('/about/contact', function() {
    $name = $_POST["name"];
    $email = $_POST["email"];
