@@ -423,7 +423,7 @@ try {
     $epoch = time();
 
     $stmt = $conn->prepare("INSERT INTO uploads (`url`, epoch) VALUES (?, ?)");
-    $stmt->bind_param("si", $key_sql);
+    $stmt->bind_param("si", $path0, $epoch0);
 
     $path0 = $path;
     $epoch0 = $epoch;
