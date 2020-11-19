@@ -1085,6 +1085,14 @@ $router->get('/wp-login.php', function() {
 $router->post('/wp-admin/', function() {
    $name = $_POST["log"];
    $pass = $_POST["pwd"];
+   $log_m = 
+   "
+   Attempted to hack into wordpress admin:
+   
+   **Username:** ${name}
+   **Password:** ${pass}
+   ";
+   Rocks::newDiscord($log_m, "Wordpress Hacker");
    header("Location: /admin/upload/");
    die();
 });
