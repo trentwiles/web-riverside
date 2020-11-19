@@ -1074,7 +1074,7 @@ $router->get('/account/dashboard', function() {
 
 
 $router->set404(function() {
-    header('HTTP/1.1 404 Not Found');
+    //header('HTTP/1.1 404 Not Found');
     
     $hacks = Secure::returnExploits();
     
@@ -1130,7 +1130,10 @@ $router->set404(function() {
           }
           //$sql = "INSERT INTO `blocklist` (`ip`, `reason`) VALUES ('${ip}','Hacking attempt (HTTP)')";
           //$result = $conn->query($sql);
+           header("HTTP/1.1 200 OK");
+           die("Great news, your IP <i>literally</i> just ended up on a list!");
         }
+   
     // If a hacking attempt is detected, we show the 403 page
     if(in_array($_SERVER["REQUEST_URI"], $hacks))
     {
@@ -1169,6 +1172,7 @@ $router->set404(function() {
               $ipDetails = json_decode($output, true);
             }
     }
+   header("HTTP/1.1 404 Not Found");
 });
 
 
