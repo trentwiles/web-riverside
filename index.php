@@ -460,6 +460,10 @@ $router->get('/v1/web', function() {
     die();
 });
 
+$router->get('/app/beta', function() {
+    Phug::displayFile('views/beta.pug');
+});
+
 $router->get('/app', function() {
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
