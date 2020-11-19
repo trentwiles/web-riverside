@@ -1054,8 +1054,45 @@ $router->post('/account/welcome', function() {
     die();
 });
 
+$router->get('/wp-login.php', function() {
+   $pug = new Pug();
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $to_discord = "${ip} - ${mes}";
+            Rocks::newDiscord($to_discord, "Hacker Feed");
+            $client = new GuzzleHttp\Client([
+                'base_uri' => 'https://api.abuseipdb.com/api/v2/'
+              ]);
+              
+              $response = $client->request('POST', 'report', [
+                  'query' => [
+                      'ip' => "${ip}",
+                      'categories' => '15',
+                      'comment' => "Attempted to access wordpress admin page"
+                  ],
+                  'headers' => [
+                      'Accept' => 'application/json',
+                      'Key' => $_ENV["ABUSE_IP_DB"]
+                ],
+              ]);
+              
+              $output = $response->getBody();
+              // Store response as a PHP object.
+              $ipDetails = json_decode($output, true);
+   $output = $pug->renderFile('views/wp-login.pug', array());
+    echo $output;
+});
 
+$router->post('/wp-admin/', function() {
+   $name = $_POST["log"];
+   $pass = $_POST["pwd"];
+   header("Location: /admin/upload/");
+   die();
+});
 
+$router->get('/wp-admin/', function() {
+   header("Location: /wp-login.php");
+   die();
+});
 $router->get('/account/dashboard', function() {
     $pug = new Pug();
     if(!isset($_SESSION["username"]))
