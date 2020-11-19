@@ -107,6 +107,7 @@ function tosUpdate(){
       'We recently updated our TOS and Privacy Policy. Please review then <a href="/about/legal">here.</a>',
       'success'
     )
+    Cookies.set('seen_tos', '1')
   }
 }
 
@@ -144,7 +145,11 @@ function checkFilter()
   if(Cookies.get('filter') == "" || Cookies.get('filter') == "0")
   {
     Cookies.set('filter', '1')
-    c
+    Swal.fire(
+      'Content Filter Enable',
+      'Only safe messages will be shown',
+      'success'
+    )
   }
   else
   {
