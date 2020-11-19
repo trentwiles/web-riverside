@@ -28,7 +28,7 @@ channel.bind('message', function(data) {
         var content = data.message;
       }
     }
-    var textnode = document.createTextNode(content);
+    var textnode = document.createTextNode(data.message);
     console.log(data.badge);
     node.appendChild(textnode);
     var final = document.getElementById("m")
