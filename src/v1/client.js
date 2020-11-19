@@ -21,10 +21,14 @@ channel.bind('message', function(data) {
     {
       if(arrayContains(data.message, swears))
       {
-        data.message = "[ hidden ]"
+        var content = "[ hidden ]"
+      }
+      else
+      {
+        var content = data.message;
       }
     }
-    var textnode = document.createTextNode(data.message);
+    var textnode = document.createTextNode(content);
     console.log(data.badge);
     node.appendChild(textnode);
     var final = document.getElementById("m")
