@@ -1124,8 +1124,8 @@ $router->set404(function() {
           if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
           }
-          $sql = "INSERT INTO `blocklist` (`ip`, `reason`) VALUES ('${ip}','Hacking attempt (HTTP)')";
-          $result = $conn->query($sql);
+          //$sql = "INSERT INTO `blocklist` (`ip`, `reason`) VALUES ('${ip}','Hacking attempt (HTTP)')";
+          //$result = $conn->query($sql);
         }
     // If a hacking attempt is detected, we show the 403 page
     if(in_array($_SERVER["REQUEST_URI"], $hacks))
