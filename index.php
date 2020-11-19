@@ -98,8 +98,9 @@ if($blocks !== 0)
     header("Content-type: application/json");
     header("HTTP/1.1 403 Forbidden");
     $reasons = array(
-        "message" => "403 Forbidden",
-        "reason" => htmlspecialchars($reason)
+        "message" => "Unauthorised Connection: 403 Forbidden",
+        "reason" => htmlspecialchars($reason),
+        "server" => "358 Engine"
     );
     $return = json_encode($reasons, true);
     die($return);
