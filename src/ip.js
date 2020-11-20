@@ -16,8 +16,8 @@ channel.bind('message', function(data) {
             var ip = JSON.parse(jsonip)
             var country = ip.country_name
             var code = ip.country_code
-            var flag = "<img src='https://www.countryflags.io/be/shiny/"+code+"32.png' />"
-            var message = flag+"Unauthorized connection attempt detected from "+data.message+" to port 22("+country+")"
+            var flag = "<img src='https://www.countryflags.io/be/shiny/"+code+"/32.png' />"
+            var message = flag+" Unauthorized connection attempt detected from "+data.message+" to port 22("+country+")"
 
             $("p").append(message);
         }
