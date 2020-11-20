@@ -19,10 +19,7 @@ channel.bind('message', function(data) {
             var flag = "<img src='https://www.countryflags.io/be/shiny/"+code+"32.png' />"
             var message = flag+"Unauthorized connection attempt detected from "+data.message+" to port 22("+country+")"
 
-            var textnode = document.createTextNode(message)
-            node.appendChild(textnode)
-            var final = document.getElementById("m")
-            final.appendChild(node)
+            $("p").append(message);
         }
     }
     xhttp.open("GET", api_url, true);
