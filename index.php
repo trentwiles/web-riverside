@@ -599,13 +599,14 @@ $router->get('/app/channels/pm/(\w+)', function($channel) {
     $mess = array();
     $users = array();
     $channel_sql = $conn -> real_escape_string(htmlspecialchars($channel));
-    $sql = "SELECT * FROM msg WHERE `channel`='${channel_sql}' ORDER BY `time` DESC";
-    $result = $conn->query($sql);
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-                array_push($mess, $row["message"]);
-                array_push($users, $row["username"]);
-        }
+    $sql = "SELECT * FROM msg WHERE `channel`=? ORDER BY `time` DESC";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $channel_sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        array_push($mess, $row["message"]);
+        array_push($users, $row["username"]);
     }
     $output = $pug->renderFile('views/client-v1.pug', array(
         'username' => $_SESSION["username"],
@@ -666,8 +667,15 @@ $router->get('/v1/new', function() {
         die("Connection failed: " . $conn->connect_error);
     }
     $sent_api_key = $conn -> real_escape_string($_GET["key"]);
-    $sql = "SELECT * FROM logins WHERE temp_auto_api_key='$sent_api_key'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM logins WHERE temp_auto_api_key=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $sent_api_key);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $_username = $row["username"];
+        break;
+    }
     $channel_select = $conn -> real_escape_string(htmlspecialchars($_GET["c_id"]));
     if(!$_GET["key"])
     {
@@ -702,13 +710,6 @@ $router->get('/v1/new', function() {
         die($final);
     }
 
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $_username = $row["username"];
-            break;
-        }
-    }
-
     if(!isset($_username))
     {
         header("HTTP/1.1 401 Unauthorized");
@@ -719,15 +720,15 @@ $router->get('/v1/new', function() {
         $final = json_encode($json, true);
         die($final);
     }
-
-    $sql = "SELECT * FROM admins WHERE username='${_username}'";
-    $result = $conn->query($sql);
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            if($row["username"] == $_username)
-            {
-                $_badge = 'fas fa-shield-alt'; // for the moment we have admin off due to pusher escaping html
-            }
+    $sql = "SELECT * FROM admins WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $_username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        if($row["username"] == $_username)
+        {
+            $_badge = 'fas fa-shield-alt'; // for the moment we have admin off due to pusher escaping html
         }
     }
 
@@ -776,13 +777,13 @@ $router->get('/v1/new', function() {
     }
 
     $runtime = time() - 10;
-    $sql = "SELECT * FROM `msg` WHERE username='${_user}' AND `time` > ${runtime}";
-    $result = $conn->query($sql);
-    $rate = 0;
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $rate = $rate + 1;
-        }
+    $sql = "SELECT * FROM `msg` WHERE username=? AND `time` > ?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("si", $_user, $runtime);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $rate = $rate + 1;
     }
 
     if($rate >= 3)
@@ -844,34 +845,37 @@ $router->get('/users/(\w+)', function($id) {
         die("Connection failed: " . $conn->connect_error);
     }
     $discord = $conn -> real_escape_string($id);
-    $sql = "SELECT * FROM admins WHERE username='${discord}'";
-    $result = $conn->query($sql);
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            if(isset($row["username"]))
-            {
-                $badge = 'fas fa-shield-alt';
-            }
+
+    $sql = "SELECT * FROM admins WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $discord);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        if(isset($row["username"]))
+        {
+            $badge = 'fas fa-shield-alt';
         }
     }
-    $sql = "SELECT * FROM logins WHERE username='${discord}'";
-    $result = $conn->query($sql);
-    $times = 0;
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $user = htmlspecialchars($row["username"]);
-            if($row["username"] == "")
-            {
-                die(Phug::displayFile('views/user-404.pug'));
-            }
-            $bio = htmlspecialchars($row["bio"]);
-            if(! $bio)
-            {
-                $bio = "Looks like this user hasn't set a bio!";
-            }
-            $pre_join = $row["login_time"];
-            $join = date("m-d-Y H:i:s", $pre_join);
+
+    $sql = "SELECT * FROM logins WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $discord);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $user = htmlspecialchars($row["username"]);
+        if($row["username"] == "")
+        {
+            die(Phug::displayFile('views/user-404.pug'));
         }
+        $bio = htmlspecialchars($row["bio"]);
+        if(! $bio)
+        {
+            $bio = "Looks like this user hasn't set a bio!";
+        }
+        $pre_join = $row["login_time"];
+        $join = date("m-d-Y H:i:s", $pre_join);
     }
     $output = $pug->render('views/user.pug', array(
         'username' => $user,
