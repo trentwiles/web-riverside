@@ -17,7 +17,7 @@ channel.bind('message', function(data) {
             var country = ip.country_name
             var code = ip.country_code
             var flag = "<img src='https://www.countryflags.io/"+code+"/shiny/32.png' />"
-            var message = flag+" Unauthorized connection attempt detected from "+data.message+" to port 22("+country+")"
+            var message = flag+" Unauthorized connection attempt detected from "+data.message+" to port 22 ("+country+")<br>"
 
             $("p").append(message);
         }
@@ -37,7 +37,7 @@ channel.bind('http', function(data) {
             var country = ip.country_name
             var code = ip.country_code
             var flag = "<img src='https://www.countryflags.io/"+code+"/shiny/32.png' />"
-            var message = flag+" HTTP hacking attempt from "+data.message+" ("+country+")"
+            var message = flag+" HTTP hacking attempt from "+data.message+" ("+country+") <br>"
 
             $("p").append(message);
         }
