@@ -193,6 +193,11 @@ $router->get('/', function() {
 
 
 $router->get('/about', function() {
+    $pug = new Pug();
+    $ipdb = file_get_contents("https://riverside.rockscrawl.php");
+    $output = $pug->render('views/about.pug', array(
+        'ipdb' => $ipdb,
+    ));
     Phug::displayFile('views/about.pug');
 });
 
