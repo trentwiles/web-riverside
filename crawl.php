@@ -27,9 +27,15 @@ $document = new Document($content);
 $posts = $document->find('p');
 
 $links = array();
+$number = 0;
 
 foreach($posts as $post) {
-    echo $post . "\n";
+    if($number == 1)
+    {
+        preg_match("\d+", $post, $matches);
+        echo $matches;
+    }
+    $number = $number + 1;
 }
 
 print_r($links);
