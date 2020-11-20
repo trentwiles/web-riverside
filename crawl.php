@@ -5,22 +5,14 @@ require "vendor/autoload.php";
 use DiDom\Document;
 $parser = new \Roboxt\Parser();
 
-die("Closed to the public");
 # Parse your robots.txt file
-$crawl = $_GET["url"];
-$page = $_GET["page"];
+$crawl = "https://www.abuseipdb.com/user/47625";
 
 if(! $crawl)
 {
     die("Missing URL");
 }
 
-if(! $page)
-{
-    die("Missing URL");
-}
-
-$file = $parser->parse($crawl . "/robots.txt");
 
 
 $cURLConnection = curl_init();
@@ -32,11 +24,13 @@ curl_close($cURLConnection);
 
 $document = new Document($content);
 
-$posts = $document->find('a');
+$posts = $document->find('p');
 
 $links = array();
 
 foreach($posts as $post) {
     array_push($links, $post->getAttribute('href'));
 }
+
+print_r($links);
 
