@@ -224,23 +224,19 @@ $router->get('/code/production/cred.js', function() {
     }
     $key = $_COOKIE["key"];
     $sql_key = $conn -> real_escape_string(htmlspecialchars($key));
-    $stmt = $conn->prepare("SELECT * FROM logins WHERE temp_auto_api_key=?");
-    $stmt->bind_param("s", $key_sql);
 
-    $key_sql = $sql_key;
+    $sql = "SELECT * FROM logins WHERE temp_auto_api_key=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("i", $sql_key);
     $stmt->execute();
-    
-
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $user = $row["username"];
-            break;
-        }
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $user = $row["username"];
+        break;
     }
     echo "const key = Cookies.get('key');\n";
     echo "const channel_send = \"" . $_SESSION["channel"] . "\";\n";
     echo "const username = \"" . $user . "\";\n";
-    $stmt->close();
 });
 
 $router->get('/code/production/m.js', function() {
