@@ -8,7 +8,7 @@ var channel = pusher.subscribe('abuseipdb');
 channel.bind('message', function(data) {
     var node = document.createElement("p");
     
-    var api_url = "http://ip-api.com/json/"+data.message;
+    var api_url = "https://ip-api.com/json/"+data.message;
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
