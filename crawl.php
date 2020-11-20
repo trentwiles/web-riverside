@@ -29,7 +29,7 @@ $posts = $document->find('p');
 $links = array();
 
 foreach($posts as $post) {
-    array_push($links, $post->getAttribute('href'));
+    array_push($links, $post);
 }
 
 print_r($links);
