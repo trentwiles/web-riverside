@@ -1185,7 +1185,8 @@ $router->set404(function() {
           }
           //$sql = "INSERT INTO `blocklist` (`ip`, `reason`) VALUES ('${ip}','Hacking attempt (HTTP)')";
           //$result = $conn->query($sql);
-           header("HTTP/1.1 200 OK");
+          $data['http'] = $ip;
+            $pusher->trigger('abuseipdb', 'http', $data);
            die("Great news, your IP <i>literally</i> just ended up on a list!");
         }
    
