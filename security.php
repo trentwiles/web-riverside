@@ -141,8 +141,15 @@ class security
                 "/owa/auth/logon.aspx" => "Searching for outlook admin page",
                 "/autodiscover/autodiscover.xml" => "GET /autodiscover/autodiscover.xml",
                 "/wp-config.good" => "Wordpress exploits",
-                "/js/mage/cookies.js" => "/js/mage/cookies.js"
-        );
+                "/js/mage/cookies.js" => "/js/mage/cookies.js",
+                "/phpformbuilder/plugins/filemanager/plugin.min.js" => "Searching for scripts",
+                "/modules/hdi/hdi-tinymce/filemanager/plugin.min.js" => "Searching for scripts",
+                "/js/filemanager/plugin.min.js" => "Searching for scripts",
+                "/admin/plugin.min.js" => "Searching for scripts",
+                "/javascript/filemanager/plugin.min.js" => "Searching for scripts",
+                "/responsivefilemanager/plugin.min.js" => "Searching for scripts",
+                "//wp1/wp-includes/wlwmanifest.xml" => "Looking for wlwmanifest file"
+            );
 
             return $exploits;
     }
