@@ -29,7 +29,7 @@ $posts = $document->find('p');
 $links = array();
 
 foreach($posts as $post) {
-    array_push($links, $post);
+    echo $post . "\n";
 }
 
 print_r($links);
