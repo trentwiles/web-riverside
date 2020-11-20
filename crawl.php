@@ -32,8 +32,7 @@ $number = 0;
 foreach($posts as $post) {
     if($number == 1)
     {
-        echo $post . "<br>";
-        preg_match("\d+", $post, $matches);
+        $matches = (int) filter_var($post, FILTER_SANITIZE_NUMBER_INT);
         echo $matches;
     }
     $number = $number + 1;
