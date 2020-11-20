@@ -162,6 +162,10 @@ $router->get('/api/visits', function() {
     echo json_encode(times, true);
 });
 
+$router->get('/about/feed', function() {
+    Phug::displayFile('views/ip.pug');
+});
+
 $router->get('/api/bycountry', function() {
     print_r($countries);
 });
