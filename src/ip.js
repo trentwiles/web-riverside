@@ -12,13 +12,12 @@ channel.bind('message', function(data) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-        var json = this.responseText
-        
+        const jsonip = this.responseText 
     }
     };
     xhttp.open("GET", api_url, true);
     xhttp.send();
-    var ip = JSON.parse(json)
+    var ip = JSON.parse(jsonip)
     var country = ip.country_name
     var code = ip.country_code
     var flag = "<img src='https://www.countryflags.io/be/shiny/"+code+"32.png' />";
