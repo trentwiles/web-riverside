@@ -1,3 +1,7 @@
+var countries = []
+var ips = []
+
+
 Pusher.logToConsole = true;
 
 var pusher = new Pusher('d3f96738bc8f4a369b91', {
@@ -14,7 +18,9 @@ channel.bind('message', function(data) {
         if (this.readyState == 4 && this.status == 200) {
             const jsonip = this.responseText 
             var ip = JSON.parse(jsonip)
+            ips.push(ip)
             var country = ip.country_name
+            countries.push(country)
             var code = ip.country_code
             var flag = "<img src='https://www.countryflags.io/"+code+"/shiny/32.png' />"
             var message = flag+" Unauthorized connection attempt detected from "+data.message+" to port 22 ("+country+")<br>"
@@ -34,11 +40,12 @@ channel.bind('http', function(data) {
         if (this.readyState == 4 && this.status == 200) {
             const jsonip = this.responseText 
             var ip = JSON.parse(jsonip)
+            ips.push(ip)
             var country = ip.country_name
+            countries.push(country)
             var code = ip.country_code
             var flag = "<img src='https://www.countryflags.io/"+code+"/shiny/32.png' />"
             var message = flag+" HTTP hacking attempt from "+data.message+" ("+country+") <br>"
-
             $("p").append(message);
         }
     }
