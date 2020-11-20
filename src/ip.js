@@ -24,7 +24,7 @@ channel.bind('message', function(data) {
             var final = document.getElementById("m")
             final.appendChild(node)
         }
-    }});
+    }
     xhttp.open("GET", api_url, true);
     xhttp.send();
-    
+})
