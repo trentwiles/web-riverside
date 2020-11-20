@@ -32,11 +32,9 @@ $number = 0;
 foreach($posts as $post) {
     if($number == 1)
     {
+        echo $post . "<br>";
         preg_match("\d+", $post, $matches);
         echo $matches;
     }
     $number = $number + 1;
 }
-
-print_r($links);
-
