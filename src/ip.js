@@ -11,20 +11,20 @@ channel.bind('message', function(data) {
     var api_url = "https://ipapi.co/"+data.message+"/json/";
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-        const jsonip = this.responseText 
-    }
-    };
+        if (this.readyState == 4 && this.status == 200) {
+            const jsonip = this.responseText 
+            var ip = JSON.parse(jsonip)
+            var country = ip.country_name
+            var code = ip.country_code
+            var flag = "<img src='https://www.countryflags.io/be/shiny/"+code+"32.png' />"
+            var message = flag+"Unauthorized connection attempt detected from "+data.message+" to port 22("+country+")"
+
+            var textnode = document.createTextNode(message)
+            node.appendChild(textnode)
+            var final = document.getElementById("m")
+            final.appendChild(node)
+        }
+    }});
     xhttp.open("GET", api_url, true);
     xhttp.send();
-    var ip = JSON.parse(jsonip)
-    var country = ip.country_name
-    var code = ip.country_code
-    var flag = "<img src='https://www.countryflags.io/be/shiny/"+code+"32.png' />";
-    var message = flag+"Unauthorized connection attempt detected from "+data.message+" to port 22("+country+")"
-
-    var textnode = document.createTextNode(message);
-    node.appendChild(textnode);
-    var final = document.getElementById("m")
-    final.appendChild(node);
-});
+    
