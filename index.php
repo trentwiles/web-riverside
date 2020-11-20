@@ -227,7 +227,7 @@ $router->get('/code/production/cred.js', function() {
 
     $sql = "SELECT * FROM logins WHERE temp_auto_api_key=?";
     $stmt = $conn->prepare($sql); 
-    $stmt->bind_param("i", $sql_key);
+    $stmt->bind_param("s", $sql_key);
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
