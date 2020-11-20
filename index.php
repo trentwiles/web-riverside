@@ -551,13 +551,16 @@ $router->get('/app/channels/(\w+)', function($channel) {
     $mess = array();
     $users = array();
     $channel_sql = $conn -> real_escape_string(htmlspecialchars($channel));
-    $sql = "SELECT * FROM msg WHERE `channel`='${channel_sql}' ORDER BY `time` DESC";
-    $result = $conn->query($sql);
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-                array_push($mess, $row["message"]);
-                array_push($users, $row["username"]);
-        }
+
+
+    $sql = "SELECT * FROM msg WHERE `channel`=? ORDER BY `time` DESC";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $channel_sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        array_push($mess, $row["message"]);
+        array_push($users, $row["username"]);
     }
     $output = $pug->renderFile('views/client-v1.pug', array(
         'username' => $_SESSION["username"],
