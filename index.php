@@ -927,6 +927,11 @@ $router->get('/users/(\w+)', function($id) {
     echo $output;
 });
 
+$router->get('/blog', function($id) {
+    Phug::displayFile('views/blog-home.pug');
+});
+
+
 $router->get('/oauth/github', function() {
     $provider = new League\OAuth2\Client\Provider\Github([
         'clientId'          => $_ENV["GITHUB_CLIENT"],
