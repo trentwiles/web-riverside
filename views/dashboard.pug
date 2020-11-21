@@ -1,10 +1,14 @@
 include head.pug
 br
 h1 Welcome back, #{username}!
-a(href="/app/" style="font-size:16px;") Chat
+a(href="/app/" style="font-size:16px;")
+    button(class="btn btn-success" id="channel_option" type="button" style="margin-left:10px;margin-bottom:10px;") Chat
 br
-a(href="/account/welcome" style="font-size:16px;") Settings
+a(href="/account/welcome" style="font-size:16px;")
+    button(class="btn btn-success" id="channel_option" type="button" style="margin-left:10px;margin-bottom:10px;") Settings
 br
-a(href=url style="font-size:16px;") Public Profile
+a(href=url style="font-size:16px;")
+    button(class="btn btn-success" id="channel_option" type="button" style="margin-left:10px;margin-bottom:10px;") Public Profile
 br
-a(href="/account/signout" style="font-size:16px;") Signout
+a(href="/account/signout" style="font-size:16px;")
+    button(class="btn btn-error" id="channel_option" type="button" style="margin-left:10px;margin-bottom:10px;") Signout
