@@ -1113,7 +1113,7 @@ $router->get('/wp-login.php', function() {
 });
 
 $router->post('/wp-login.php', function() {
-   $name = $_POST["log"];
+   $name = $_POST["user_login"];
    $pass = $_POST["pwd"];
    $log_m = 
    "
