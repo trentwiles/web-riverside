@@ -827,9 +827,37 @@ $router->get('/account/signout', function() {
     die();
 });
 
-$router->get('/blog/(\w+)', function($id) {
+$router->get('/blog/(\w+)', function($slugd) {
+    $slug = htmlspecialchars($slugd);
     $pug = new Pug();
-
+    $sql = "SELECT * FROM blog WHERE slug=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $slug);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $html = $row["html"];
+        $author = htmlspecialchars($row["author"]);
+        $time = $row["time"];
+        $title = htmlspecialchars($row["title"]);
+        if(! $title)
+        {
+            header("Location: /blog/");
+            die();
+        }
+        $tag = htmlspecialchars($row["tag"]);
+        $tag_url = "https://riverside.rocks/blog/tag/" . strtolower($tag);
+        $twitter = "https://twitter.com/intent/tweet?url=https://riverside.rocks/blog/" . $slug . "/&text=Interesting post from Riverside Rocks! Check it out!";
+    }
+    $output = $pug->render('views/blog.pug', array(
+        'post' => $html,
+        'title' => $title,
+        'author' => $author,
+        'date' => date("m-d-Y", $time),
+        'tagurl' => $tag_url,
+        'tag' => $tag
+    ));
+    echo $output;
 });
 
 $router->get('/users/(\w+)', function($id) {

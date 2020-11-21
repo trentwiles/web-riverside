@@ -1,0 +1,12 @@
+include head.pug
+br
+h1 #{title}
+strong #{author} - #{date}
+br
+a(href=tagurl style="font-size:16px;")
+    button(class="btn btn-success" id="channel_option" type="button" style="margin-left:10px;margin-bottom:10px;") #{tag}
+br
+| !{post}
+br
+a(href=twitter target="_blank")
+    img(src="https://riverside.rocks/assets/serve/production/app/5fb86113f20e3.png")
