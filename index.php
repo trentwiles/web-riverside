@@ -849,14 +849,14 @@ $router->get('/blog/(\w+)', function($slugd) {
         $author = htmlspecialchars($row["author"]);
         $time = $row["time"];
         $title = htmlspecialchars($row["title"]);
-        if(! $title)
-        {
-            header("Location: /blog/");
-            die();
-        }
         $tag = htmlspecialchars($row["tag"]);
         $tag_url = "https://riverside.rocks/blog/tag/" . strtolower($tag);
         $twitter = "https://twitter.com/intent/tweet?url=https://riverside.rocks/blog/" . $slug . "/&text=Interesting post from Riverside Rocks! Check it out!";
+    }
+    if($title !== "")
+    {
+        header("Location: /blog/");
+        die();
     }
     $output = $pug->render('views/blog.pug', array(
         'post' => $html,
