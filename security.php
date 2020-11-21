@@ -121,7 +121,6 @@ class security
                 "/web_shell_cmd.gch" => "Searching for webshells",
                 "/.well-known/security.txt" => "/.well-known/security.txt",
                 "/new/" => "Wordpress hacks",
-                "/blog/" => "Wordpress hacks",
                 "/2019/" => "Wordpress hacks",
                 "/2020/" => "Wordpress hacks",
                 "/wp-json" => "Searching for wordpress exploits",
