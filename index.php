@@ -944,20 +944,24 @@ $router->get('/oauth/github', function() {
             $user_agent = $conn -> real_escape_string(htmlspecialchars($_SERVER['HTTP_USER_AGENT']));
             $show_onboarding = "false";
             echo "Hello ${github_username}, your ID is ${github_id}";
-            $sql = "SELECT * FROM logins WHERE username='${github_username}'";
-            $result = $conn->query($sql);
-            if (!empty($result) && $result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
-                    // Erase old logins
-                    if($row["bio"] == "")
-                    {
-                        $show_onboarding = "true";
-                    }
-                    $sql = "DELETE FROM logins WHERE username='${github_username}'";
-                    $result = $conn->query($sql);
-                    break;
+
+            $sql = "SELECT * FROM logins WHERE username=?";
+            $stmt = $conn->prepare($sql); 
+            $stmt->bind_param("s", $github_username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_assoc()) {
+                if($row["bio"] == "")
+                {
+                    $show_onboarding = "true";
                 }
+                $sql = "DELETE FROM logins WHERE username=?";
+                $stmt = $conn->prepare($sql); 
+                $stmt->bind_param("s", $github_username);
+                $stmt->execute();
+                break;
             }
+
             echo "\n DEBUG: SELECTED USERNAME + DELETE OLD RECORD \n";
 
             $temp_auto_api_key = Rocks::base64rand(30);
@@ -969,8 +973,12 @@ $router->get('/oauth/github', function() {
             {
                 $bio = "Looks like this user has not set a bio yet!";
             }
-            $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `bio`, `login_time`, `temp_auto_api_key`) VALUES ('${remote_ip}', '${user_agent}', 'Not Found', '${github_username}', '${github_id}', '${bio}', '${github_time}', '${temp_auto_api_key}')";
-            $result = $conn->query($sql);
+            $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `bio`, `login_time`, `temp_auto_api_key`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($sql); 
+            $human_readable = "Not found";
+            $stmt->bind_param("ssssisis", $remote_ip, $user_agent, $human_readable, $github_username, $github_id, $bio, $github_time, $temp_auto_api_key);
+            $stmt->execute();
+            
             echo "\n DEBUG: INSERT NEW RECORD \n";
 
             $sql = "SELECT * FROM bans";
@@ -1036,13 +1044,14 @@ $router->get('/account/welcome', function() {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT * FROM logins WHERE username='${github_username}'";
-    $result = $conn->query($sql);
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $bio_pre = htmlspecialchars($row["bio"]);
-        }
-    }
+    $sql = "SELECT * FROM logins WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $github_username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $bio_pre = htmlspecialchars($row["bio"]);
+    } 
     $output = $pug->renderFile('views/account-details.pug', array(
         'username' => $_SESSION["username"],
         'current_bio' => $bio_pre,
@@ -1067,8 +1076,10 @@ $router->post('/account/welcome', function() {
     }
     $updated_bio = $conn -> real_escape_string(htmlspecialchars($_POST["bio"]));
     $auth_u = $_SESSION["username"];
-    $sql = "UPDATE `logins` SET `bio`='${updated_bio}' WHERE username='$auth_u'";
-    $result = $conn->query($sql);
+    $sql = "UPDATE `logins` SET `bio`=? WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("ss", $updated_bio, $auth_u);
+    $stmt->execute();
     header("Location: /account/dashboard");
     die();
 });
