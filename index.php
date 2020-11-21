@@ -837,6 +837,10 @@ $router->get('/blog/(\w+)', function($slugd) {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+    if($slugd == "")
+    {
+        echo "Blog Homepage Should be here sooner than later...";
+    }
     $slug = htmlspecialchars($slugd);
     $pug = new Pug();
     $sql = "SELECT * FROM blog WHERE slug=?";
