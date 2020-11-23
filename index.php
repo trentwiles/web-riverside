@@ -875,6 +875,15 @@ $router->get('/blog/(\w+)', function($slugd) {
 
 $router->get('/account/dashboard/admin', function() {
     $pug = new Pug();
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
     $discord = $_SESSION["username"];
     $sql = "SELECT * FROM admins WHERE username=?";
     $stmt = $conn->prepare($sql); 
@@ -896,6 +905,15 @@ $router->get('/account/dashboard/admin', function() {
 
 $router->get('/account/dashboard/admin/action', function() {
     $pug = new Pug();
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
     $discord = $_SESSION["username"];
     $sql = "SELECT * FROM admins WHERE username=?";
     $stmt = $conn->prepare($sql); 
@@ -915,6 +933,15 @@ $router->get('/account/dashboard/admin/action', function() {
 
 $router->get('/account/dashboard/admin/action/(\w+)', function($user_name) {
     $pug = new Pug();
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
     $discord = $_SESSION["username"];
     $sql = "SELECT * FROM admins WHERE username=?";
     $stmt = $conn->prepare($sql); 
