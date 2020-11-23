@@ -1357,14 +1357,14 @@ $router->set404(function() {
           }
           //$sql = "INSERT INTO `blocklist` (`ip`, `reason`) VALUES ('${ip}','Hacking attempt (HTTP)')";
           //$result = $conn->query($sql);
-          $data['http'] = $ip;
-       $pusher = new Pusher\Pusher(
-        $_ENV["PUSHER_APP_KEY"],
-        $_ENV["PUSHER_APP_SECRET"],
-        $_ENV["PUSHER_APP_ID"],
-        $options
-    );
-            $pusher->trigger('abuseipdb', 'http', $data);
+        //$data['http'] = $ip;
+       //$pusher = new Pusher\Pusher(
+        //$_ENV["PUSHER_APP_KEY"],
+        //$_ENV["PUSHER_APP_SECRET"],
+        //$_ENV["PUSHER_APP_ID"],
+        //$options
+    //);
+            //$pusher->trigger('abuseipdb', 'http', $data);
            die("Great news, your IP <i>literally</i> just ended up on a list!");
         }
    
