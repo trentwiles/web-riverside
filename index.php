@@ -873,6 +873,27 @@ $router->get('/blog/(\w+)', function($slugd) {
     echo $output;
 });
 
+$router->get('/dashboard/admin', function() {
+    $pug = new Pug();
+    $discord = $_SESSION["username"];
+    $sql = "SELECT * FROM admins WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $discord);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        if(! $row["username"])
+        {
+            header("Location: /dashboard");
+            die();
+        }
+    }
+    $output = $pug->render('views/admin-home.pug', array(
+        'username' => htmlspecialchars($discord),
+    ));
+    echo $output;
+});
+
 $router->get('/users/(\w+)', function($id) {
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
