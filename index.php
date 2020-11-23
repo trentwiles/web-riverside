@@ -894,6 +894,64 @@ $router->get('/dashboard/admin', function() {
     echo $output;
 });
 
+$router->get('/dashboard/admin/action', function() {
+    $pug = new Pug();
+    $discord = $_SESSION["username"];
+    $sql = "SELECT * FROM admins WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $discord);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        if(! $row["username"])
+        {
+            header("Location: /dashboard");
+            die();
+        }
+    }
+    $output = $pug->render('views/admin-select.pug', array());
+    echo $output;
+});
+
+$router->get('/dashboard/admin/action/(\w+)', function($user_name) {
+    $pug = new Pug();
+    $discord = $_SESSION["username"];
+    $sql = "SELECT * FROM admins WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $discord);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        if(! $row["username"])
+        {
+            header("Location: /dashboard");
+            die();
+        }
+    }
+
+    $sql = "SELECT * FROM logins WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $user_name);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        if(! $row["username"])
+        {
+            die(header("Location: /admin/dashboard/action/"));
+        }
+        else
+        {
+            $ip = $row["ip"];
+        }
+    }
+    
+    $output = $pug->render('views/admin-action.pug', array(
+        'user' => htmlspecialchars($user_name),
+        'ip' => htmlspecialchars($ip)
+    ));
+    echo $output;
+});
+
 $router->get('/users/(\w+)', function($id) {
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
