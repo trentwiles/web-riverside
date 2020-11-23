@@ -873,7 +873,7 @@ $router->get('/blog/(\w+)', function($slugd) {
     echo $output;
 });
 
-$router->get('/dashboard/admin', function() {
+$router->get('/account/dashboard/admin', function() {
     $pug = new Pug();
     $discord = $_SESSION["username"];
     $sql = "SELECT * FROM admins WHERE username=?";
@@ -894,7 +894,7 @@ $router->get('/dashboard/admin', function() {
     echo $output;
 });
 
-$router->get('/dashboard/admin/action', function() {
+$router->get('/account/dashboard/admin/action', function() {
     $pug = new Pug();
     $discord = $_SESSION["username"];
     $sql = "SELECT * FROM admins WHERE username=?";
@@ -905,7 +905,7 @@ $router->get('/dashboard/admin/action', function() {
     while ($row = $result->fetch_assoc()) {
         if(! $row["username"])
         {
-            header("Location: /dashboard");
+            header("Location: /account/dashboard");
             die();
         }
     }
@@ -913,7 +913,7 @@ $router->get('/dashboard/admin/action', function() {
     echo $output;
 });
 
-$router->get('/dashboard/admin/action/(\w+)', function($user_name) {
+$router->get('/account/dashboard/admin/action/(\w+)', function($user_name) {
     $pug = new Pug();
     $discord = $_SESSION["username"];
     $sql = "SELECT * FROM admins WHERE username=?";
@@ -937,7 +937,7 @@ $router->get('/dashboard/admin/action/(\w+)', function($user_name) {
     while ($row = $result->fetch_assoc()) {
         if(! $row["username"])
         {
-            die(header("Location: /admin/dashboard/action/"));
+            die(header("Location: /account/dashboard/admin/action/"));
         }
         else
         {
