@@ -195,6 +195,9 @@ $router->get('/', function() {
     echo $output;
 });
 
+$router->get('/super_secret_easteregg.omg', function() {
+    Phug::displayFile('views/secret.pug');
+});
 
 $router->get('/about', function() {
     $pug = new Pug();
