@@ -147,7 +147,8 @@ class security
                 "/admin/plugin.min.js" => "Searching for scripts",
                 "/javascript/filemanager/plugin.min.js" => "Searching for scripts",
                 "/responsivefilemanager/plugin.min.js" => "Searching for scripts",
-                "//wp1/wp-includes/wlwmanifest.xml" => "Looking for wlwmanifest file"
+                "//wp1/wp-includes/wlwmanifest.xml" => "Looking for wlwmanifest file",
+                "/arc-sw.js" => "Searching for Arc files"
             );
 
             return $exploits;
