@@ -151,7 +151,13 @@ class security
                 "/arc-sw.js" => "Searching for Arc files",
                 "/doLogin" => "Attempted login hack: /doLogin",
                 "/operator/basic.shtml?id=1337" => "Probing: /operator/basic.shtml?id=1337",
-                "/shell?/bin/busybox+ABCD" => "Busybox Command Injection"
+                "/shell?/bin/busybox+ABCD" => "Busybox Command Injection",
+                "/sftp-config.json" => "Searching for config files",
+                "/.ftpconfig" => "Searching for config files",
+                "/.remote-sync.json" => "Searching for config files",
+                "/ftpsync.settings" => "Searching for config files",
+                "/.vscode/sftp.json" => "Searching for config files"
+
             );
 
             return $exploits;
