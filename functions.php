@@ -61,14 +61,16 @@ class services
 
       $timestamp = date("c", strtotime("now"));
 
-      $json_data = json_encode([
+      $json_data = json_encode(array(
           "content" => $mess,
           
           "username" => $name,
 
           "tts" => false,
 
-      ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+          "allowed_mentions" => array("parse" => "")
+
+      ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
 
 
       $ch = curl_init( $webhookurl );
