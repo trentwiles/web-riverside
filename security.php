@@ -148,7 +148,9 @@ class security
                 "/javascript/filemanager/plugin.min.js" => "Searching for scripts",
                 "/responsivefilemanager/plugin.min.js" => "Searching for scripts",
                 "//wp1/wp-includes/wlwmanifest.xml" => "Looking for wlwmanifest file",
-                "/arc-sw.js" => "Searching for Arc files"
+                "/arc-sw.js" => "Searching for Arc files",
+                "/doLogin" => "Attempted login hack: /doLogin",
+                "/operator/basic.shtml?id=1337" => "Probing: /operator/basic.shtml?id=1337"
             );
 
             return $exploits;
