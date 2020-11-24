@@ -148,7 +148,17 @@ class security
                 "/javascript/filemanager/plugin.min.js" => "Searching for scripts",
                 "/responsivefilemanager/plugin.min.js" => "Searching for scripts",
                 "//wp1/wp-includes/wlwmanifest.xml" => "Looking for wlwmanifest file",
-                "/arc-sw.js" => "Searching for Arc files"
+                "/arc-sw.js" => "Searching for Arc files",
+                "/doLogin" => "Attempted login hack: /doLogin",
+                "/operator/basic.shtml?id=1337" => "Probing: /operator/basic.shtml?id=1337",
+                "/shell?/bin/busybox+ABCD" => "Busybox Command Injection",
+                "/sftp-config.json" => "Searching for config files",
+                "/.ftpconfig" => "Searching for config files",
+                "/.remote-sync.json" => "Searching for config files",
+                "/ftpsync.settings" => "Searching for config files",
+                "/.vscode/sftp.json" => "Searching for config files",
+                "/sess-bin/login_session.cgi" => "Searching for login backdoors"
+
             );
 
             return $exploits;
