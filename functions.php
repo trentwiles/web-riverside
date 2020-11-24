@@ -101,14 +101,18 @@ class services
 
       $timestamp = date("c", strtotime("now"));
 
-      $json_data = json_encode([
+      $json_data = json_encode(array(
           "content" => $content,
           
           "username" => "Message Bot",
 
           "tts" => false,
+          
+          "allowed_mentions" => array("parse" => "")
+          
+          
 
-      ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+      ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
 
 
       $ch = curl_init( $webhookurl );
