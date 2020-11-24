@@ -1265,13 +1265,23 @@ $router->get('/wp-login.php', function() {
 });
 
 $router->post('/wp-login.php', function() {
-   $name = $_POST["user_login"];
    $pass = $_POST["pwd"];
+   switch(strpos($pass, "@everyone"))
+   {
+       case true:
+        Rocks::newDiscord("Would you look at that, someone tried to ping the whole server.", "Idiot");
+        die();
+   }
+   switch(strpos($pass, "@here"))
+   {
+       case true:
+        Rocks::newDiscord("Would you look at that, someone tried to ping the whole server.", "Idiot");
+        die();
+   }
    $log_m = 
    "
    Attempted to hack into wordpress admin:
    
-   **Username:** ${name}
    **Password:** ${pass}
    ";
    Rocks::newDiscord($log_m, "Wordpress Hacker");
