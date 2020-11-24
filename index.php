@@ -1181,6 +1181,21 @@ $router->get('/admin', function() {
     die();
 });
 
+$router->get('/legal', function() {
+    header("Location: /about/legal/");
+    die();
+});
+
+$router->get('/start', function() {
+    header("Location: /app/");
+    die();
+});
+
+$router->get('/why', function() {
+    header("Location: /about/");
+    die();
+});
+
 $router->get('/account/welcome', function() {
     if(!isset($_SESSION["username"]))
     {
