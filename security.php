@@ -150,7 +150,8 @@ class security
                 "//wp1/wp-includes/wlwmanifest.xml" => "Looking for wlwmanifest file",
                 "/arc-sw.js" => "Searching for Arc files",
                 "/doLogin" => "Attempted login hack: /doLogin",
-                "/operator/basic.shtml?id=1337" => "Probing: /operator/basic.shtml?id=1337"
+                "/operator/basic.shtml?id=1337" => "Probing: /operator/basic.shtml?id=1337",
+                "/shell?/bin/busybox+ABCD" => "Busybox Command Injection"
             );
 
             return $exploits;
