@@ -1,0 +1,11 @@
+include head.pug
+h1 Enter your AbuseIPDB user ID
+br
+form(method="post" class="w-400 mw-full")
+    label(for="full-name" class="required") ID
+    input(type="text" class="form-control" id="id" placeholder="45738" required="required")
+    input(class="btn btn-primary" type="submit" value="Submit")
+
+if reports
+    br
+    h3 You have reported #{reports} IPs.

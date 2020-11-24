@@ -5,13 +5,14 @@ require "vendor/autoload.php";
 use DiDom\Document;
 $parser = new \Roboxt\Parser();
 
-# Parse your robots.txt file
-$crawl = "https://www.abuseipdb.com/user/47625";
+$id = $_GET["id"];
 
-if(! $crawl)
+if(! $id)
 {
-    die("Missing URL");
+    $id = "47625";
 }
+
+$crawl = "https://www.abuseipdb.com/user/" . $id;
 
 
 

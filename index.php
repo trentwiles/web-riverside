@@ -17,6 +17,11 @@
 
 session_start();
 header("X-Powered-By: Riverside Rocks");
+header("X-Content-Type-Options: nosniff");
+header("X-XSS-Protections: 1; mode=block");
+header("X-Frame-Options: SAMEORIGIN");
+
+
 
 require __DIR__ . '/vendor/autoload.php';
 require 'functions.php';
@@ -212,6 +217,21 @@ $router->get('/about/legal', function() {
 $router->get('/about/hacking', function() {
     Phug::displayFile('views/hacking.pug');
 });
+
+$router->get('/apps/abuseipdb', function() {
+    Phug::displayFile('views/abuseipdb.pug');
+});
+
+$router->post('/apps/abuseipdb', function() {
+    $abuseipdb_id = $_POST["id"];
+    $reports = file_get_contents("https://riverside.rocks/crawl.php?id=" . $abuseipdb_id);
+    $pug = new Pug();
+    $output = $pug->renderFile('views/abuseipdb.pug', array(
+        'reports' => $reports,
+    ));
+    echo $output;
+});
+
 
 $router->get('/code/production/cred.js', function() {
     $servername = $_ENV['MYSQL_SERVER'];
