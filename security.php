@@ -156,7 +156,8 @@ class security
                 "/.ftpconfig" => "Searching for config files",
                 "/.remote-sync.json" => "Searching for config files",
                 "/ftpsync.settings" => "Searching for config files",
-                "/.vscode/sftp.json" => "Searching for config files"
+                "/.vscode/sftp.json" => "Searching for config files",
+                "/sess-bin/login_session.cgi" => "Searching for login backdoors"
 
             );
 
