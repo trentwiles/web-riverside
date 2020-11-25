@@ -331,15 +331,14 @@ $router->post('/about/contact', function() {
     curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
     curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($verify);
-    if($responseData->success) {
+    $responseData = json_decode($response, true);
+    if($responseData["success"]) {
         Rocks::newDiscordContact($final);
         Phug::displayFile('views/thanks.pug');
     } 
     else {
         header("HTTP/1.1 403 Forbidden");
         echo "You did not pass the captcha.";
-        echo "<br>";
-        print_r($_POST);
     }
    
 });
