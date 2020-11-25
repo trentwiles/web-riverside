@@ -321,9 +321,25 @@ $router->post('/about/contact', function() {
    $comment = $_POST["description"];
    // No need to worry about XSS or SQL injections, thats now Discord's problem hehe
    $final = "From ${name} <${email}> regarding ${type}: **${comment}**";
-   Rocks::newDiscordContact($final); // Note that this will go to the "hacker feed" on my discord server
-    //print_r($_POST);
-   Phug::displayFile('views/thanks.pug');
+   $data = array(
+    'secret' => $_ENV["CAPTCHA"],
+    'response' => $_POST['h-captcha-response']
+    );
+    $verify = curl_init();
+    curl_setopt($verify, CURLOPT_URL, "https://hcaptcha.com/siteverify");
+    curl_setopt($verify, CURLOPT_POST, true);
+    curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($verify);
+    if($responseData->success) {
+        Rocks::newDiscordContact($final);
+        Phug::displayFile('views/thanks.pug');
+    } 
+    else {
+        header("HTTP/1.1 403 Forbidden");
+        echo "You did not pass the captcha.";
+    }
+   
 });
 
 $router->get('/watch/(\w+)', function($id) {

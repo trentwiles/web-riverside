@@ -1,5 +1,7 @@
 include head.pug
 br
+script(src='https://www.hCaptcha.com/1/api.js' async defer)
+script(src="contact-check.js")
 h1 Contact Us
 p Use this form to send feedback, bugs, and concerns.
 form(method="post" class="w-400 mw-full")
@@ -20,4 +22,5 @@ form(method="post" class="w-400 mw-full")
     div(class="form-group")
       label(for="description") Comment
       textarea(class="form-control" id="description" name="description" placeholder="Comment")
+      div(class="h-captcha" data-sitekey="ad38a47c-c415-4b1d-b22d-c1f61126ac4e")
     input(class="btn btn-primary" type="submit" value="Submit")
