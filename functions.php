@@ -41,9 +41,22 @@ class services
   {
     $base = "https://statcord.com/${ver}/stats/${id}";
     $api = json_decode(file_get_contents($base), true);
-    $users = $api["data"][9]["users"];
-    $servers = $api["data"][9]["servers"];
-    $commands = $api["data"][9]["commands"];
+    $num = 1;
+    while(true)
+    {
+      if($api["data"][$num]["users"] == "")
+      {
+        break;
+      }
+      else
+      {
+        $num = $num + 1;
+      }
+    }
+    $magic = $num - 1;
+    $users = $api["data"][$magic]["users"];
+    $servers = $api["data"][$magic]["servers"];
+    $commands = $api["data"][$magic]["commands"];
     $array = array($users, $servers, $commands);
     return $array;
   }
