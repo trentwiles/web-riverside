@@ -338,6 +338,8 @@ $router->post('/about/contact', function() {
     else {
         header("HTTP/1.1 403 Forbidden");
         echo "You did not pass the captcha.";
+        echo "<br>";
+        print_r($_POST);
     }
    
 });
