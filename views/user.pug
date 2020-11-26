@@ -1,9 +1,11 @@
 include head.pug
+link(href="/src/user.css")
 br
 h1 #{username} #[i(class=badge)]
 p #{bio}
 br
-i(class="fas fa-database") #{pebbles}
+i(class="fas fa-database") 
+p #{pebbles}
 br
 br
 i Last sign in time: #{join}
