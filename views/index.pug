@@ -9,4 +9,5 @@ a(href="//github.com/RiversideRocks/web-riverside"): button(class="btn btn-prima
 br
 p #{visits} Total Visits - #{subs} Total Subscribers - #{views} Total Video Views
 br
-a(href="http://bit.ly/RiversideRocks" target="_blank") YouTube
+if (user)
+    p Signed in as #[a(href=profile target="_blank") #{username} ]

@@ -175,51 +175,6 @@ $router->get('/api/bycountry', function() {
     print_r($countries);
 });
 
-$router->get('/api/image', function() {
-    $servername = $_ENV['MYSQL_SERVER'];
-    $username = $_ENV["MYSQL_USERNAME"];
-    $password = $_ENV["MYSQL_PASSWORD"];
-    $dbname = $_ENV["MYSQL_DATABASE"];
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    $sql = "SELECT * FROM uploads";
-    $result = $conn->query($sql);
-    $ammount = 0;
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $ammount = $ammount + 1;
-        }
-    }
-
-    $upload = rand(0,$ammount);
-
-    $sql = "SELECT * FROM uploads";
-    $result = $conn->query($sql);
-    $ammount = 0;
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            while(true)
-            {
-                if($ammount = $upload)
-                {
-                    $image = $row["url"];
-                    break;
-                }
-                else
-                {
-                    $ammount = $ammount + 1;
-                }
-            }
-            break;
-        }
-    }
-
-    //header("Content-type: image/png");
-    echo $image;
-
-});
 
 /*===========================
 /\/\/\/\/\/\/\/\/\/\/\/\/\/\
@@ -238,10 +193,17 @@ $router->get('/', function() {
     $api_response2 = file_get_contents('https://www.googleapis.com/youtube/v3/channels?part=statistics&id='.$channel_id.'&fields=items/statistics/viewCount&key='.$api_key);
     $api_response_decoded2 = json_decode($api_response2, true);
     $views = $api_response_decoded2['items'][0]['statistics']['viewCount'];
+    if($_SESSION["username"] !== "")
+    {
+        $authuser = htmlspecialchars($_SESSION["username"]);
+        $profile = "https://riverside.rocks/users/" . $authuser;
+    }
     $output = $pug->render('views/index.pug', array(
         'visits' => times,
         'subs' => $subs,
-        'views' => $views
+        'views' => $views,
+        'user' => $authuser,
+        'profile' => $profile,
     ));
     echo $output;
 });
