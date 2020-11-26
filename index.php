@@ -202,7 +202,7 @@ $router->get('/api/image', function() {
         while($row = $result->fetch_assoc()) {
             if($ammount = $upload)
             {
-                $image = $result["url"];
+                $image = $row["url"];
                 break;
             }
             else
