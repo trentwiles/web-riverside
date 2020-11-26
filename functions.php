@@ -185,6 +185,6 @@ class services
      $from_join_pre = time() - $join;
      $from_join = $from_join_pre * 0.00001;
 
-     return $from_join + $from_message;
+     return round($from_join + $from_message);
    }
 }
