@@ -207,7 +207,7 @@ $router->get('/', function() {
         $profile = "https://riverside.rocks/users/" . $authuser;
     }
     $latest = Rocks::githubEvent("RiversideRocks", 0);
-    $github = "Latest from GitHub: " . $latest["event"] . "(Repo " . $latest["repo"] . ")";
+    $github = "Latest from GitHub: " . $latest["event"] . " (Repo " . $latest["repo"] . ")";
     $output = $pug->render('views/index.pug', array(
         'visits' => times,
         'subs' => $subs,
