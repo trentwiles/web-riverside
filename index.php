@@ -1085,16 +1085,17 @@ $router->get('/users/(\w+)', function($id) {
     $stmt->bind_param("s", $discord);
     $stmt->execute();
     $result = $stmt->get_result();
-    $count = 0;
+    $count4 = 0;
     while ($row = $result->fetch_assoc()) {
-        $count = $count + 1;
+        $count4 = $count4 + 1;
     }
+    $pebbles = Rocks::calcMsg($count4, $pre_join);
     $output = $pug->render('views/user.pug', array(
         'username' => $user,
         'bio' => $bio,
         'join' => $join,
         'badge' => $badge,
-        'pebbles' => 
+        'pebbles' => $pebbles
     ));
     echo $output;
 });
