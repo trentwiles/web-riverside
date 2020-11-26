@@ -142,4 +142,30 @@ class services
       curl_close( $ch );
       return true;
    }
+   public function githubEvent($user, $eventid) // Example: github("RiversideRocks", 0) (Would return latest event for user RiversideRocks)
+   {
+    $githubSpeak = array(
+      "WatchEvent" => "Stared",
+      "PushEvent" => "Commited"
+    );
+
+     $base = "https://api.github.com/users/" . $user . "/events";
+     $json = json_decode(file_get_contents($base), true);
+
+     $og_eventType = $json[$eventid]["type"];
+     $eventType = $githubSpeak[$og_eventType];
+     $repoName = $json[$eventid]["repo"]["name"];
+     $repoUrl = "https://github.com/" . $repoName;
+     $eventTime = $json[$eventid]["created_at"];
+
+     $data = array(
+       "event" => $eventType,
+       "repo" => $repoName,
+       "url" => $repoUrl,
+       "time" => $eventTime
+     );
+
+     return $data;
+
+   }
 }
