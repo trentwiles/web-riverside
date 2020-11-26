@@ -176,7 +176,6 @@ $router->get('/api/bycountry', function() {
 });
 
 $router->get('/api/image', function() {
-    $pog->random = new PragmaRX\Random\Random();
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
     $password = $_ENV["MYSQL_PASSWORD"];
