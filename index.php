@@ -176,7 +176,7 @@ $router->get('/api/bycountry', function() {
 });
 
 $router->get('/api/image', function() {
-    $this->random = new PragmaRX\Random\Random();
+    $pog->random = new PragmaRX\Random\Random();
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
     $password = $_ENV["MYSQL_PASSWORD"];
@@ -198,7 +198,7 @@ $router->get('/api/image', function() {
 
     $sql = "SELECT * FROM uploads";
     $result = $conn->query($sql);
-    $wow = $this->random->numeric()->start(0)->end($ammount)->get();
+    $wow = $pog->random->numeric()->start(0)->end($ammount)->get();
     $ammount = 0;
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
