@@ -154,7 +154,7 @@ class services
      $json = json_decode(file_get_contents($base), true);
      $ch = curl_init();  
  
-     curl_setopt($ch,CURLOPT_URL,$url);
+     curl_setopt($ch,CURLOPT_URL,$base);
      curl_setopt($ch, CURLOPT_USERAGENT, "RiversideRocks");
      curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
   
