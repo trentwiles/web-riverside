@@ -34,7 +34,7 @@ foreach($posts as $post) {
     if($number == 1)
     {
         $matches = (int) filter_var($post, FILTER_SANITIZE_NUMBER_INT);
-        echo substr($matches,4);
+        echo $matches;
     }
     $number = $number + 1;
 }
