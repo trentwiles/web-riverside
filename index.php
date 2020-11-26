@@ -195,6 +195,7 @@ $router->get('/api/image', function() {
     }
 
     $upload = rand(0,$ammount);
+    die($upload);
 
     $sql = "SELECT * FROM uploads";
     $result = $conn->query($sql);
