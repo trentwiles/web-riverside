@@ -155,12 +155,12 @@ class services
      $ch = curl_init();  
  
      curl_setopt($ch,CURLOPT_URL,$url);
+     curl_setopt($ch, CURLOPT_USERAGENT, "RiversideRocks");
      curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
   
      $prejson = curl_exec($ch);
   
      curl_close($ch);
-     return $output;
      $json = json_decode($prejson, true);
 
      $og_eventType = $json[$eventid]["type"];
