@@ -212,7 +212,7 @@ $router->get('/api/image', function() {
         }
     }
 
-    header("Content-type: image/png");
+    //header("Content-type: image/png");
     echo $image;
 
 });
