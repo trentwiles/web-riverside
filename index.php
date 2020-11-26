@@ -175,6 +175,48 @@ $router->get('/api/bycountry', function() {
     print_r($countries);
 });
 
+$router->get('/api/image', function() {
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT * FROM uploads";
+    $result = $conn->query($sql);
+    $ammount = 0;
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $ammount = $ammount + 1;
+        }
+    }
+
+    $upload = rand(0, $ammount);
+
+    $sql = "SELECT * FROM uploads";
+    $result = $conn->query($sql);
+    $ammount = 0;
+    if (!empty($result) && $result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            if($ammount = $upload)
+            {
+                $image = $result["url"];
+                break;
+            }
+            else
+            {
+                $ammount = $ammount + 1;
+            }
+        }
+    }
+
+    header("Content-type: image/png");
+    echo file_get_contents($image);
+
+});
+
 /*===========================
 /\/\/\/\/\/\/\/\/\/\/\/\/\/\
 END EXPERIMENTAL API ENDPOINTS
