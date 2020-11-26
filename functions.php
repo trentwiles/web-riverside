@@ -183,7 +183,7 @@ class services
    {
      $from_message = $number/0.5;
      $from_join_pre = time() - $join;
-     $from_join = $from_join_pre/0.00001;
+     $from_join = $from_join_pre * 0.00001;
 
      return $from_join + $from_message;
    }
