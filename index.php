@@ -194,15 +194,13 @@ $router->get('/api/image', function() {
     }
 
     $upload = rand(0,$ammount);
-    die($ammount . $upload);//
 
     $sql = "SELECT * FROM uploads";
     $result = $conn->query($sql);
-    $wow = $pog->random->numeric()->start(0)->end($ammount)->get();
     $ammount = 0;
     if (!empty($result) && $result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-            if($ammount = $wow)
+            if($ammount = $upload)
             {
                 $image = $row["url"];
                 break;
