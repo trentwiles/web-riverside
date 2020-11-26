@@ -1080,11 +1080,21 @@ $router->get('/users/(\w+)', function($id) {
         $pre_join = $row["login_time"];
         $join = date("m-d-Y H:i:s", $pre_join);
     }
+    $sql = "SELECT * FROM msg WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $discord);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $count = 0;
+    while ($row = $result->fetch_assoc()) {
+        $count = $count + 1;
+    }
     $output = $pug->render('views/user.pug', array(
         'username' => $user,
         'bio' => $bio,
         'join' => $join,
-        'badge' => $badge
+        'badge' => $badge,
+        'pebbles' => 
     ));
     echo $output;
 });

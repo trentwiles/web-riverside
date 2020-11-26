@@ -179,4 +179,12 @@ class services
      return $data;
 
    }
+   public function calcMsg($number, $join)
+   {
+     $from_message = $number/0.5;
+     $from_join_pre = time() - $join;
+     $from_join = $from_join_pre/0.00001;
+
+     return $from_join + $from_message;
+   }
 }
