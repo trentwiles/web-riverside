@@ -1079,6 +1079,10 @@ $router->get('/users/(\w+)', function($id) {
         }
         $pre_join = $row["login_time"];
         $join = date("m-d-Y H:i:s", $pre_join);
+        if($pre_join == "")
+        {
+            die(header("Location: /request-error?code=404"));
+        }
     }
     $sql = "SELECT * FROM msg WHERE username=?";
     $stmt = $conn->prepare($sql); 
@@ -1098,6 +1102,60 @@ $router->get('/users/(\w+)', function($id) {
         'pebbles' => $pebbles
     ));
     echo $output;
+});
+
+$router->get('/users/(\w+)/pebbles', function($id) {
+    $pug = new Pug();
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $sql = "SELECT * FROM msg WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $discord);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $count4 = 0;
+    while ($row = $result->fetch_assoc()) {
+        $count4 = $count4 + 1;
+    }
+
+    $sql = "SELECT * FROM logins WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $discord);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        $pre_join = $row["login_time"];
+    }
+    if($pre_join == "")
+    {
+        die(header("Location: /"));
+    }
+    $sql = "SELECT * FROM msg WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $discord);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $count4 = 0;
+    while ($row = $result->fetch_assoc()) {
+        $count4 = $count4 + 1;
+    }
+
+    $pebbles = Rocks::calcMsgDetailed($count4, $pre_join);
+    $full = Rocks::calcMsg($count4, $pre_join);
+    $output = $pug->render('views/breakdown.pug', array(
+        "message" => $pebbles["message"],
+        'join' => $pebbles["join"],
+        'total' => $full,
+        "username" => htmlspecialchars($_SESSION["username"])
+    ));
+
 });
 
 $router->get('/blog', function($id) {
