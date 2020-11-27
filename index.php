@@ -1086,7 +1086,9 @@ $router->get('/users/(\w+)', function($id) {
             die(header("Location: /request-error?code=404"));
         }
     }
-    die($user);
+    if($user == ""){
+        die("404");
+    }
     $sql = "SELECT * FROM msg WHERE username=?";
     $stmt = $conn->prepare($sql); 
     $stmt->bind_param("s", $discord);
