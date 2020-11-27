@@ -1264,10 +1264,10 @@ $router->get('/oauth/github', function() {
             $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `bio`, `followers`, `following` `login_time`, `temp_auto_api_key`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql); 
             $human_readable = "Not found";
-            $stmt->bind_param("ssssisssis", $remote_ip, $user_agent, $human_readable, $github_username, $github_id, $bio, $followers, $following, $github_time, $temp_auto_api_key);
+            $stmt->bind_param("ssssisttis", $remote_ip, $user_agent, $human_readable, $github_username, $github_id, $bio, $followers, $following, $github_time, $temp_auto_api_key);
             $stmt->execute();
             
-            echo "\n DEBUG: INSERT NEW RECORD \n";
+            echo "\n DEBUG: INSERT NEW RECORD (IF YOU ARE SEEING THIS SCREEN, PLEASE EMAIL TRENT@RIVERSIDE.ROCKS \n";
 
             $sql = "SELECT * FROM bans";
             $result = $conn->query($sql);
