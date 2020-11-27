@@ -253,6 +253,7 @@ $router->post('/apps/abuseipdb', function() {
 
 
 $router->get('/code/production/cred.js', function() {
+    header("Content-type: text/javascript");
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
     $password = $_ENV["MYSQL_PASSWORD"];
@@ -604,7 +605,6 @@ $router->get('/app/channels/(\w+)', function($channel) {
         die();
     }
     $_SESSION["channel"] = $channel_select;
-    setcookie("chan", $channel_select, time() + (86400 * 30), "/");
     $mess = array();
     $users = array();
     $channel_sql = $conn -> real_escape_string(htmlspecialchars($channel));
