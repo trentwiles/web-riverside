@@ -1241,6 +1241,8 @@ $router->get('/oauth/github', function() {
                 {
                     $show_onboarding = "true";
                 }
+                $following = $row["following"];
+                $followers = $row["followers"];
                 $sql = "DELETE FROM logins WHERE username=?";
                 $stmt = $conn->prepare($sql); 
                 $stmt->bind_param("s", $github_username);
@@ -1259,10 +1261,10 @@ $router->get('/oauth/github', function() {
             {
                 $bio = "Looks like this user has not set a bio yet!";
             }
-            $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `bio`, `login_time`, `temp_auto_api_key`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO `logins`(`IP`, `agent`, `human_agent`, `username`, `id`, `bio`, `followers`, `following` `login_time`, `temp_auto_api_key`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($sql); 
             $human_readable = "Not found";
-            $stmt->bind_param("ssssisis", $remote_ip, $user_agent, $human_readable, $github_username, $github_id, $bio, $github_time, $temp_auto_api_key);
+            $stmt->bind_param("ssssisssis", $remote_ip, $user_agent, $human_readable, $github_username, $github_id, $bio, $followers, $following, $github_time, $temp_auto_api_key);
             $stmt->execute();
             
             echo "\n DEBUG: INSERT NEW RECORD \n";
