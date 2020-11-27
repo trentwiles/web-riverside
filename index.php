@@ -1496,9 +1496,9 @@ $router->set404(function() {
                 ],
               ]);
         }
-          $output = $response->getBody();
+          //$output = $response->getBody();
           // Store response as a PHP object.
-          $ipDetails = json_decode($output, true);
+          //$ipDetails = json_decode($output, true);
           $servername = $_ENV['MYSQL_SERVER'];
           $username = $_ENV["MYSQL_USERNAME"];
           $password = $_ENV["MYSQL_PASSWORD"];
