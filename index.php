@@ -1249,15 +1249,12 @@ $router->get('/oauth/github', function() {
                 $stmt->execute();
                 break;
             }
-            if($following  == "")
-            {
-                $following = "[]";
-            }
-            if($followers == "")
-            {
-                $followers = "[]";
-            }
-            die($followers . $following);
+
+            $following = "[]";
+
+            $followers = "[]";
+            
+            //die($followers . $following);
 
             echo "\n DEBUG: SELECTED USERNAME + DELETE OLD RECORD \n";
 
