@@ -1117,7 +1117,7 @@ $router->get('/users/(\w+)/pebbles', function($id) {
     }
     $sql = "SELECT * FROM msg WHERE username=?";
     $stmt = $conn->prepare($sql); 
-    $stmt->bind_param("s", $discord);
+    $stmt->bind_param("s", $id);
     $stmt->execute();
     $result = $stmt->get_result();
     $count4 = 0;
@@ -1127,7 +1127,7 @@ $router->get('/users/(\w+)/pebbles', function($id) {
 
     $sql = "SELECT * FROM logins WHERE username=?";
     $stmt = $conn->prepare($sql); 
-    $stmt->bind_param("s", $discord);
+    $stmt->bind_param("s", $id);
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
