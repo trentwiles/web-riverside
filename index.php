@@ -1087,7 +1087,7 @@ $router->get('/users/(\w+)', function($id) {
         }
     }
     if($user == ""){
-        die("404");
+        die(header("Location: /request-error?code=404"));
     }
     $sql = "SELECT * FROM msg WHERE username=?";
     $stmt = $conn->prepare($sql); 
