@@ -1137,8 +1137,9 @@ $router->get('/users/(\w+)/pebbles', function($id) {
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
         $pre_join = $row["login_time"];
+        $user = htmlspecialchars($row["username"]);
     }
-    if($row["username"] == ""){
+    if($user == ""){
         die(header("Location: /request-error?code=404"));
     }
     $sql = "SELECT * FROM msg WHERE username=?";
