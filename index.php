@@ -1152,6 +1152,8 @@ $router->get('/users/(\w+)/pebbles', function($id) {
         "username" => htmlspecialchars($id)
     ));
 
+    echo $output;
+
 });
 
 $router->get('/blog', function($id) {
