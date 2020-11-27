@@ -1516,7 +1516,7 @@ $router->set404(function() {
     //);
             //$pusher->trigger('abuseipdb', 'http', $data);
            die("Great news, your IP <i>literally</i> just ended up on a list!");
-        }
+        
    
     // If a hacking attempt is detected, we show the 403 page
     if(in_array($_SERVER["REQUEST_URI"], $hacks))
