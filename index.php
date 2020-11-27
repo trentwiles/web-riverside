@@ -1099,12 +1099,14 @@ $router->get('/users/(\w+)', function($id) {
         $count4 = $count4 + 1;
     }
     $pebbles = Rocks::calcMsg($count4, $pre_join);
+    $pebble_url = "https://riverside.rocks/users/" . $user . "/pebbles";
     $output = $pug->render('views/user.pug', array(
         'username' => $user,
         'bio' => $bio,
         'join' => $join,
         'badge' => $badge,
-        'pebbles' => $pebbles
+        'pebbles' => $pebbles,
+        "pebble_url" => $pebble_url
     ));
     echo $output;
 });
