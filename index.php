@@ -1086,6 +1086,7 @@ $router->get('/users/(\w+)', function($id) {
             die(header("Location: /request-error?code=404"));
         }
     }
+    die($user);
     $sql = "SELECT * FROM msg WHERE username=?";
     $stmt = $conn->prepare($sql); 
     $stmt->bind_param("s", $discord);
@@ -1096,10 +1097,6 @@ $router->get('/users/(\w+)', function($id) {
         $count4 = $count4 + 1;
     }
     $pebbles = Rocks::calcMsg($count4, $pre_join);
-    if($user = "") 
-    {
-        die("404");
-    }
     $output = $pug->render('views/user.pug', array(
         'username' => $user,
         'bio' => $bio,
