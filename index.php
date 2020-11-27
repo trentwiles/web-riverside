@@ -1149,7 +1149,7 @@ $router->get('/users/(\w+)/pebbles', function($id) {
         "message" => $pebbles["message"],
         'join' => $pebbles["join"],
         'total' => $full,
-        "username" => htmlspecialchars($_SESSION["username"])
+        "username" => htmlspecialchars($id)
     ));
 
 });
