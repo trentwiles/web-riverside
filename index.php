@@ -604,6 +604,7 @@ $router->get('/app/channels/(\w+)', function($channel) {
         die();
     }
     $_SESSION["channel"] = $channel_select;
+    setcookie("chan", $channel_select, time() + (86400 * 30), "/");
     $mess = array();
     $users = array();
     $channel_sql = $conn -> real_escape_string(htmlspecialchars($channel));

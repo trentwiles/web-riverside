@@ -14,7 +14,7 @@ function arrayContains(needle, arrhaystack)
 
 var swears = ['frick'];
 
-var channel = pusher.subscribe(channel_send);
+var channel = pusher.subscribe(Cookies.get('chan'));
 channel.bind('message', function(data) {
     var node = document.createElement("p");
     if(Cookies.get('filter') == "1")
