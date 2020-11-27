@@ -1243,11 +1243,11 @@ $router->get('/oauth/github', function() {
                 }
                 $following = $row["following"];
                 $followers = $row["followers"];
-                if(!isset($following))
+                if($following  == "")
                 {
                     $following = "[]";
                 }
-                if(!isset($followers))
+                if($followers == "")
                 {
                     $followers = "[]";
                 }
