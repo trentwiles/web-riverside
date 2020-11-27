@@ -223,7 +223,7 @@ $router->get('/', function() {
 
 $router->get('/about', function() {
     $pug = new Pug();
-    $ipdb = file_get_contents("https://riverside.rockscrawl.php");
+    $ipdb = file_get_contents("https://riverside.rocks/crawl.php");
     $output = $pug->render('views/about.pug', array(
         'ipdb' => $ipdb,
     ));
@@ -1070,7 +1070,7 @@ $router->get('/users/(\w+)', function($id) {
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
         $user = htmlspecialchars($row["username"]);
-        if($row["username"] == "")
+        if(!isset($row["username"]))
         {
             die(Phug::displayFile('views/user-404.pug'));
         }
