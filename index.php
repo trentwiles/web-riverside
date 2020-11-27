@@ -1243,19 +1243,19 @@ $router->get('/oauth/github', function() {
                 }
                 $following = $row["following"];
                 $followers = $row["followers"];
-                if($following  == "")
-                {
-                    $following = "[]";
-                }
-                if($followers == "")
-                {
-                    $followers = "[]";
-                }
                 $sql = "DELETE FROM logins WHERE username=?";
                 $stmt = $conn->prepare($sql); 
                 $stmt->bind_param("s", $github_username);
                 $stmt->execute();
                 break;
+            }
+            if($following  == "")
+            {
+                $following = "[]";
+            }
+            if($followers == "")
+            {
+                $followers = "[]";
             }
             die($followers . $following);
 
