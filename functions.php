@@ -183,7 +183,7 @@ class services
    {
      $from_message = $number/0.5;
      $from_join_pre = time() - $join;
-     $from_join = $from_join_pre * 0.00001;
+     $from_join = $from_join_pre * 0.001;
 
      return round($from_join + $from_message);
    }
@@ -191,7 +191,7 @@ class services
    {
      $from_message = $number/0.5;
      $from_join_pre = time() - $join;
-     $from_join = $from_join_pre * 0.00001;
+     $from_join = $from_join_pre * 0.001;
 
      return array("join" => $from_join, "message" => $from_message);
    }
