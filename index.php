@@ -186,6 +186,7 @@ END EXPERIMENTAL API ENDPOINTS
 
 $router->get('/', function() {
     $pug = new Pug();
+    /*
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
     $password = $_ENV["MYSQL_PASSWORD"];
@@ -202,20 +203,19 @@ $router->get('/', function() {
     $api_response2 = file_get_contents('https://www.googleapis.com/youtube/v3/channels?part=statistics&id='.$channel_id.'&fields=items/statistics/viewCount&key='.$api_key);
     $api_response_decoded2 = json_decode($api_response2, true);
     $views = $api_response_decoded2['items'][0]['statistics']['viewCount'];
+    */
     if($_SESSION["username"] !== "")
     {
         $authuser = htmlspecialchars($_SESSION["username"]);
         $profile = "https://riverside.rocks/users/" . $authuser;
     }
+    /*
     $latest = Rocks::githubEvent("RiversideRocks", 0);
     $github = "Latest from GitHub: " . $latest["event"] . " (Repo " . $latest["repo"] . ")";
+    */
     $output = $pug->render('views/index.pug', array(
-        'visits' => times,
-        'subs' => $subs,
-        'views' => $views,
         'user' => $authuser,
         'profile' => $profile,
-        'github' => $github
     ));
     echo $output;
 });
