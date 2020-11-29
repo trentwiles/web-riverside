@@ -157,7 +157,10 @@ class security
                 "/.remote-sync.json" => "Searching for config files",
                 "/ftpsync.settings" => "Searching for config files",
                 "/.vscode/sftp.json" => "Searching for config files",
-                "/sess-bin/login_session.cgi" => "Searching for login backdoors"
+                "/sess-bin/login_session.cgi" => "Searching for login backdoors",
+                "/muieblackcat" => "phpMyAdmin Scanning software",
+                "//phpMyAdmin/scripts/setup.php" => "Searching for phpMyAdmin backdoors",
+                "//pma/scripts/setup.php" => "Searching for phpMyAdmin backdoors"
 
             );
 
