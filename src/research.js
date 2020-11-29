@@ -51,14 +51,19 @@ function getCountryFromIP(ip){
 if(Cookies.get('lytics') !== "false"){
     while(true)
     {
-        var ua = navigator.userAgent;
-        var country = getCountryFromIP(getIP())
-        var ref = document.referrer
-        $.post("/api/research", function()
-        {
-          agent: ua,
-          locale: country,
-          referrer: ref
-        },
+        setTimeout(function(){
+            var ua = navigator.userAgent;
+            var country = getCountryFromIP(getIP())
+            var ref = document.referrer
+            $.post("/api/research",
+            {
+            agent: ua,
+            locale: country,
+            referrer: ref
+            },
+            function(data,status){
+                console.log(status);
+            });
+        }, 5000);
     }
 }
