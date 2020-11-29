@@ -1,3 +1,4 @@
+// Analytics conset script (by default we collect basic user data, nothing that would )
 function confirm()
 {
     if(Cookies.get('seen') !== "true"){
@@ -11,3 +12,4 @@ function confirm()
 }
 
 confirm();
+// can also be added to onload

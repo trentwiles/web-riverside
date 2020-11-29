@@ -172,7 +172,8 @@ class security
             "Mozilla/5.0" => "Port Scanner",
             "curl/7.58.0" => "Scanning for exploits",
             "Hello, world" => "Mozi Botnet",
-            "polaris botnet" => "Polaris Botnet"
+            "polaris botnet" => "Polaris Botnet",
+            "" => "Port Scanner or Botnet"
         );
         return $agents;
     }

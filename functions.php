@@ -142,6 +142,13 @@ class services
       curl_close( $ch );
       return true;
    }
+
+  /*
+   * @param user: username of the github user (we use the same names on riverside.rock as on GitHub)
+   * @param eventid: a number created by github (user 0 for latest)
+   * @result: array of event details
+  */
+
    public function githubEvent($user, $eventid) // Example: github("RiversideRocks", 0) (Would return latest event for user RiversideRocks)
    {
     $githubSpeak = array(
@@ -179,6 +186,12 @@ class services
      return $data;
 
    }
+
+  /*
+   * @param number: number of messages a user has sent
+   * @param join: the time in epoch time when a user has joined
+   * @result: number of pebbles
+  */
    public function calcMsg($number, $join)
    {
      $from_message = $number/0.5;
@@ -187,6 +200,11 @@ class services
 
      return round($from_join + $from_message);
    }
+  /*
+   * @param number: number of messages a user has sent
+   * @param join: the time in epoch time when a user has joined
+   * @result: detailed array of the result, good for making a table
+  */
    public function calcMsgDetailed($number, $join)
    {
      $from_message = $number/0.5;
