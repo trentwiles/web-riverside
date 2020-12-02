@@ -2,4 +2,5 @@ User-agent: *
 Disallow: /views/*
 Disallow: /admin/*
 Disallow: /wp-login.php
+Disallow: /phpMyAdmin/*
 Disallow: /app/channels/pm/*
