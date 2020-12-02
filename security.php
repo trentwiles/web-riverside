@@ -160,7 +160,9 @@ class security
                 "/sess-bin/login_session.cgi" => "Searching for login backdoors",
                 "/muieblackcat" => "phpMyAdmin Scanning software",
                 "//phpMyAdmin/scripts/setup.php" => "Searching for phpMyAdmin backdoors",
-                "//pma/scripts/setup.php" => "Searching for phpMyAdmin backdoors"
+                "//pma/scripts/setup.php" => "Searching for phpMyAdmin backdoors",
+                "/wp-includes/fonts/css.php" => "Wordpress probing, /wp-includes/fonts/css.php",
+                "/wp-includes/css/css.php" => "Wordpress probing, /wp-includes/css/css.php"
 
             );
 
