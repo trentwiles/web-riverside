@@ -162,7 +162,9 @@ class security
                 "//phpMyAdmin/scripts/setup.php" => "Searching for phpMyAdmin backdoors",
                 "//pma/scripts/setup.php" => "Searching for phpMyAdmin backdoors",
                 "/wp-includes/fonts/css.php" => "Wordpress probing, /wp-includes/fonts/css.php",
-                "/wp-includes/css/css.php" => "Wordpress probing, /wp-includes/css/css.php"
+                "/wp-includes/css/css.php" => "Wordpress probing, /wp-includes/css/css.php",
+                "/evox/about" => "Probing for services",
+                "/nmaplowercheck1606923328" => "Nmap"
 
             );
 
