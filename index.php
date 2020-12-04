@@ -30,7 +30,7 @@ require 'security.php';
 
 use RiversideRocks\services as Rocks;
 use RiversideRocks\security as Secure;
-use IPTools\IP as Network;
+use IPTools\Network;
 
 $exploits = Secure::returnExploits();
 
@@ -178,7 +178,7 @@ $router->get('/api/bycountry', function() {
 });
 
 $router->get('/api/cidr', function() {
-    $hosts = Network::parse('1.1.1.1')->hosts; // Range(192.168.1.1, 192.168.1.254);
+    $hosts = Network::parse('1.1.1.0/24')->hosts; // Range(192.168.1.1, 192.168.1.254);
     foreach($hosts as $ip) {
         echo (string)$ip . '<br>';
     }
