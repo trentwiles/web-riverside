@@ -77,7 +77,16 @@ END EMERGENCY SHUTOFF SWITCH
 
 ================================================*/
 
-        
+if($argv[0] == "ip" && isset($argv[1]))
+{
+    $hosts = Network::parse($_GET["ip"])->hosts;
+    $sendl = array();
+    foreach($hosts as $ipas) {
+        array_push($sendl, (string)$ipas);
+    }
+    $echo = json_encode($sendl, true);
+    echo $echo;
+}        
 
 $servername = $_ENV['MYSQL_SERVER'];
 $username = $_ENV["MYSQL_USERNAME"];
