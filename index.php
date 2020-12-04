@@ -180,7 +180,7 @@ $router->get('/api/bycountry', function() {
 $router->get('/api/cidr', function() {
     header("Content-type: application/json");
     $hosts = Network::parse($_GET["ip"])->hosts;
-    $sendl = array("status" => "ok");
+    $sendl = array();
     foreach($hosts as $ipas) {
         array_push($sendl, (string)$ipas);
     }
