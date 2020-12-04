@@ -181,7 +181,7 @@ $router->get('/api/cidr', function() {
     foreach($hosts as $ip) {
         echo (string)$ip . '<br>';
     }
-}
+});
 
 
 /*===========================
