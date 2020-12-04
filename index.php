@@ -176,6 +176,11 @@ $router->get('/api/bycountry', function() {
     print_r($countries);
 });
 
+$router->get('/api/cidr', function() {
+    $ipi = new IP($_GET["ip"]);
+    print_r(IP('1.1.1.0/24')->hosts);
+}
+
 
 /*===========================
 /\/\/\/\/\/\/\/\/\/\/\/\/\/\
