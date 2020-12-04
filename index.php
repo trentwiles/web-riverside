@@ -178,10 +178,14 @@ $router->get('/api/bycountry', function() {
 });
 
 $router->get('/api/cidr', function() {
-    $hosts = Network::parse('1.1.1.0/24')->hosts; // Range(192.168.1.1, 192.168.1.254);
-    foreach($hosts as $ip) {
-        echo (string)$ip . '<br>';
+    header("Content-type: application/json");
+    $hosts = Network::parse($_GET["ip"])->hosts;
+    $sendl = array();
+    foreach($hosts as $ipas) {
+        array_push($sendl, $ipas);
     }
+    $echo = json_encode($sendl, true);
+    echo $echo;
 });
 
 
