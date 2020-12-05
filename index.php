@@ -174,7 +174,7 @@ $router->get('/about/feed', function() {
 
 $router->post('/twitter', function() {
     $dms = json_decode($_POST["content"], true);
-    echo $dms[0];
+    echo print_r($dms);
 });
 
 $router->get('/api/bycountry', function() {
