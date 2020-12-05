@@ -190,7 +190,7 @@ $router->get('/twitter/approve', function() {
     $responseParser = new ResponseParser();
 
     $printerManager = new PrinterManager($builder, $client, $responseParser);
-    $printer = $printerManager->findByUri('ipp://192.168.11.1:631');
+    $printer = $printerManager->findByUri('ipp://192.168.1.11:631');
 
     $jobManager = new JobManager($builder, $client, $responseParser);
 
