@@ -172,6 +172,10 @@ $router->get('/about/feed', function() {
     Phug::displayFile('views/ip.pug');
 });
 
+$router->post('/twitter', function() {
+    print_r($_POST);
+});
+
 $router->get('/api/bycountry', function() {
     print_r($countries);
 });
