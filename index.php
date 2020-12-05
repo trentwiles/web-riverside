@@ -173,11 +173,8 @@ $router->get('/about/feed', function() {
 });
 
 $router->post('/twitter', function() {
-    $dms = json_decode($_POST["content"], true);
-    foreach($dms as $dm)
-    {
-        echo htmlspecialchars($dm);
-    }
+    $dms = json_decode($_POST, true);
+    echo $dms["content"][0];
 });
 
 $router->get('/api/bycountry', function() {
