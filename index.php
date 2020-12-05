@@ -32,7 +32,9 @@ use RiversideRocks\services as Rocks;
 use RiversideRocks\security as Secure;
 use IPTools\Network;
 use Smalot\Cups\Builder\Builder;
+use Smalot\Cups\Manager\JobManager;
 use Smalot\Cups\Manager\PrinterManager;
+use Smalot\Cups\Model\Job;
 use Smalot\Cups\Transport\Client;
 use Smalot\Cups\Transport\ResponseParser;
 
