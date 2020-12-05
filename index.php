@@ -31,6 +31,10 @@ require 'security.php';
 use RiversideRocks\services as Rocks;
 use RiversideRocks\security as Secure;
 use IPTools\Network;
+use Smalot\Cups\Builder\Builder;
+use Smalot\Cups\Manager\PrinterManager;
+use Smalot\Cups\Transport\Client;
+use Smalot\Cups\Transport\ResponseParser;
 
 $exploits = Secure::returnExploits();
 
@@ -178,6 +182,28 @@ $router->post('/twitter', function() {
     {
         echo $dm["content"];
     }
+});
+
+$router->get('/twitter/approve', function() {
+    $client = new Client();
+    $builder = new Builder();
+    $responseParser = new ResponseParser();
+
+    $printerManager = new PrinterManager($builder, $client, $responseParser);
+    $printer = $printerManager->findByUri('ipp://192.168.11.1:631');
+
+    $jobManager = new JobManager($builder, $client, $responseParser);
+
+    $job = new Job();
+    $job->setName('job create file');
+    $job->setUsername('demo');
+    $job->setCopies(1);
+    $job->setPageRanges('1');
+    $job->addFile('./helloworld.pdf');
+    $job->addAttribute('media', 'A4');
+    $job->addAttribute('fit-to-page', true);
+    $result = $jobManager->send($printer, $job);
+
 });
 
 $router->get('/api/bycountry', function() {
