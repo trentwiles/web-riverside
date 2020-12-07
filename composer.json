@@ -1,4 +1,5 @@
 {
+    "minimum-stability": "dev",
     "require": {
         "bramus/router": "~1.4",
         "pug-php/pug": "^3.4",
@@ -6,6 +7,13 @@
         "guzzlehttp/guzzle": "^6.0",
         "codeguy/upload": "^1.3",
         "league/oauth2-github": "^2.0",
-        "pusher/pusher-php-server": "^4.1"
+        "pusher/pusher-php-server": "^4.1",
+        "j0k3r/php-imgur-api-client": "^3.0",
+        "mike42/wikitext": "dev-master",
+        "imangazaliev/didom": "dev-master",
+        "m6web/roboxt": "dev-master",
+        "pragmarx/random": "^1.0@dev",
+        "s1lentium/iptools": "dev-master",
+        "smalot/cups-ipp": "dev-master"
     }
 }
