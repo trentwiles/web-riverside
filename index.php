@@ -107,15 +107,15 @@ if (!empty($result) && $result->num_rows > 0) {
 
 if($blocks !== 0)
 {
-    header("Content-type: application/json");
     header("HTTP/1.1 403 Forbidden");
-    $reasons = array(
-        "message" => "Unauthorised Connection: 403 Forbidden",
-        "reason" => htmlspecialchars($reason),
-        "server" => "358 Engine"
-    );
-    $return = json_encode($reasons, true);
-    die($return);
+    $pug = new Pug();
+    $lmessage = "403 Forbidden";
+    $output = $pug->render('views/ip-ban.pug', array(
+        'large_message' => $lmessage,
+        'details' => htmlspecialchars($reason),
+        'ip' => $ip
+    ));
+    die($output);
 }
 
 
