@@ -1,7 +1,8 @@
 include head.pug
+script(src="/src/ban.js")
 br
 h1 #{large_message}
 h3 Our system has detected unauthorized behavior from your IP address (#{ip}).
-p Reason: #{details}
+h4 Reason: #{details}
 br
-i To appeal this ban, contact us at support@riverside.rocks.
+p To appeal this ban, contact us at support@riverside.rocks.
