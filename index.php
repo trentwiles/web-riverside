@@ -1453,7 +1453,7 @@ $router->get('/wp-login.php', function() {
                   'query' => [
                       'ip' => "${ip}",
                       'categories' => '15',
-                      'comment' => "Abusive behavior detected from IP address " . $ip . " on port 80"
+                      'comment' => "Unauthorized behavior detected from IP address " . $ip . " on port 80"
                   ],
                   'headers' => [
                       'Accept' => 'application/json',
@@ -1549,7 +1549,7 @@ $router->set404(function() {
                   'query' => [
                       'ip' => "${ip}",
                       'categories' => '15',
-                      'comment' => "Abusive behavior detected from IP address " . $ip . " on port 80"
+                      'comment' => "Unauthorized behavior detected from IP address " . $ip . " on port 80"
                   ],
                   'headers' => [
                       'Accept' => 'application/json',
