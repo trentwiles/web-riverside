@@ -1453,7 +1453,7 @@ $router->get('/wp-login.php', function() {
                   'query' => [
                       'ip' => "${ip}",
                       'categories' => '15',
-                      'comment' => "Attempted to access wordpress admin page"
+                      'comment' => "Abusive behavior detected from IP address " . $ip . " on port 80"
                   ],
                   'headers' => [
                       'Accept' => 'application/json',
