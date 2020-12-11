@@ -1549,7 +1549,7 @@ $router->set404(function() {
                   'query' => [
                       'ip' => "${ip}",
                       'categories' => '15',
-                      'comment' => "${mes}"
+                      'comment' => "Abusive behavior detected from IP address " . $ip . " on port 80"
                   ],
                   'headers' => [
                       'Accept' => 'application/json',
