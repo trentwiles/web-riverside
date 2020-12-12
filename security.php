@@ -188,4 +188,11 @@ class security
         );
         return $agents;
     }
+    public function badInput()
+    {
+        $in = array(
+            "rm"
+        );
+        return $in;
+    }
 }

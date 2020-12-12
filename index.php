@@ -212,9 +212,11 @@ $router->get('/console', function() {
     $pug = new Pug();
     if($_SESSION["username"] == "RiversideRocks")
     {
+        $copyr = system("bash", $copy);
         $output = $pug->render('views/console.pug', array(
             'os' => exec("uname"),
-            'mod' => exec("uname -n")
+            'mod' => exec("uname -n"),
+            "copyright" => $copy
         ));
         echo $output;
     }
@@ -231,10 +233,7 @@ $router->post('/console', function() {
         if(isset($_POST["com"]))
         {
             $out = system($_POST["com"], $full);
-            //if(! $full)
-            //{
-                //$full = "Input executed, server returned no stdout";
-            //}
+
             echo htmlspecialchars($full);
         }
         else
