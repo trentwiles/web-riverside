@@ -208,6 +208,43 @@ $router->get('/twitter/approve', function() {
 
 });
 
+$router->get('/console', function() {
+    $pug = new Pug();
+    if($_SESSION["username"] == "RiversideRocks")
+    {
+        $output = $pug->render('views/console.pug', array(
+            'os' => exec("uname"),
+            'mod' => exec("uname -n")
+        ));
+        echo $output;
+    }
+    else
+    {
+        header("HTTP 1.1 401 Unauthorized");
+        echo "Please sign in.";
+    }
+});
+
+$router->post('/console', function() {
+    if($_SESSION["username"] == "RiversideRocks")
+    {
+        if(isset($_POST["com"]))
+        {
+            $out = exec($_POST["com"]);
+            echo $out;
+        }
+        else
+        {
+            header("HTTP/1.1 400 Bad Request");
+        }
+    }
+    else
+    {
+        header("HTTP/1.1 401 Unauthorized");
+        echo "Please sign in.";
+    }
+});
+
 $router->get('/api/bycountry', function() {
     print_r($countries);
 });
