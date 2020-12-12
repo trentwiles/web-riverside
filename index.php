@@ -212,10 +212,9 @@ $router->get('/console', function() {
     $pug = new Pug();
     if($_SESSION["username"] == "RiversideRocks")
     {
-        //system("bash --version", $copys);
         $output = $pug->render('views/console.pug', array(
             'os' => exec("uname"),
-            'mod' => exec("uname -n"),
+            'mod' => exec("uname -n")
         ));
         echo $output;
     }
