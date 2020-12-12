@@ -163,8 +163,16 @@ class security
                 "/wp-includes/fonts/css.php" => "Wordpress probing, /wp-includes/fonts/css.php",
                 "/wp-includes/css/css.php" => "Wordpress probing, /wp-includes/css/css.php",
                 "/evox/about" => "Probing for services",
-                "/nmaplowercheck1606923328" => "Nmap"
-
+                "/nmaplowercheck1606923328" => "Nmap",
+                "/axis2/axis2-admin/login" => "Admin logins",
+                "/python.php" => "Probing",
+                "/images/stories/filemga.php?ssp=RfVbHu" => "Probing",
+                "/baidoubi.php" => "Probing",
+                "/images/stories/cmd.php" => "Probing",
+                "/webdav/" => "Probing",
+                "/bbs/index.php" => "Probing",
+                "/bbs/ajax/render/widget_tabbedcontainer_tab_panel" => "Probing",
+                "/wordpress/wp-admin/setup-config.php?step=1" => "Searching for wordpress admin"
             );
 
             return $exploits;

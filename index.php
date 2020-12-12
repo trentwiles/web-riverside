@@ -231,11 +231,16 @@ $router->post('/console', function() {
         if(isset($_POST["com"]))
         {
             $out = exec($_POST["com"]);
-            echo $out;
+            if(! $out)
+            {
+                $out = "Input executed, server returned no stdout";
+            }
+            echo htmlspecialchars($out);
         }
         else
         {
             header("HTTP/1.1 400 Bad Request");
+            echo "400 Bad Request, check the dev console.";
         }
     }
     else
