@@ -231,10 +231,10 @@ $router->post('/console', function() {
         if(isset($_POST["com"]))
         {
             $out = system($_POST["com"], $full);
-            if(! $full)
-            {
-                $full = "Input executed, server returned no stdout";
-            }
+            //if(! $full)
+            //{
+                //$full = "Input executed, server returned no stdout";
+            //}
             echo htmlspecialchars($full);
         }
         else
