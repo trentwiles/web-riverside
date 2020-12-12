@@ -15,8 +15,7 @@ function send(bash)
         },
         function(data) {
             var node = document.createElement("p");
-            var textnode = document.createTextNode(data.message);
-            console.log(data.badge);
+            var textnode = document.createTextNode(data);
             node.appendChild(textnode);
             var final = document.getElementById("m")
             final.appendChild(node);
