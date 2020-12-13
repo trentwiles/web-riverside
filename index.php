@@ -306,6 +306,9 @@ $router->get('/', function() {
     echo $output;
 });
 
+$router->get('/globe', function() {
+    Phug::displayFile('views/globe.pug');
+});
 
 $router->get('/about', function() {
     $pug = new Pug();
