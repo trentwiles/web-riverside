@@ -143,6 +143,39 @@ class services
       return true;
    }
 
+   public function newDiscordContactSpam($content)
+   {
+      $webhookurl = $_ENV["DISCORD_WEBHOOK_SPAM"];
+
+      $timestamp = date("c", strtotime("now"));
+
+      $json_data = json_encode(array(
+          "content" => $content,
+          
+          "username" => "Message Bot (LIKLEY SPAM)",
+
+          "tts" => false,
+          
+          "allowed_mentions" => array("parse" => "")
+          
+          
+
+      ), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+
+
+      $ch = curl_init( $webhookurl );
+      curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-type: application/json'));
+      curl_setopt( $ch, CURLOPT_POST, 1);
+      curl_setopt( $ch, CURLOPT_POSTFIELDS, $json_data);
+      curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1);
+      curl_setopt( $ch, CURLOPT_HEADER, 0);
+      curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1);
+
+      $response = curl_exec( $ch );
+      curl_close( $ch );
+      return true;
+   }
+
   /*
    * @param user: username of the github user (we use the same names on riverside.rock as on GitHub)
    * @param eventid: a number created by github (user 0 for latest)

@@ -447,8 +447,8 @@ $router->post('/about/contact', function() {
         Phug::displayFile('views/thanks.pug');
     } 
     else {
-        header("HTTP/1.1 403 Forbidden");
-        echo "You did not pass the captcha.";
+        echo "You did not pass the captcha. Please try again.";
+        Rocks::newDiscordContactSpam($final);
     }
    
 });
