@@ -174,6 +174,11 @@ $router->get('/api/visits', function() {
     echo json_encode(times, true);
 });
 
+$router->get('/v1/research', function() {
+    header("HTTP/1.1 405 Method Not Allowed");
+    die(json_encode(array("success" => "false", "message" => "This endpoint does not accept GET requests"), true));
+});
+
 $router->get('/about/feed', function() {
     Phug::displayFile('views/ip.pug');
 });
