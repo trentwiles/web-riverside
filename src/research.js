@@ -17,17 +17,9 @@
 */
 
 function getIP(){
-    //
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var yourip = this.responseText 
-        }else{
-            var yourip = "0.0.0.0" // set the ip to a non-exsistant IP as a fallback
-        }
-    }
-    xhttp.open("GET", "https://riverside.rocks/ip.php", true);
-    xhttp.send();
+    $.get("ip.php", function(data, status){
+        var yourip = data;
+      });
     return yourip;
 }
 
