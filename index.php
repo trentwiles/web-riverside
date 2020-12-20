@@ -174,6 +174,10 @@ $router->get('/api/visits', function() {
     echo json_encode(times, true);
 });
 
+$router->get('/ip', function() {
+    echo $ip;
+});
+
 $router->get('/v1/research', function() {
     header("HTTP/1.1 405 Method Not Allowed");
     header("Content-type: application/json");
