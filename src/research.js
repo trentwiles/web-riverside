@@ -24,7 +24,7 @@ function getIP(){
             return this.responseText 
         }
     }
-    xhttp.open("GET", "/cdn-cgi/trace", true);
+    xhttp.open("GET", "https://whoami.computer/ip", true);
     xhttp.send();
 }
 
