@@ -21,6 +21,7 @@ function res(){
         $.get("ip.php", function(data, status){
             console.log(status)
             $.get("https://ipapi.co/"+data+"/json/", function(data1, status1){
+                alert(data1)
                 var ip = JSON.parse(data1)
                 var country = ip.country_name
                 var ua = navigator.userAgent;
