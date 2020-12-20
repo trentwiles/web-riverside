@@ -44,4 +44,3 @@ function res(){
         });
     });
 }
-setInterval(res(), 4000)
