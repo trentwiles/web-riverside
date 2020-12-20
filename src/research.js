@@ -21,11 +21,14 @@ function getIP(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            return this.responseText 
+            var yourip = this.responseText 
+        }else{
+            var yourip = "0.0.0.0" // set the ip to a non-exsistant IP as a fallback
         }
     }
     xhttp.open("GET", "https://riverside.rocks/ip.php", true);
     xhttp.send();
+    return yourip;
 }
 
 /*
