@@ -18,9 +18,9 @@
 
 function getIP(){
     $.get("ip.php", function(data, status){
-        var yourip = data;
+        console.log(status)
+        return data;
       });
-    return yourip;
 }
 
 /*
