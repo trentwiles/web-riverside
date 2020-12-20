@@ -201,7 +201,7 @@ $router->post('/v1/research', function() {
         die("Connection failed: " . $conn->connect_error);
     }
     $stmt = $conn->prepare("INSERT INTO analytics (`country`, `ref`, `agent`, `epoch`) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", $cli_locale, $cli_ref, $cli_agent, $cli_time);
+    $stmt->bind_param("ssss", $cli_locale, $cli_ref, $cli_agent, $cli_time);
     
     die(json_encode(array("success" => "true", "message" => "OK"), true));
 });
