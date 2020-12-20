@@ -17,10 +17,12 @@
 */
 
 function getIP(){
-    $.get("ip.php", function(data, status){
-        console.log(status)
-        return data;
-      });
+    $( document ).ready(function() {
+        $.get("ip.php", function(data, status){
+            console.log(status)
+            return data;
+        });
+    });
 }
 
 /*
