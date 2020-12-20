@@ -202,6 +202,8 @@ $router->post('/v1/research', function() {
     }
     $stmt = $conn->prepare("INSERT INTO analytics (`country`, `ref`, `agent`, `epoch`) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $cli_locale, $cli_ref, $cli_agent, $cli_time);
+    $stmt->execute();
+
     
     die(json_encode(array("success" => "true", "message" => "OK"), true));
 });
