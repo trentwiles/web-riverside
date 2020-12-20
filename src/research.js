@@ -32,10 +32,12 @@ function res(){
                 {
                 agent: ua,
                 locale: country,
+                time: Date.now(),
                 referrer: ref
                 },
                 function(data3,status3){
                     console.log(status3);
+                    console.log(data3);
                 });
                 return true;
             });
