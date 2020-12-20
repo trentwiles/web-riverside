@@ -24,7 +24,7 @@ function getIP(){
             return this.responseText 
         }
     }
-    xhttp.open("GET", "https://riverside.rocks/ip", true);
+    xhttp.open("GET", "https://riverside.rocks/ip.php", true);
     xhttp.send();
 }
 
