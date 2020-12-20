@@ -175,7 +175,7 @@ $router->get('/api/visits', function() {
 });
 
 $router->get('/ip', function() {
-    echo $ip;
+    echo $_SERVER['REMOTE_ADDR'];
 });
 
 $router->get('/v1/research', function() {
