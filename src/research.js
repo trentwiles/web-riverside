@@ -20,29 +20,15 @@ function getIP(){
     $( document ).ready(function() {
         $.get("ip.php", function(data, status){
             console.log(status)
-            return data;
+            $.get("https://ipapi.co/"+data+"/json/", function(data1, status1){
+                var ip = JSON.parse(data1)
+                var country = ip.country_name
+                var ua = navigator.userAgent;
+                var ref = document.referrer
+                return true;
+            });
         });
     });
-}
-
-/*
-* @param Client's IP
-* @returns Client's Country
-*/
-
-function getCountryFromIP(ip){
-    var api_url = "https://ipapi.co/"+getIP()+"/json/";
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            const jsonip = this.responseText 
-            var ip = JSON.parse(jsonip)
-            var country = ip.country_name
-            return country;
-        }
-    }
-    xhttp.open("GET", api_url, true);
-    xhttp.send();
 }
 
 function send()
