@@ -23,9 +23,7 @@ function getIP(){
             $.get("https://ipapi.co/"+data+"/json/", function(data1, status1){
                 var ip = JSON.parse(data1)
                 var country = ip.country_name
-                var ua = navigator.userAgent;
-                var ref = document.referrer
-                return true;
+                return country;
             });
         });
     });
@@ -33,6 +31,8 @@ function getIP(){
 
 function send()
 {
+    var ua = navigator.userAgent;
+    var ref = document.referrer
     $.post("/v1/research",
     {
     agent: ua,
