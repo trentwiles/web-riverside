@@ -186,10 +186,10 @@ $router->get('/v1/research', function() {
 
 $router->post('/v1/research', function() {
     header("Content-type: application/json");
-    $cli_agent = $_POST["agent"];
-    $cli_locale = $_POST["locale"];
-    $cli_ref = $_POST["referrer"];
-    $cli_time = $_POST["time"];
+    $cli_agent = htmlspecialchars($_POST["agent"]);
+    $cli_locale = htmlspecialchars($_POST["locale"]);
+    $cli_ref = htmlspecialchars($_POST["referrer"]);
+    $cli_time = htmlspecialchars($_POST["time"]);
 
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
@@ -201,7 +201,7 @@ $router->post('/v1/research', function() {
         die("Connection failed: " . $conn->connect_error);
     }
     $stmt = $conn->prepare("INSERT INTO analytics (`country`, `ref`, `agent`, `epoch`) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("sssi", htmlspecialchars($cli_locale), htmlspecialchars($cli_ref), htmlspecialchars($cli_agent), htmlspecialchars($cli_time));
+    $stmt->bind_param("sssi", $cli_locale, $cli_ref, $cli_agent, $cli_time);
     
     die(json_encode(array("success" => "true", "message" => "OK"), true));
 });
