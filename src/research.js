@@ -16,7 +16,7 @@
 * @returns Client's IP
 */
 
-function getIP(){
+function res(){
     $( document ).ready(function() {
         $.get("ip.php", function(data, status){
             console.log(status)
@@ -39,4 +39,4 @@ function getIP(){
         });
     });
 }
-setInterval(send(), 4000)
+setInterval(res(), 4000)
