@@ -23,25 +23,20 @@ function getIP(){
             $.get("https://ipapi.co/"+data+"/json/", function(data1, status1){
                 var ip = JSON.parse(data1)
                 var country = ip.country_name
-                return country;
+                var ua = navigator.userAgent;
+                var ref = document.referrer
+                $.post("/v1/research",
+                {
+                agent: ua,
+                locale: country,
+                referrer: ref
+                },
+                function(data3,status3){
+                    console.log(status3);
+                });
+                return true;
             });
         });
     });
 }
-
-function send()
-{
-    var ua = navigator.userAgent;
-    var ref = document.referrer
-    $.post("/v1/research",
-    {
-    agent: ua,
-    locale: country,
-    referrer: ref
-    },
-    function(data,status){
-        console.log(status);
-    });
-}
-
 setInterval(send(), 4000)
