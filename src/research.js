@@ -33,9 +33,6 @@ function getIP(){
 
 function send()
 {
-    var ua = navigator.userAgent;
-    var country = getCountryFromIP(getIP())
-    var ref = document.referrer
     $.post("/v1/research",
     {
     agent: ua,
