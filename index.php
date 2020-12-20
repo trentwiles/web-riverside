@@ -1,7 +1,7 @@
 <?php
 /*
    +----------------------------------------------------------------------+
-   | Copyright (c) 2020 Trent Wiles and the Riverside Rocks authors       |
+   | Copyright (c) 2020 Riverside Rocks authors                           |
    +----------------------------------------------------------------------+
    | This source file is subject to the Apache 2.0 Lisence.               |
    |                                                                      |
@@ -176,8 +176,18 @@ $router->get('/api/visits', function() {
 
 $router->get('/v1/research', function() {
     header("HTTP/1.1 405 Method Not Allowed");
+    header("Content-type: application/json");
     die(json_encode(array("success" => "false", "message" => "This endpoint does not accept GET requests"), true));
 });
+
+$router->post('/v1/research', function() {
+    header("Content-type: application/json");
+    $cli_agent = $_POST["agent"];
+    $cli_locale = $_POST["locale"];
+    $cli_ref = $_POST["referer"];
+    print_r($_POST);
+});
+
 
 $router->get('/about/feed', function() {
     Phug::displayFile('views/ip.pug');

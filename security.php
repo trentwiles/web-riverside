@@ -1,7 +1,7 @@
 <?php
 /*
    +----------------------------------------------------------------------+
-   | Copyright (c) 2020 Trent Wiles and the Riverside Rocks authors       |
+   | Copyright (c) 2020 Riverside Rocks authors                           |
    +----------------------------------------------------------------------+
    | This source file is subject to the Apache 2.0 Lisence.               |
    |                                                                      |

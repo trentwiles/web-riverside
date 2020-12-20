@@ -1,6 +1,6 @@
 /*
    +----------------------------------------------------------------------+
-   | Copyright (c) 2020 Trent Wiles and the Riverside Rocks authors       |
+   | Copyright (c) 2020 Riverside Rocks authors                           |
    +----------------------------------------------------------------------+
    | This source file is subject to the Apache 2.0 Lisence.               |
    |                                                                      |
@@ -24,7 +24,7 @@ function getIP(){
             return this.responseText 
         }
     }
-    xhttp.open("GET", "https://whoami.computer/ip", true);
+    xhttp.open("GET", "/cdn-cgi/trace", true);
     xhttp.send();
 }
 
@@ -48,22 +48,20 @@ function getCountryFromIP(ip){
     xhttp.send();
 }
 
-if(Cookies.get('lytics') !== "false"){
-    while(true)
+function send()
+{
+    var ua = navigator.userAgent;
+    var country = getCountryFromIP(getIP())
+    var ref = document.referrer
+    $.post("/v1/research",
     {
-        setTimeout(function(){
-            var ua = navigator.userAgent;
-            var country = getCountryFromIP(getIP())
-            var ref = document.referrer
-            $.post("/api/research",
-            {
-            agent: ua,
-            locale: country,
-            referrer: ref
-            },
-            function(data,status){
-                console.log(status);
-            });
-        }, 5000);
-    }
+    agent: ua,
+    locale: country,
+    referrer: ref
+    },
+    function(data,status){
+        console.log(status);
+    });
 }
+
+setInterval(send(), 4000)
