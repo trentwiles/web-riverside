@@ -20,12 +20,14 @@ function res(){
     $( document ).ready(function() {
         $.get("ip.php", function(data, status){
             console.log(status)
-            $.get("https://ipapi.co/"+data+"/json/", function(data1, status1){
-                var ip = JSON.parse(data1)
-                alert(ip)
-                var country = ip.country_name
+            $.get("https://ipapi.co/"+data+"/country/", function(data1, status1){
+                var country = data1
                 var ua = navigator.userAgent;
                 var ref = document.referrer
+                if(ref == "")
+                {
+                    ref = "None"
+                }
                 $.post("/v1/research",
                 {
                 agent: ua,
