@@ -18,7 +18,7 @@
 
 function res(){
     $( document ).ready(function() {
-        $.get("ip.php", function(data, status){
+        $.get("/ip.php", function(data, status){
             console.log(status)
             $.get("https://ipapi.co/"+data+"/country/", function(data1, status1){
                 var country = data1
