@@ -546,7 +546,7 @@ $router->get('/admin/upload', function() {
 });
 
 $router->get('/v1/analytics', function() {
-    include "/analtyics.php";
+    include __DIR__ . "/analyics.php";
 });
 
 
