@@ -26,5 +26,9 @@ $sql = "SELECT country, count(*) as SameValue from analytics GROUP BY country OR
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        print_r($row);
+        $countries = $row["country"];
+        foreach($countries as $country)
+        {
+            echo $country;
+        }
     }
