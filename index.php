@@ -545,9 +545,12 @@ $router->get('/admin/upload', function() {
     Phug::displayFile('views/upload.pug');
 });
 
+/*
 $router->get('/v1/analytics', function() {
     file_get_contents("https://riverside.rocks/analyics.php");
 });
+
+*/
 
 
 $router->post('/v1/ugc-handler', function() {
