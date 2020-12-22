@@ -40,6 +40,10 @@ while ($row = $result->fetch_assoc()) {
 }
 
 echo json_encode(array(
-    "countries" => $countries,
-    "hits" => $hits,
+    "notice" => "Please don't excessively request this data!",
+    "data" =>
+        array(
+            "countries" => $countries,
+            "hits" => $hits,
+        )
 ));
