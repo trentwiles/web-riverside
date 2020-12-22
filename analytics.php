@@ -30,6 +30,10 @@ $countries = array();
 $hits = array();
 while ($row = $result->fetch_assoc()) {
     $country = $row["country"];
+    if(! $country)
+    {
+        $country = "Unknown";
+    }
     $hit = $row["hits"];
     array_push($countries, $country);
     array_push($hits, $hit);
