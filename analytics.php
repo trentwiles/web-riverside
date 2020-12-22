@@ -26,8 +26,8 @@ $sql = "SELECT country, count(*) as hits from analytics GROUP BY country ORDER B
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        $countries = $row["country"]; 
+        $countries = $row["country"];
         $hits = $row["hits"];
-        echo $countries;
+        echo "<br>" . $countries;
         echo "<br>" . $hits;
     }
