@@ -221,6 +221,8 @@ $router->post('/twitter', function() {
     }
 });
 
+
+
 $router->get('/twitter/approve', function() {
     $client = new Client();
     $builder = new Builder();
@@ -542,6 +544,11 @@ $router->get('/discord', function() {
 $router->get('/admin/upload', function() {
     Phug::displayFile('views/upload.pug');
 });
+
+$router->get('/v1/analytics', function() {
+    include "analtyics.php";
+});
+
 
 $router->post('/v1/ugc-handler', function() {
     
