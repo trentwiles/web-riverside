@@ -21,11 +21,13 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT country, count(*) as SameValue from analytics GROUP BY country ORDER BY SameValue DESC";
+$sql = "SELECT country, count(*) as hits from analytics GROUP BY country ORDER BY hits DESC";
     $stmt = $conn->prepare($sql); 
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        $countries = $row["country"];
+        $countries = $row["country"]; 
+        $hits = $row["hits"];
         echo $countries;
+        echo "<br>" . $hits;
     }
