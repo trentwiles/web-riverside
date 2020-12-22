@@ -2,6 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+header("Content-type: application/json");
 header("X-Powered-By: Riverside Rocks");
 header("X-Server: kestral (v2.2)");
 header("X-Content-Type-Options: nosniff");
@@ -22,12 +23,19 @@ if ($conn->connect_error) {
 }
 
 $sql = "SELECT country, count(*) as hits from analytics GROUP BY country ORDER BY hits DESC";
-    $stmt = $conn->prepare($sql); 
-    $stmt->execute();
-    $result = $stmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        $countries = $row["country"];
-        $hits = $row["hits"];
-        echo "<br>" . $countries;
-        echo "<br>" . $hits;
-    }
+$stmt = $conn->prepare($sql); 
+$stmt->execute();
+$result = $stmt->get_result();
+$countries = array();
+$hits = array();
+while ($row = $result->fetch_assoc()) {
+    $country = $row["country"];
+    $hit = $row["hits"];
+    array_push($countries, $country);
+    array_push($hits, $hit);
+}
+
+echo json_encode(array(
+    "countries" => $countries,
+    "hits" => $hits,
+));
