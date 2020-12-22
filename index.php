@@ -546,7 +546,7 @@ $router->get('/admin/upload', function() {
 });
 
 $router->get('/v1/analytics', function() {
-    include "analyics.php";
+    file_get_contents("https://riverside.rocks/analyics.php");
 });
 
 
