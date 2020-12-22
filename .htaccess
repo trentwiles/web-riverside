@@ -65,3 +65,7 @@ RewriteRule ^config.php$ / [F,L]
 RewriteRule ^flarum$ / [F,L]
 RewriteRule ^storage/(.*)?$ / [F,L]
 RewriteRule ^vendor/(.*)?$ / [F,L]
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
