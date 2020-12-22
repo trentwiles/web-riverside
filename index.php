@@ -451,6 +451,10 @@ $router->get('/projects', function() {
     Phug::displayFile('views/projects.pug');
 });
 
+$router->get('/traffic', function() {
+    Phug::displayFile('views/analytics.pug');
+});
+
 $router->get('/contact', function() {
    header("Location: /about/contact");
 });
