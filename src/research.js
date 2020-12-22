@@ -17,30 +17,35 @@
 */
 
 function res(){
-    $( document ).ready(function() {
-        $.get("/ip.php", function(data, status){
-            console.log(status)
-            $.get("https://ipapi.co/"+data+"/country/", function(data1, status1){
-                var country = data1
-                var ua = navigator.userAgent;
-                var ref = document.referrer
-                if(ref == "")
-                {
-                    ref = "None"
-                }
-                $.post("/v1/research",
-                {
-                agent: ua,
-                locale: country,
-                time: Date.now(),
-                referrer: ref
-                },
-                function(data3,status3){
-                    console.log(status3);
-                    console.log(data3);
+    if(Cookies.read("opt") !== "true")
+        {
+        $( document ).ready(function() {
+            $.get("/ip.php", function(data, status){
+                console.log(status)
+                $.get("https://ipapi.co/"+data+"/country/", function(data1, status1){
+                    var country = data1
+                    var ua = navigator.userAgent;
+                    var ref = document.referrer
+                    if(ref == "")
+                    {
+                        ref = "None"
+                    }
+                    $.post("/v1/research",
+                    {
+                    agent: ua,
+                    locale: country,
+                    time: Date.now(),
+                    referrer: ref
+                    },
+                    function(data3,status3){
+                        console.log(status3);
+                        console.log(data3);
+                    });
+                    return true;
                 });
-                return true;
             });
         });
-    });
+    }else{
+        console.log("We noticed that you opted out of analytics. We respect that. (╯°□°）╯︵ ┻━┻")
+    }
 }
