@@ -17,8 +17,8 @@
 */
 
 function res(){
-    if(Cookies.read("opt") !== "true")
-        {
+    //if(Cookies.read("opt") !== "true")
+        //{
         $( document ).ready(function() {
             $.get("/ip.php", function(data, status){
                 console.log(status)
@@ -45,7 +45,7 @@ function res(){
                 });
             });
         });
-    }else{
-        console.log("We noticed that you opted out of analytics. We respect that. (╯°□°）╯︵ ┻━┻")
-    }
+    //}else{
+      //  console.log("We noticed that you opted out of analytics. We respect that. (╯°□°）╯︵ ┻━┻")
+    //}
 }
