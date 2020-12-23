@@ -10,4 +10,6 @@ $router->get('/test', function() {
     echo "lol";
 });
 
+die();
+
 $router->run();
