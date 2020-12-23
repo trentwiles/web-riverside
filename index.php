@@ -33,7 +33,7 @@ Require all controllers
 
 */
 
-require '../controllers/boost.php';
+require 'controllers/boost.php';
 
 
 
