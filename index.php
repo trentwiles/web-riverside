@@ -26,6 +26,8 @@ header("X-Frame-Options: SAMEORIGIN");
 
 require __DIR__ . '/vendor/autoload.php';
 require 'functions.php';
+require 'boost.php';
+
 require 'security.php';
 
 use RiversideRocks\services as Rocks;

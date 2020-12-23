@@ -41,8 +41,20 @@ function res(){
                         console.log(status3);
                         console.log(data3);
                     });
-                    return true;
+                    //return true;
                 });
+            });
+            if(username !== "")
+            {
+                var isAuth = true;
+            }
+            $.post("/v1/boost",
+                    {
+                    isClientAuth: isAuth
+                    },
+                    function(data3,status3){
+                        console.log(status3);
+                        console.log(data3);
             });
         });
     //}else{
