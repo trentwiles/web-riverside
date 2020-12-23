@@ -7,9 +7,8 @@ $dotenv->load();
 $router = new \Bramus\Router\Router();
 
 $router->get('/test', function() {
-    echo "lol";
+    die("lol");
 });
 
-die();
 
 $router->run();
