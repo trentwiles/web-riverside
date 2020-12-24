@@ -41,10 +41,11 @@ while ($row = $result->fetch_assoc()) {
 
 echo "countries,visits";
 
+$count = 0;
+
 foreach($countries as $place)
 {
-    foreach($hits as $visit)
-    {
-        echo $place . "," . $visit;
-    }
+
+    echo $place . "," . $hits[$count];
+    $count = $count + 1;
 }
