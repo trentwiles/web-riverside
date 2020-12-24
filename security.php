@@ -172,7 +172,9 @@ class security
                 "/webdav/" => "Probing",
                 "/bbs/index.php" => "Probing",
                 "/bbs/ajax/render/widget_tabbedcontainer_tab_panel" => "Probing",
-                "/wordpress/wp-admin/setup-config.php?step=1" => "Searching for wordpress admin"
+                "/wordpress/wp-admin/setup-config.php?step=1" => "Searching for wordpress admin",
+                "/Main_Login.asp" => "Probing for logins",
+                "/mysqlprint.css" => "Probing"
             );
 
             return $exploits;
