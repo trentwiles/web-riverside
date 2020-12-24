@@ -47,15 +47,15 @@ function res(){
             if(username !== "")
             {
                 var isAuth = true;
-            }
-            $.post("/v1/boost",
-                    {
+                $.post("/v1/boost",
+                {
                     isClientAuth: isAuth
-                    },
-                    function(data3,status3){
-                        console.log(status3);
-                        console.log(data3);
-            });
+                },
+                function(data3,status3){
+                    console.log(status3);
+                    console.log(data3);
+                });
+            }
         });
     //}else{
       //  console.log("We noticed that you opted out of analytics. We respect that. (╯°□°）╯︵ ┻━┻")
