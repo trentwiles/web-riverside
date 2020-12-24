@@ -2,7 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-header("Content-type: application/json");
+header("Content-type: text/csv");
 header("X-Powered-By: Riverside Rocks");
 header("X-Server: kestral (v2.2)");
 header("X-Content-Type-Options: nosniff");
@@ -46,6 +46,6 @@ $count = 0;
 foreach($countries as $place)
 {
 
-    echo $place . "," . $hits[$count];
+    echo $place . "," . $hits[$count] . "\n";
     $count = $count + 1;
 }
