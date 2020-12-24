@@ -2,7 +2,7 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-header("Content-type: text/csv");
+header("Content-type: text/plain");
 header("X-Powered-By: Riverside Rocks");
 header("X-Server: kestral (v2.2)");
 header("X-Content-Type-Options: nosniff");
@@ -39,7 +39,7 @@ while ($row = $result->fetch_assoc()) {
     array_push($hits, $hit);
 }
 
-echo "countries,visits";
+echo "countries,visits" . "\n";
 
 $count = 0;
 
