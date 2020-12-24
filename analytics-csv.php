@@ -529,7 +529,9 @@ $iso = array(
 
 'ZM' => 'Zambia',
 
-'ZW' => 'Zimbabwe'
+'ZW' => 'Zimbabwe',
+
+"Unknown" => "Unknown"
 
 );
 
