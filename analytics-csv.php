@@ -8,6 +8,7 @@ header("X-Server: kestral (v2.2)");
 header("X-Content-Type-Options: nosniff");
 header("X-XSS-Protections: 1; mode=block");
 header("X-Frame-Options: SAMEORIGIN");
+header("Access-Control-Allow-Origin: *");
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
