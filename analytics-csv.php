@@ -541,7 +541,7 @@ $count = 0;
 
 foreach($countries as $place)
 {
-    if($place = "Unknown")
+    if($place == "Unknown")
     {
         // nothing
     }else{
