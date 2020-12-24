@@ -541,7 +541,12 @@ $count = 0;
 
 foreach($countries as $place)
 {
+    if($place = "Unknown")
+    {
+        // nothing
+    }else{
+        echo $iso[$place] . "," . $hits[$count] . "\n";
+    }
 
-    echo $iso[$place] . "," . $hits[$count] . "\n";
     $count = $count + 1;
 }
