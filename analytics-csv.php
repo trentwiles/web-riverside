@@ -540,6 +540,6 @@ $count = 0;
 foreach($countries as $place)
 {
 
-    echo $c[$place] . "," . $hits[$count] . "\n";
+    echo $iso[$place] . "," . $hits[$count] . "\n";
     $count = $count + 1;
 }
