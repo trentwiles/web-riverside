@@ -34,6 +34,7 @@ Require all controllers
 */
 
 require 'authapi.php';
+require 'users.php';
 
 
 
