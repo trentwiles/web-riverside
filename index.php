@@ -33,7 +33,7 @@ Require all controllers
 
 */
 
-require __DIR__ . '/controllers/boost.php';
+include __DIR__ . '/controllers/boost.php';
 
 
 
