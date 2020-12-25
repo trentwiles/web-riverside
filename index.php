@@ -130,18 +130,13 @@ if($blocks !== 0)
     die($output);
 }
 
-
-
-
-$ipinfo = json_decode(file_get_contents("http://ip-api.com/json/${ip}"), true);
-$country = $conn -> real_escape_string(htmlspecialchars($ipinfo["country"]));
 $epoch = time();
 
 $stmt = $conn->prepare("INSERT INTO logs (epoch, country) VALUES (?, ?)");
 $stmt->bind_param("is", $epoch1, $country1);
 
 $epoch1 = $epoch;
-$country1 = $country;
+$country1 = $_SERVER["HTTP_CF_IPCOUNTRY"];
 $stmt->execute();
 $stmt->close();
 
