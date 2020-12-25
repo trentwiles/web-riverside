@@ -5,12 +5,4 @@ script(src="https://cdn.jsdelivr.net/npm/js-cookie@2.2.1/src/js.cookie.min.js")
 script(src="/src/video.min.js")
 script
     const room = #{room}
-    var connection = new RTCMultiConnection();
-
-    connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
-
-    connection.session = {
-        audio: true
-    };
-
-    connection.openOrJoin(room);
+    
