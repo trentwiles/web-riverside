@@ -221,6 +221,47 @@ $router->post('/v1/research', function() {
 });
 
 
+$router->post('/v1/boost', function() {
+    header("Content-type: application/json");
+    $cli_agent = htmlspecialchars($_POST["agent"]);
+    $cli_locale = htmlspecialchars($_POST["locale"]);
+    $cli_ref = htmlspecialchars($_POST["referrer"]);
+    $cli_time = htmlspecialchars($_POST["time"]);
+
+    $servername = $_ENV['MYSQL_SERVER'];
+    $username = $_ENV["MYSQL_USERNAME"];
+    $password = $_ENV["MYSQL_PASSWORD"];
+    $dbname = $_ENV["MYSQL_DATABASE"];
+
+    if(!isset($_POST["base"]))
+    {
+        header("HTTP/1.1 400 Bad Request");
+        die(json_encode(array("success" => "false", "message" => "Bad Request"), true));
+    }
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    if(!$_SESSION["username"])
+    {
+        header("HTTP/1.1 401 Unauthorized");
+        die(json_encode(array("success" => "false", "message" => "Not logged in"), true));
+    }
+
+    $r_username = htmlspecialchars($_SESSION["username"]);
+    $r_time = 10;
+    $r_epoch = time();
+
+
+    $stmt = $conn->prepare("INSERT INTO read_time (`username`, `time`, `epoch`) VALUES (?, ?, ?)");
+    $stmt->bind_param("sii", $r_username, $r_time, $r_epoch);
+    $stmt->execute();
+
+    
+    die(json_encode(array("success" => "true", "message" => "OK"), true));
+});
+
 $router->get('/about/feed', function() {
     Phug::displayFile('views/ip.pug');
 });
