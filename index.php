@@ -818,7 +818,8 @@ $router->get('/app/channels/(\w+)', function($channel) {
         'user3' => $users[2],
         'mes4' => $mess[3],
         'user4' => $users[3],
-        'debug' => ""
+        'debug' => "",
+        'video' => "https://riverside.rocks/video/" . $channel_sql
     ));
     echo $output;
 });
