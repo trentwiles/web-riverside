@@ -7,7 +7,7 @@ $dotenv->load();
 
 $router = new \Bramus\Router\Router();
 
-$router->post('/v1/boost', function() {
+$router->post('/v1/isauth', function() {
     header("Content-type: application/json");
     if(isset($_SESSION["username"]))
     {
