@@ -449,9 +449,9 @@ $router->get('/code/production/cred.js', function() {
         $user = $row["username"];
         break;
     }
-    echo "const key = Cookies.get('key');\n";
-    echo "const channel_send = \"" . $_SESSION["channel"] . "\";\n";
-    echo "const username = \"" . $user . "\";\n";
+    echo "var key = Cookies.get('key');\n";
+    echo "var channel_send = \"" . $_SESSION["channel"] . "\";\n";
+    echo "var username = \"" . $user . "\";\n";
 });
 
 $router->get('/code/production/m.js', function() {
