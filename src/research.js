@@ -20,9 +20,7 @@ function res(){
     //if(Cookies.read("opt") !== "true")
         //{
         $( document ).ready(function() {
-            $.get("/ip.php", function(data, status){
-                console.log(status)
-                $.get("https://ipapi.co/"+data+"/country/", function(data1, status1){
+                $.get("https://ipapi.co/country/", function(data1, status1){
                     var country = data1
                     var ua = navigator.userAgent;
                     var ref = document.referrer
@@ -42,9 +40,7 @@ function res(){
                         console.log(data3);
                     });
                     //return true;
-                });
-            });
-                
+                });                
         });
     //}else{
       //  console.log("We noticed that you opted out of analytics. We respect that. (╯°□°）╯︵ ┻━┻")
