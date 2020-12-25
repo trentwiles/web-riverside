@@ -246,4 +246,18 @@ class services
 
      return array("join" => $from_join, "message" => $from_message);
    }
+   public function secondsToTime($time)
+   {
+     if($time >= 60)
+     {
+       if($time >= 3600)
+       {
+        return gmdate("H", $time) . "h";
+       }else{
+        return gmdate("i", $time) . "m";
+       }
+     }else{
+       return "<1m";
+     }
+   }
 }

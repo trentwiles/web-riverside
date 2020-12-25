@@ -1253,6 +1253,21 @@ $router->get('/users/(\w+)', function($id) {
             $badge = 'fas fa-shield-alt';
         }
     }
+    $rtime = 0;
+    $sql = "SELECT * FROM read_time WHERE username=?";
+    $stmt = $conn->prepare($sql); 
+    $stmt->bind_param("s", $discord);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    while ($row = $result->fetch_assoc()) {
+        if(!isset($row["username"]))
+        {
+        }
+        else
+        {
+            $rtime = $rtime + $row["time"];
+        }
+    }
 
     $sql = "SELECT * FROM logins WHERE username=?";
     $stmt = $conn->prepare($sql); 
