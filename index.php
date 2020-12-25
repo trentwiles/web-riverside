@@ -1232,7 +1232,7 @@ $router->get('/video/(\w+)', function($call) {
     echo $output;
 });
 
-$router->get('/users/(/[a-z0-9_-]+)', function($id) {
+$router->get('/users/(\w+)', function($id) {
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
