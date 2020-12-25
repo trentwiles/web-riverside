@@ -1312,7 +1312,8 @@ $router->get('/users/(\w+)', function($id) {
         'join' => $join,
         'badge' => $badge,
         'pebbles' => $pebbles,
-        "pebble_url" => $pebble_url
+        "pebble_url" => $pebble_url,
+        "time" => Rocks::secondsToTime($rtime)
     ));
     echo $output;
 });
