@@ -356,6 +356,8 @@ END EXPERIMENTAL API ENDPOINTS
 
 
 $router->get('/', function() {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     /*
     $servername = $_ENV['MYSQL_SERVER'];
@@ -396,6 +398,8 @@ $router->get('/globe', function() {
 });
 
 $router->get('/about', function() {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     $ipdb = file_get_contents("https://riverside.rocks/crawl.php");
     $output = $pug->render('views/about.pug', array(
@@ -405,14 +409,20 @@ $router->get('/about', function() {
 });
 
 $router->get('/about/legal', function() {
+    header('HTTP/1.1 200 OK');
+
     Phug::displayFile('views/legal.pug');
 });
 
 $router->get('/about/hacking', function() {
+    header('HTTP/1.1 200 OK');
+
     Phug::displayFile('views/hacking.pug');
 });
 
 $router->get('/apps/abuseipdb', function() {
+    header('HTTP/1.1 200 OK');
+
     Phug::displayFile('views/abuseipdb.pug');
 });
 
@@ -428,6 +438,8 @@ $router->post('/apps/abuseipdb', function() {
 
 
 $router->get('/code/production/cred.js', function() {
+    header('HTTP/1.1 200 OK');
+
     header("Content-type: text/javascript");
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
@@ -480,12 +492,16 @@ $router->get('/code/production/m.js', function() {
 });
 
 $router->get('/account/login', function() {
+    header('HTTP/1.1 200 OK');
+
     Phug::displayFile('views/signin.pug');
 });
 
 $stat = Rocks::statcord("764485265775263784", "logan");
 
 $router->get('/about/stats', function() {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     $stat = Rocks::statcord("764485265775263784", "logan");
     $output = $pug->renderFile('views/count.pug', array(
@@ -498,10 +514,14 @@ $router->get('/about/stats', function() {
 });
 
 $router->get('/projects', function() {
+    header('HTTP/1.1 200 OK');
+
     Phug::displayFile('views/projects.pug');
 });
 
 $router->get('/traffic', function() {
+    header('HTTP/1.1 200 OK');
+
     Phug::displayFile('views/analytics.pug');
 });
 
@@ -510,10 +530,14 @@ $router->get('/contact', function() {
 });
 
 $router->get('/about/contact', function() {
+    header('HTTP/1.1 200 OK');
+
     Phug::displayFile('views/contact.pug'); // might make this dynamic later, might not
 });
 
 $router->post('/about/contact', function() {
+    header('HTTP/1.1 200 OK');
+
    $name = $_POST["name"];
    $email = $_POST["email"];
    $type = $_POST["type"];
@@ -559,6 +583,8 @@ $router->get('/watch/(\w+)', function($id) {
 });
 
 $router->get('/videos', function() {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     die(header("Location: https://www.youtube.com/RiversideRocks"));
 
@@ -576,6 +602,8 @@ $router->get('/index.php', function() {
 });
 
 $router->get('/ip', function() {
+    header('HTTP/1.1 200 OK');
+
     Rocks::abuseDB($ip);
 });
 
@@ -590,6 +618,8 @@ $router->get('/discord', function() {
 ===============================*/
 
 $router->get('/admin/upload', function() {
+    header('HTTP/1.1 200 OK');
+
     Phug::displayFile('views/upload.pug');
 });
 
@@ -602,6 +632,9 @@ $router->get('/v1/analytics', function() {
 
 
 $router->post('/v1/ugc-handler', function() {
+
+    header('HTTP/1.1 200 OK');
+
     
     $curl = curl_init();
 
@@ -627,6 +660,8 @@ $router->post('/v1/ugc-handler', function() {
 });
 
 $router->post('/admin/upload', function() {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     if($_POST["key"] !== $_ENV["UPLOAD"]){
         $output = $pug->renderFile('views/upload-fail.pug', array(
@@ -712,10 +747,14 @@ $router->get('/v1/web', function() {
 });
 
 $router->get('/app/beta', function() {
+    header('HTTP/1.1 200 OK');
+
     Phug::displayFile('views/beta.pug');
 });
 
 $router->get('/app', function() {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
@@ -766,6 +805,8 @@ $router->get('/app/channels', function() {
 //
 
 $router->get('/app/create', function() {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     $gen_id = Rocks::base64rand(5);
     $output = $pug->render('views/client-v1-create.pug', array(
@@ -776,6 +817,8 @@ $router->get('/app/create', function() {
 });
 
 $router->get('/app/channels/(\w+)', function($channel) {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
@@ -825,6 +868,8 @@ $router->get('/app/channels/(\w+)', function($channel) {
 });
 
 $router->get('/app/channels/pm/(\w+)', function($channel) {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
@@ -871,6 +916,8 @@ $router->get('/app/channels/pm/(\w+)', function($channel) {
 });
 
 $router->get('/help/(\w+)', function($wiki) {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     if(!isset($wiki))
     {
@@ -1056,10 +1103,14 @@ $router->get('/v1/new', function() {
 
 
 $router->get('/community', function() {
+    header('HTTP/1.1 200 OK');
+
     Phug::displayFile('views/community-temp.pug');
 });
 
 $router->get('/app/support', function() {
+    header('HTTP/1.1 200 OK');
+
     Phug::displayFile('views/client-support.pug');
 });
 
@@ -1073,6 +1124,8 @@ $router->get('/account/signout', function() {
 });
 
 $router->get('/blog/(\w+)', function($slugd) {
+    header('HTTP/1.1 200 OK');
+
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
     $password = $_ENV["MYSQL_PASSWORD"];
@@ -1149,6 +1202,8 @@ $router->get('/account/dashboard/admin', function() {
 });
 
 $router->get('/account/dashboard/admin/action', function() {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
@@ -1177,6 +1232,8 @@ $router->get('/account/dashboard/admin/action', function() {
 });
 
 $router->get('/account/dashboard/admin/action/(\w+)', function($user_name) {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
@@ -1225,6 +1282,8 @@ $router->get('/account/dashboard/admin/action/(\w+)', function($user_name) {
 });
 
 $router->get('/video/(\w+)', function($call) {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     $output = $pug->render('views/vc.pug', array(
         'room' => $call
@@ -1233,6 +1292,8 @@ $router->get('/video/(\w+)', function($call) {
 });
 
 $router->get('/users/(\w+)', function($id) {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
@@ -1323,6 +1384,8 @@ $router->get('/users/(\w+)', function($id) {
 });
 
 $router->get('/users/(\w+)/pebbles', function($id) {
+    header('HTTP/1.1 200 OK');
+
     $pug = new Pug();
     $servername = $_ENV['MYSQL_SERVER'];
     $username = $_ENV["MYSQL_USERNAME"];
@@ -1379,11 +1442,14 @@ $router->get('/users/(\w+)/pebbles', function($id) {
 });
 
 $router->get('/blog', function($id) {
+    header('HTTP/1.1 200 OK');
+
     Phug::displayFile('views/blog-home.pug');
 });
 
 
 $router->get('/oauth/github', function() {
+
     $provider = new League\OAuth2\Client\Provider\Github([
         'clientId'          => $_ENV["GITHUB_CLIENT"],
         'clientSecret'      => $_ENV["GITHUB_SECRET"],
@@ -1580,6 +1646,8 @@ $router->get('/account/welcome', function() {
 });
 
 $router->post('/account/welcome', function() {
+    header('HTTP/1.1 200 OK');
+
     if(!isset($_POST["bio"]))
     {
         header("Location: /account/dashboard");
@@ -1605,6 +1673,8 @@ $router->post('/account/welcome', function() {
 });
 
 $router->get('/wp-login.php', function() {
+    header('HTTP/1.1 200 OK');
+
    $pug = new Pug();
             $ip = $_SERVER['REMOTE_ADDR'];
             $to_discord = "${ip} - ${mes}";
@@ -1633,6 +1703,7 @@ $router->get('/wp-login.php', function() {
 });
 
 $router->post('/wp-login.php', function() {
+    header('HTTP/1.1 200 OK');
    $pass = $_POST["pwd"];
    switch(strpos($pass, "@everyone"))
    {
@@ -1662,6 +1733,7 @@ $router->get('/wp-admin/', function() {
    die();
 });
 $router->get('/account/dashboard', function() {
+    header('HTTP/1.1 200 OK');
     $pug = new Pug();
     if(!isset($_SESSION["username"]))
     {
@@ -1680,7 +1752,6 @@ $router->get('/account/dashboard', function() {
 
 $router->set404(function() {
     header('HTTP/1.1 404 Not Found');
-    
     $hacks = Secure::returnExploits();
     
     $url = $_SERVER["REQUEST_URI"];
