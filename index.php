@@ -1228,6 +1228,13 @@ $router->get('/account/dashboard/admin/action/(\w+)', function($user_name) {
     echo $output;
 });
 
+$router->get('/video/(\w+)', function($call) {
+    $pug = new Pug();
+    $output = $pug->render('views/vc.pug', array(
+        'room' => $call
+    ));
+    echo $output;
+});
 
 $router->get('/users/(\w+)', function($id) {
     $pug = new Pug();
