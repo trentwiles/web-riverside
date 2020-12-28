@@ -120,7 +120,7 @@ if (!empty($result) && $result->num_rows > 0) {
 if($blocks !== 0)
 {
     header("HTTP/1.1 403 Forbidden");
-    echo "<center><br><br><br><img src='https://cdn.riverside.rocks/a/purchase-devourer-harrier.png' height='480px' width='1100px'/>";
+    echo "<html><head><title>403 Forbidden</title></head><body><center><h1>403 Forbidden</h1></center><hr><center>358 Engine</center></body></html>";
     die();
 }
 
