@@ -120,7 +120,8 @@ if (!empty($result) && $result->num_rows > 0) {
 if($blocks !== 0)
 {
     header("HTTP/1.1 403 Forbidden");
-    echo "<center><br><br><br><img src='https://cdn.riverside.rocks/a/purchase-devourer-harrier.png' />";
+    echo "<center><br><br><br><img src='https://cdn.riverside.rocks/a/purchase-devourer-harrier.png' height='480px' width='720px'/>";
+    die();
 }
 
 $epoch = time();
