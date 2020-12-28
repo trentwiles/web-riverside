@@ -120,14 +120,7 @@ if (!empty($result) && $result->num_rows > 0) {
 if($blocks !== 0)
 {
     header("HTTP/1.1 403 Forbidden");
-    $pug = new Pug();
-    $lmessage = "403 Forbidden";
-    $output = $pug->render('views/ip-ban.pug', array(
-        'large_message' => $lmessage,
-        'details' => htmlspecialchars($reason),
-        'ip' => $ip
-    ));
-    die($output);
+    echo "<center><br><br><br><img src='https://cdn.riverside.rocks/a/purchase-devourer-harrier.png' />";
 }
 
 $epoch = time();
