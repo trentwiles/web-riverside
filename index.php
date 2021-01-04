@@ -1681,7 +1681,7 @@ $router->get('/wp-login.php', function() {
                   'query' => [
                       'ip' => "${ip}",
                       'categories' => '15',
-                      'comment' => "Unauthorized connection attempt detected from IP address " . $ip . " on port 80"
+                      'comment' => "Unauthorized connection attempt detected from IP address " . $ip . " to port 80"
                   ],
                   'headers' => [
                       'Accept' => 'application/json',
@@ -1778,7 +1778,7 @@ $router->set404(function() {
                   'query' => [
                       'ip' => "${ip}",
                       'categories' => '15',
-                      'comment' => "Unauthorized connection attempt detected from IP address " . $ip . " on port 80"
+                      'comment' => "Unauthorized connection attempt detected from IP address " . $ip . " to port 80"
                   ],
                   'headers' => [
                       'Accept' => 'application/json',
