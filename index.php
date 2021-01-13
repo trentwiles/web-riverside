@@ -175,8 +175,11 @@ $router->get('/api/visits', function() {
     echo json_encode(times, true);
 });
 
+
+// Note that this endpoint will not work at the moment, this repo is private!
 $router->get('/ip', function() {
-    echo $_SERVER['REMOTE_ADDR'];
+   header("Location: https://raw.githubusercontent.com/RiversideRocks/BlockSec/main/ips.txt");
+   die();
 });
 
 $router->get('/v1/research', function() {
