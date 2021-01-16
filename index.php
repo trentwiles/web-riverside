@@ -461,7 +461,7 @@ $router->get('/index.php', function() {
 });
 
 $router->get('/discord', function() {
-    header("Location: https://discord.gg/Pa7S4Hm");
+    header("Location: https://discord.gg/wka5SZWqhe");
 });
 
 /*================================
