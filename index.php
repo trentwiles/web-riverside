@@ -190,6 +190,7 @@ $router->get('/v1/research', function() {
 
 $router->post('/v1/research', function() {
     header("Content-type: application/json");
+    header("HTTP/1.1 200 OK");
     $cli_agent = htmlspecialchars($_POST["agent"]);
     $cli_locale = htmlspecialchars($_POST["locale"]);
     $cli_ref = htmlspecialchars($_POST["referrer"]);
