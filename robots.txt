@@ -4,3 +4,8 @@ Disallow: /admin/*
 Disallow: /wp-login.php
 Disallow: /phpMyAdmin/*
 Disallow: /app/channels/pm/*
+
+# creepy services, blocked
+
+User-agent: ZoominfoBot
+Disallow: /*
