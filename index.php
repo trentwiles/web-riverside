@@ -43,12 +43,6 @@ require 'security.php';
 use RiversideRocks\services as Rocks;
 use RiversideRocks\security as Secure;
 use IPTools\Network;
-use Smalot\Cups\Builder\Builder;
-use Smalot\Cups\Manager\JobManager;
-use Smalot\Cups\Manager\PrinterManager;
-use Smalot\Cups\Model\Job;
-use Smalot\Cups\Transport\Client;
-use Smalot\Cups\Transport\ResponseParser;
 
 $exploits = Secure::returnExploits();
 
@@ -146,40 +140,9 @@ $sql = "SELECT * FROM logs";
     }
     define("times", $times);
 
-$sql = "SELECT * FROM msg";
-    $result = $conn->query($sql);
-    $times = 0;
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $times = $times + 1;
-        }
-    }
-
-    define("mess", $times);
-
-
-    $sql = "SELECT country, count(*) as SameValue from logs GROUP BY country ORDER BY SameValue DESC";
-    $result = $conn->query($sql);
-    $countries = array();
-    if (!empty($result) && $result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $con = htmlspecialchars($row["country"]);
-            $val = htmlspecialchars($row["SameValue"]);
-            array_push($countries, $con, $val);
-        }
-    }
-
-
 
 $router->get('/api/visits', function() {
     echo json_encode(times, true);
-});
-
-
-// Note that this endpoint will not work at the moment, this repo is private!
-$router->get('/ip', function() {
-   header("Location: https://raw.githubusercontent.com/RiversideRocks/BlockSec/main/ips.txt");
-   die();
 });
 
 $router->get('/v1/research', function() {
@@ -259,53 +222,9 @@ $router->get('/about/feed', function() {
     Phug::displayFile('views/ip.pug');
 });
 
-$router->post('/twitter', function() {
-    $dms = json_decode($_POST["content"], true);
-    foreach($dms as $dm)
-    {
-        echo $dm["content"];
-    }
-});
-
-
-
-$router->get('/twitter/approve', function() {
-    $client = new Client();
-    $builder = new Builder();
-    $responseParser = new ResponseParser();
-
-    $printerManager = new PrinterManager($builder, $client, $responseParser);
-    $printer = $printerManager->findByUri('ipp://192.168.1.11:631');
-
-    $jobManager = new JobManager($builder, $client, $responseParser);
-
-    $job = new Job();
-    $job->setName('job create file');
-    $job->setUsername('demo');
-    $job->setCopies(1);
-    $job->setPageRanges('1');
-    $job->addFile('./helloworld.pdf');
-    $job->addAttribute('media', 'A4');
-    $job->addAttribute('fit-to-page', true);
-    $result = $jobManager->send($printer, $job);
-
-});
-
 $router->get('/api/bycountry', function() {
     print_r($countries);
 });
-
-$router->get('/api/cidr', function() {
-    header("Content-type: application/json");
-    $hosts = Network::parse($_GET["ip"])->hosts;
-    $sendl = array();
-    foreach($hosts as $ipas) {
-        array_push($sendl, (string)$ipas);
-    }
-    $echo = json_encode($sendl, true);
-    echo $echo;
-});
-
 
 /*===========================
 /\/\/\/\/\/\/\/\/\/\/\/\/\/\
@@ -318,24 +237,6 @@ $router->get('/', function() {
     header('HTTP/1.1 200 OK');
 
     $pug = new Pug();
-    /*
-    $servername = $_ENV['MYSQL_SERVER'];
-    $username = $_ENV["MYSQL_USERNAME"];
-    $password = $_ENV["MYSQL_PASSWORD"];
-    $dbname = $_ENV["MYSQL_DATABASE"];
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    $channel_id = "UCoHNPdbSrE2c_g95JgGiBkw";
-    $api_key = $_ENV["YOUTUBE"];
-    $api_response = file_get_contents('https://www.googleapis.com/youtube/v3/channels?part=statistics&id='.$channel_id.'&fields=items/statistics/subscriberCount&key='.$api_key);
-    $api_response_decoded = json_decode($api_response, true);
-    $subs = $api_response_decoded['items'][0]['statistics']['subscriberCount'];
-    $api_response2 = file_get_contents('https://www.googleapis.com/youtube/v3/channels?part=statistics&id='.$channel_id.'&fields=items/statistics/viewCount&key='.$api_key);
-    $api_response_decoded2 = json_decode($api_response2, true);
-    $views = $api_response_decoded2['items'][0]['statistics']['viewCount'];
-    */
     if($_SESSION["username"] !== "")
     {
         $authuser = htmlspecialchars($_SESSION["username"]);
@@ -473,16 +374,6 @@ $router->get('/community', function() {
 
 $router->get('/legal', function() {
     header("Location: /about/legal/");
-    die();
-});
-
-$router->get('/start', function() {
-    header("Location: /app/");
-    die();
-});
-
-$router->get('/why', function() {
-    header("Location: /about/");
     die();
 });
 
