@@ -280,6 +280,12 @@ $router->get('/about/hacking', function() {
     Phug::displayFile('views/hacking.pug');
 });
 
+$router->get('/analytics', function() {
+    header('HTTP/1.1 200 OK');
+
+    Phug::displayFile('views/static-analytics.pug');
+});
+
 $stat = Rocks::statcord("764485265775263784", "logan");
 
 $router->get('/about/stats', function() {
