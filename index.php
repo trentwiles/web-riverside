@@ -309,6 +309,16 @@ $router->get('/projects', function() {
 });
 
 
+$router->get('/analytics/(\w+)', function($s) {
+    header('HTTP/1.1 200 OK');
+
+    $pug = new Pug();
+    $output = $pug->renderFile('views/analytics.pug', array(
+        'website' => htmlspecialchars($s)
+    ));
+    echo $output;
+});
+
 $router->get('/contact', function() {
    header("Location: /about/contact");
 });
