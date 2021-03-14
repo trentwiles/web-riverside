@@ -313,7 +313,7 @@ $router->get('/analytics/(\w+)', function($s) {
     header('HTTP/1.1 200 OK');
 
     $pug = new Pug();
-    $output = $pug->renderFile('views/analytics.pug', array(
+    $output = $pug->renderFile('views/analytics-page.pug', array(
         'website' => htmlspecialchars($s)
     ));
     echo $output;
