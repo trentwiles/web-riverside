@@ -309,7 +309,7 @@ $router->get('/projects', function() {
 });
 
 
-$router->get('/analytics/(\w+)', function($s) {
+$router->get('/analytics/view/(\w+)', function($s) {
     header('HTTP/1.1 200 OK');
 
     $pug = new Pug();
