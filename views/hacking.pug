@@ -4,9 +4,14 @@ h1 What we report to AbuseIPDB.com
 div(class="content" style="width:80%")
   p We report the following activity to AbuseIPDB.com:
   ul
-    li Hacking Attempts on Port 80 (Looking for exploits, ie. GET /wp-admin/ or brute force, ie POST /wp-login.php)
-    li Hacking Attempts on Port 8080 (Scans/Any connection)
-    li Hacking Attempts on Port 22 (Scans/SSH Brute Force)
+    li Hacking Attempts on port 80/443 (TCP) (Looking for exploits, ie. GET /wp-admin/ or brute force, ie POST /wp-login.php)
+    li Connections to port 8080 (TCP) (Scans/Any connection)
+    li Connections to port 3000 (TCP) (Scans/Any connection)
+    li Connections to port 443/80 (TCP) (w/ no/invalid host header)
+    li Connections to port 53 (UDP) (Scans/Any connection)
+    li Connections to port 8000 (TCP) (Scans/Any connection)
+    li Hacking Attempts on Port 22 (TCP) (Scans/SSH Brute Force)
+    li Hacking Attempts on Port 23 (TCP) (Scans/Telnet Brute Force)
   p If you have noticed your IP on AbuseIPDB and it has been reported by us, please contact us (click the contact button on the menu).
 
 h1 Hacking/Bug Bounty
