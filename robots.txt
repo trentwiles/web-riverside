@@ -9,3 +9,6 @@ Disallow: /app/channels/pm/*
 
 User-agent: ZoominfoBot
 Disallow: /*
+
+User-agent: SafeDNSBot
+Disallow: /
