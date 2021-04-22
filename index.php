@@ -374,7 +374,7 @@ $router->get('/videos', function() {
 });
 
 $router->get('/index.php', function() {
-    header("Location: https://www.youtube.com/watch?v=E2Q52cVx7Bo");
+    header("Location: https://www.youtube.com/watch?v=dQw4w9WgXcQ");
     die();
 });
 
