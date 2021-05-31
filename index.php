@@ -388,6 +388,12 @@ $router->get('/community', function() {
     Phug::displayFile('views/community-temp.pug');
 });
 
+$router->get('/about/status', function() {
+    header('HTTP/1.1 200 OK');
+
+    Phug::displayFile('views/server.pug');
+});
+
 $router->get('/legal', function() {
     header("Location: /about/legal/");
     die();
